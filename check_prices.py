@@ -1,15 +1,18 @@
 """
 Price tracker for iPhone 17 / 17 Pro / 17 Pro Max mobile contract bundles.
 
-Checks handyhase.de, logitel.de and check24.de for offers matching:
+Checks handyhase.de and logitel.de for offers matching:
 - provider Vodafone or Telekom
 - at least `min_data_gb` of data
 - no "Young" or "GigaKombi"/"Kombi" tariffs
 - effective price below the per-device threshold
 
 Sends a push notification via ntfy.sh when a qualifying offer is found.
-Check24 is fetched with a headless Chromium browser (Playwright) because
-its tariff list is rendered by JavaScript after the page loads.
+
+NOTE FOR FIRST RUN: this is a first version written without being able to
+test against the live sites from this environment. If a source returns
+0 offers, the script prints a chunk of the raw page text it saw - paste
+that back to Claude so the regex can be adjusted together.
 """
 
 import json
@@ -65,12 +68,14 @@ def fetch_text(url):
     return soup.get_text("\n", strip=True)
 
 
-def fetch_text_browser(url):
+def fetch_text_browser(url, wait_ms=8000, extra_click_labels=()):
     """Fetch a page with a real (headless) Chromium browser via Playwright.
-    Needed for sites like Check24 that build the tariff list with
-    JavaScript after the page loads - a plain HTTP fetch only sees an
-    empty shell there. Clicks away the cookie banner if one appears,
-    then waits for the tariff list to render."""
+    Needed for sites like Check24/Tariffuxx that build the tariff list
+    with JavaScript after the page loads - a plain HTTP fetch only sees
+    an empty shell there. Clicks away the cookie banner if one appears,
+    optionally clicks other labels (e.g. an "apply filters" button some
+    sites need before showing real tariffs), then waits for the list to
+    render."""
     from playwright.sync_api import sync_playwright
 
     with sync_playwright() as p:
@@ -87,7 +92,12 @@ def fetch_text_browser(url):
                 break
             except Exception:
                 continue
-        page.wait_for_timeout(8000)  # give the JS app time to load tariffs
+        for label in extra_click_labels:
+            try:
+                page.get_by_text(label, exact=False).first.click(timeout=3000)
+            except Exception:
+                pass
+        page.wait_for_timeout(wait_ms)  # give the JS app time to load tariffs
         text = page.inner_text("body")
         context.close()
         browser.close()
@@ -166,6 +176,78 @@ def parse_check24(text, market_value_eur, months):
             {
                 "provider": provider,
                 "tariff": f"{tariff} ({shop})",
+                "data_gb": data_gb,
+                "months": months,
+                "monthly_fee": avg,
+                "device_cost": 0.0,
+                "bonus": 0.0,
+                "effective_price": effective_price,
+            }
+        )
+    return offers
+
+
+# ---------------------------------------------------------------------------
+# Tariffuxx parser
+# ---------------------------------------------------------------------------
+def parse_tariffuxx(text, market_value_eur, months):
+    """
+    Tariffuxx cards end in "Zum Tarif". Each card holds a small cost table
+    (Grundgebühr / Handy Zuzahlung / Bonus / Einmalig) and a "Durchschnitt
+    p. Monat" figure - the same style of pre-computed, non-netted average
+    as the other three sites, so effective_price = avg - market_value/months.
+
+    FIRST-RUN NOTE, more so than the other three sites: Tariffuxx also
+    login-walls full pricing on tariffs that pay no commission (shown only
+    as a "Vorschau"/preview otherwise), and its filter panel may need an
+    explicit "Übernehmen" click before real tariffs replace the page's
+    default placeholder cards. This is a genuine first guess - if it comes
+    back with 0 offers, the debug dump below shows what's really there so
+    we can fix it against reality, same loop as the other three sites.
+    """
+    offers = []
+    seen = set()
+
+    end_markers = list(re.finditer(r"Zum Tarif", text))
+    block_start = 0
+    for m in end_markers:
+        block = text[block_start:m.start()]
+        block_start = m.end()
+
+        avg_m = re.search(r"Durchschnitt\s*p\.\s*Monat\D{0,10}?([\d,]+)\s*€", block)
+        if not avg_m:
+            continue
+        avg = to_float(avg_m.group(1))
+
+        net_m = re.search(r"\b(Telekom|Vodafone|o2|Telefónica|1&1)\b", block)
+        if net_m:
+            raw = net_m.group(1)
+            provider = "o2" if raw.lower() in ("o2", "telefónica") else raw
+        else:
+            provider = "unbekannt"
+
+        data_m = re.search(r"Unlimited|(\d+)\s*GB", block)
+        if not data_m:
+            continue
+        data_gb = 9999 if data_m.group(0) == "Unlimited" else int(data_m.group(1))
+
+        # Tariff name: last non-empty line before the data-volume mention.
+        pre_lines = [
+            ln.strip() for ln in block[: data_m.start()].split("\n") if ln.strip()
+        ]
+        tariff = pre_lines[-1] if pre_lines else "unbekannt"
+
+        effective_price = round(avg - market_value_eur / months, 2)
+
+        dedup_key = (provider, tariff, data_gb, avg)
+        if dedup_key in seen:
+            continue
+        seen.add(dedup_key)
+
+        offers.append(
+            {
+                "provider": provider,
+                "tariff": tariff,
                 "data_gb": data_gb,
                 "months": months,
                 "monthly_fee": avg,
@@ -287,8 +369,6 @@ def parse_logitel(text, market_value_eur, months):
 
         data_m = re.search(r"(\d+)\s*GB\s*5G", block)
         device_m = re.search(r"Gerät einm\.?\s*nur:\s*([\d,]+)\s*€", block)
-        # Bonuses show up under several names: a Wechselbonus for porting
-        # your number, a Telekom-style Cashback, or a Guthaben (credit).
         bonus_m = re.search(r"(\d+)\s*€\s*(?:Wechselbonus|Cashback|Guthaben|Online-Bonus)", block)
         connection_m = re.search(r"Anschlusspreis:?\s*\n?\s*(Gratis|[\d,]+)\s*€?", block)
         shipping_m = re.search(r"Versandkosten\s*([\d,]+)\s*€", block)
@@ -296,8 +376,6 @@ def parse_logitel(text, market_value_eur, months):
         if not (data_m and device_m):
             continue  # doesn't look like a full tariff card - skip
 
-        # Monthly fee: first price-looking number that appears strictly
-        # between the device cost and the "Anschlusspreis" label.
         device_end = device_m.end()
         connection_start = connection_m.start() if connection_m else len(block)
         fee = first_price(block[device_end:connection_start])
@@ -315,7 +393,6 @@ def parse_logitel(text, market_value_eur, months):
         total = fee * months + device_cost + connection + shipping - bonus - market_value_eur
         effective_price = round(total / months, 2)
 
-        # The page lists the same cards more than once - keep only one copy.
         dedup_key = (anchor.group("provider"), tariff, data_gb, fee, device_cost)
         if dedup_key in seen:
             continue
@@ -377,6 +454,10 @@ def main():
             try:
                 if site == "check24":
                     text = fetch_text_browser(url)
+                elif site == "tariffuxx":
+                    text = fetch_text_browser(
+                        url, wait_ms=12000, extra_click_labels=["Übernehmen"]
+                    )
                 else:
                     text = fetch_text(url)
             except Exception as exc:
@@ -389,21 +470,19 @@ def main():
                 offers = parse_logitel(text, market_value, config["contract_months"])
             elif site == "check24":
                 offers = parse_check24(text, market_value, config["contract_months"])
+            elif site == "tariffuxx":
+                offers = parse_tariffuxx(text, market_value, config["contract_months"])
             else:
                 print(f"Unknown site '{site}', skipping.")
                 continue
 
             print(f"Found {len(offers)} raw offers.")
             if not offers:
-                # Search for a landmark string that should be near the
-                # tariff cards. If it's missing entirely, the content is
-                # probably injected by JavaScript after page load (or a
-                # bot-wall blocked the browser) - the debug text below
-                # tells us which case we're in.
                 landmarks = {
                     "handyhase": "Effektivpreis",
                     "logitel": "Tarifempfehlungen",
                     "check24": "über",
+                    "tariffuxx": "Zum Tarif",
                 }
                 landmark = landmarks.get(site, "€")
                 idx = text.find(landmark)
