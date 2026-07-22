@@ -18,13 +18,23 @@ def main() -> None:
         page = browser.new_page()
 
         print("Step 1/3: checking for new models...")
-        discover_models.run(page)
+        try:
+            discover_models.run(page)
+        except Exception as exc:
+            print(f"[main] discovery step failed, continuing anyway: {exc}")
 
         print("Step 2/3: scraping retailers for tracked models...")
-        hits = scrape_prices.scrape_all(page)
+        hits = []
+        try:
+            hits = scrape_prices.scrape_all(page)
+        except Exception as exc:
+            print(f"[main] scraping step failed: {exc}")
 
         print(f"Step 3/3: {len(hits)} offer(s) below threshold — notifying.")
-        notify.notify_offers(hits)
+        try:
+            notify.notify_offers(hits)
+        except Exception as exc:
+            print(f"[main] notification step failed: {exc}")
 
         browser.close()
 
