@@ -31,10 +31,18 @@ def scrape_all(page) -> list[Offer]:
     hits = []
     for model in models:
         for adapter in ADAPTERS:
+            retailer_name = getattr(adapter, "RETAILER", adapter.__name__)
             try:
                 offers = adapter.fetch_offers(page, model)
             except Exception as exc:  # noqa: BLE001 - one bad adapter shouldn't kill the run
-                print(f"[{adapter.RETAILER}] failed for {model['brand']} {model['model']}: {exc}")
+                print(f"[{retailer_name}] failed for {model['brand']} {model['model']}: {exc}")
                 continue
+
+            if offers:
+                summary = ", ".join(f"€{o.price_eur:.0f} ({o.material})" for o in offers)
+                print(f"[{retailer_name}] {model['brand']} {model['model']}: {len(offers)} offer(s) found — {summary}")
+            else:
+                print(f"[{retailer_name}] {model['brand']} {model['model']}: no offers found")
+
             hits.extend(o for o in offers if below_threshold(o))
     return hits
