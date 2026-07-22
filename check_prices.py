@@ -9,12 +9,13 @@ Checks handyhase.de, logitel.de and check24.de for offers matching:
 
 Sends a push notification via ntfy.sh when a qualifying offer is found.
 Check24 is fetched with a headless Chromium browser (Playwright) because
-its tariff list is rendered by JavaScript after the page loads.
+its tariff list is rendered by JavaScript after the page loads. The
+browser is launched once per run and reused across devices, since
+starting Chromium itself (not the page loads) was the slow part.
 """
 
 import json
 import re
-import sys
 from pathlib import Path
 
 import requests
@@ -65,22 +66,34 @@ def fetch_text(url):
     return soup.get_text("\n", strip=True)
 
 
-def fetch_text_browser(url, wait_ms=8000, extra_click_labels=()):
-    """Fetch a page with a real (headless) Chromium browser via Playwright.
-    Needed for sites like Check24 that build the tariff list with
-    JavaScript after the page loads - a plain HTTP fetch only sees an
-    empty shell there. Clicks away the cookie banner if one appears,
-    optionally clicks other labels, then waits for the list to render."""
+def launch_browser():
+    """Start one headless Chromium instance to be reused across every
+    browser-based fetch in this run. Launching Chromium is the slow part
+    (process start-up, not the page loads) - starting it once instead of
+    once per device cuts real runtime noticeably. Returns (pw_cm, browser);
+    call pw_cm.__exit__(None, None, None) when done to shut it down."""
     from playwright.sync_api import sync_playwright
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch()
-        context = browser.new_context(
-            user_agent=HEADERS["User-Agent"], locale="de-DE"
-        )
+    pw_cm = sync_playwright()
+    pw = pw_cm.__enter__()
+    browser = pw.chromium.launch()
+    return pw_cm, browser
+
+
+def fetch_text_browser(browser, url, wait_ms=8000, extra_click_labels=()):
+    """Fetch a page using an already-running browser instance. Needed for
+    sites like Check24 that build the tariff list with JavaScript after
+    the page loads - a plain HTTP fetch only sees an empty shell there.
+    Clicks away the cookie banner if one appears, optionally clicks other
+    labels (e.g. an "apply filters" button some sites need before showing
+    real tariffs), then waits for the list to render. Uses a fresh browser
+    *context* per call (cheap - just an isolated cookie/session jar) so
+    pages don't leak state between devices, while the expensive browser
+    *process* itself is only started once per run."""
+    context = browser.new_context(user_agent=HEADERS["User-Agent"], locale="de-DE")
+    try:
         page = context.new_page()
         page.goto(url, timeout=60000, wait_until="domcontentloaded")
-        # Try common consent-banner buttons; ignore if none is found.
         for label in ("Nur notwendige Cookies", "alle akzeptieren", "Akzeptieren"):
             try:
                 page.get_by_text(label, exact=False).first.click(timeout=3000)
@@ -93,10 +106,9 @@ def fetch_text_browser(url, wait_ms=8000, extra_click_labels=()):
             except Exception:
                 pass
         page.wait_for_timeout(wait_ms)  # give the JS app time to load tariffs
-        text = page.inner_text("body")
+        return page.inner_text("body")
+    finally:
         context.close()
-        browser.close()
-    return text
 
 
 # ---------------------------------------------------------------------------
@@ -324,9 +336,6 @@ def passes_filters(offer, config):
     if offer["data_gb"] < config["min_data_gb"]:
         return False
     name = offer["tariff"]
-    # A real tariff name is short. A long one is a strong sign a parser
-    # grabbed a stray sentence or table fragment instead - reject rather
-    # than risk alerting on garbage.
     if len(name) > 70:
         return False
     for bad_word in config["exclude_name_contains"]:
@@ -351,80 +360,91 @@ def main():
     config = load_json(CONFIG_PATH, {})
     state = load_json(STATE_PATH, {})
 
-    for device in config["devices"]:
-        device_name = device["name"]
-        threshold = device["threshold_effective_price"]
-        market_value = device["market_value_eur"]
+    needs_browser = any(
+        source["site"] == "check24"
+        for device in config["devices"]
+        for source in device["sources"]
+    )
+    pw_cm, browser = (launch_browser() if needs_browser else (None, None))
 
-        for source in device["sources"]:
-            site = source["site"]
-            url = source["url"]
-            print(f"\n--- {device_name} / {site} ---")
+    try:
+        for device in config["devices"]:
+            device_name = device["name"]
+            threshold = device["threshold_effective_price"]
+            market_value = device["market_value_eur"]
 
-            try:
-                if site == "check24":
-                    text = fetch_text_browser(url)
-                else:
-                    text = fetch_text(url)
-            except Exception as exc:
-                print(f"Could not fetch {url}: {exc}")
-                continue
+            for source in device["sources"]:
+                site = source["site"]
+                url = source["url"]
+                print(f"\n--- {device_name} / {site} ---")
 
-            if site == "handyhase":
-                offers = parse_handyhase(text)
-            elif site == "logitel":
-                offers = parse_logitel(text, market_value, config["contract_months"])
-            elif site == "check24":
-                offers = parse_check24(text, market_value, config["contract_months"])
-            else:
-                print(f"Unknown site '{site}', skipping.")
-                continue
-
-            print(f"Found {len(offers)} raw offers.")
-            if not offers:
-                landmarks = {
-                    "handyhase": "Effektivpreis",
-                    "logitel": "Tarifempfehlungen",
-                    "check24": "über",
-                }
-                landmark = landmarks.get(site, "€")
-                idx = text.find(landmark)
-                if idx == -1:
-                    print(
-                        f"Landmark '{landmark}' not found ANYWHERE in the fetched "
-                        f"page. This suggests the tariff content is loaded by "
-                        f"JavaScript after the page loads, so a plain HTTP fetch "
-                        f"never sees it - a regex fix alone won't solve this."
-                    )
-                    print("First 500 chars fetched:")
-                    print(text[:500])
-                else:
-                    print(f"Landmark '{landmark}' found at position {idx}. Text around it:")
-                    print(text[idx:idx + 1500])
-                continue
-
-            for offer in offers:
-                if not passes_filters(offer, config):
+                try:
+                    if site == "check24":
+                        text = fetch_text_browser(browser, url)
+                    else:
+                        text = fetch_text(url)
+                except Exception as exc:
+                    print(f"Could not fetch {url}: {exc}")
                     continue
 
-                key = (
-                    f"{site}|{device_name}|{offer['provider']}|"
-                    f"{offer['tariff']}|{offer['data_gb']}"
-                )
-                eff = offer["effective_price"]
-                print(f"  {offer['provider']:10s} {offer['tariff'][:40]:40s} "
-                      f"{offer['data_gb']:>3}GB  eff. {eff:.2f} €")
+                if site == "handyhase":
+                    offers = parse_handyhase(text)
+                elif site == "logitel":
+                    offers = parse_logitel(text, market_value, config["contract_months"])
+                elif site == "check24":
+                    offers = parse_check24(text, market_value, config["contract_months"])
+                else:
+                    print(f"Unknown site '{site}', skipping.")
+                    continue
 
-                if eff < threshold and state.get(key) != eff:
-                    send_ntfy(
-                        config["ntfy_topic"],
-                        f"{device_name}: {eff:.2f} €/Monat!",
-                        f"{offer['provider']} {offer['tariff']} "
-                        f"({offer['data_gb']} GB) bei {site} - "
-                        f"Effektivpreis {eff:.2f} €/Monat",
+                print(f"Found {len(offers)} raw offers.")
+                if not offers:
+                    landmarks = {
+                        "handyhase": "Effektivpreis",
+                        "logitel": "Tarifempfehlungen",
+                        "check24": "über",
+                    }
+                    landmark = landmarks.get(site, "€")
+                    idx = text.find(landmark)
+                    if idx == -1:
+                        print(
+                            f"Landmark '{landmark}' not found ANYWHERE in the fetched "
+                            f"page. This suggests the tariff content is loaded by "
+                            f"JavaScript after the page loads, so a plain HTTP fetch "
+                            f"never sees it - a regex fix alone won't solve this."
+                        )
+                        print("First 500 chars fetched:")
+                        print(text[:500])
+                    else:
+                        print(f"Landmark '{landmark}' found at position {idx}. Text around it:")
+                        print(text[idx:idx + 1500])
+                    continue
+
+                for offer in offers:
+                    if not passes_filters(offer, config):
+                        continue
+
+                    key = (
+                        f"{site}|{device_name}|{offer['provider']}|"
+                        f"{offer['tariff']}|{offer['data_gb']}"
                     )
-                    state[key] = eff
-                    print(f"  -> ALERT sent ({eff:.2f} € < {threshold} €)")
+                    eff = offer["effective_price"]
+                    print(f"  {offer['provider']:10s} {offer['tariff'][:40]:40s} "
+                          f"{offer['data_gb']:>3}GB  eff. {eff:.2f} €")
+
+                    if eff < threshold and state.get(key) != eff:
+                        send_ntfy(
+                            config["ntfy_topic"],
+                            f"{device_name}: {eff:.2f} €/Monat!",
+                            f"{offer['provider']} {offer['tariff']} "
+                            f"({offer['data_gb']} GB) bei {site} - "
+                            f"Effektivpreis {eff:.2f} €/Monat",
+                        )
+                        state[key] = eff
+                        print(f"  -> ALERT sent ({eff:.2f} € < {threshold} €)")
+    finally:
+        if pw_cm:
+            pw_cm.__exit__(None, None, None)
 
     save_json(STATE_PATH, state)
 
