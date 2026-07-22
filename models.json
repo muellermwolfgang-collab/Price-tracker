@@ -1,0 +1,18 @@
+{
+  "_meta": {
+    "note": "Seed list, researched but not execution-verified. Clearance figures are last-known-good per model line, not guaranteed current — that's what discover_models.py is for.",
+    "last_reviewed": "2026-07-22"
+  },
+  "models": [
+    {"brand": "Cervélo", "model": "Áspero", "materials": ["carbon"], "max_tire_clearance_mm": 45},
+    {"brand": "Canyon", "model": "Grail CF", "materials": ["carbon"], "max_tire_clearance_mm": 42},
+    {"brand": "Canyon", "model": "Grail AL", "materials": ["aluminium"], "max_tire_clearance_mm": 42},
+    {"brand": "Merida", "model": "Silex", "materials": ["carbon", "aluminium"], "max_tire_clearance_mm": 40},
+    {"brand": "Orbea", "model": "Terra", "materials": ["carbon", "aluminium"], "max_tire_clearance_mm": 45},
+    {"brand": "Trek", "model": "Checkpoint SL", "materials": ["carbon"], "max_tire_clearance_mm": 45},
+    {"brand": "Cannondale", "model": "SuperX", "materials": ["carbon"], "max_tire_clearance_mm": 42},
+    {"brand": "Focus", "model": "Atlas", "materials": ["aluminium", "carbon"], "max_tire_clearance_mm": 40},
+    {"brand": "Ridley", "model": "Kanzo Speed", "materials": ["carbon"], "max_tire_clearance_mm": 40},
+    {"brand": "3T", "model": "Exploro", "materials": ["carbon"], "max_tire_clearance_mm": 40}
+  ]
+}
