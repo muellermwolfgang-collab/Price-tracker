@@ -1,18 +1,19 @@
 {
   "_meta": {
-    "note": "Seed list, researched but not execution-verified. Clearance figures are last-known-good per model line, not guaranteed current — that's what discover_models.py is for.",
+    "note": "Seed list. Verified against real retailer inventory where noted; others are still researched-but-unconfirmed for-sale-as-frameset status. Clearance figures are last-known-good, not guaranteed current.",
     "last_reviewed": "2026-07-22"
   },
   "models": [
-    {"brand": "Cervélo", "model": "Áspero", "materials": ["carbon"], "max_tire_clearance_mm": 45},
-    {"brand": "Canyon", "model": "Grail CF", "materials": ["carbon"], "max_tire_clearance_mm": 42},
-    {"brand": "Canyon", "model": "Grail AL", "materials": ["aluminium"], "max_tire_clearance_mm": 42},
-    {"brand": "Merida", "model": "Silex", "materials": ["carbon", "aluminium"], "max_tire_clearance_mm": 40},
-    {"brand": "Orbea", "model": "Terra", "materials": ["carbon", "aluminium"], "max_tire_clearance_mm": 45},
-    {"brand": "Trek", "model": "Checkpoint SL", "materials": ["carbon"], "max_tire_clearance_mm": 45},
-    {"brand": "Cannondale", "model": "SuperX", "materials": ["carbon"], "max_tire_clearance_mm": 42},
-    {"brand": "Focus", "model": "Atlas", "materials": ["aluminium", "carbon"], "max_tire_clearance_mm": 40},
-    {"brand": "Ridley", "model": "Kanzo Speed", "materials": ["carbon"], "max_tire_clearance_mm": 40},
-    {"brand": "3T", "model": "Exploro", "materials": ["carbon"], "max_tire_clearance_mm": 40}
+    {"brand": "Cervélo", "model": "Áspero", "materials": ["carbon"], "max_tire_clearance_mm": 45, "note": "Not yet confirmed for sale as standalone frameset at any checked retailer"},
+    {"brand": "Canyon", "model": "Grail CF", "materials": ["carbon"], "max_tire_clearance_mm": 42, "note": "Current generation is carbon-only (AL variant discontinued). Canyon's own site only showed complete-bike listings, not a frame-only option -- verify manually whether frameset-only purchase exists"},
+    {"brand": "Merida", "model": "Silex", "materials": ["carbon", "aluminium"], "max_tire_clearance_mm": 40, "note": "Not yet confirmed for sale as standalone frameset at any checked retailer"},
+    {"brand": "Orbea", "model": "Terra", "materials": ["carbon", "aluminium"], "max_tire_clearance_mm": 45, "note": "Not yet confirmed for sale as standalone frameset at any checked retailer"},
+    {"brand": "Trek", "model": "Checkpoint SL", "materials": ["carbon"], "max_tire_clearance_mm": 45, "note": "Not yet confirmed for sale as standalone frameset at any checked retailer"},
+    {"brand": "Cannondale", "model": "SuperX", "materials": ["carbon"], "max_tire_clearance_mm": 42, "note": "Not yet confirmed for sale as standalone frameset at any checked retailer"},
+    {"brand": "Focus", "model": "Atlas", "materials": ["aluminium", "carbon"], "max_tire_clearance_mm": 40, "note": "Not yet confirmed for sale as standalone frameset at any checked retailer"},
+    {"brand": "Ridley", "model": "Kanzo Fast", "materials": ["carbon"], "max_tire_clearance_mm": 40, "note": "CONFIRMED for sale as frameset on BIKE24 (~988 EUR, 2025 model). Previously listed here as 'Kanzo Speed' -- corrected name"},
+    {"brand": "3T", "model": "Exploro", "materials": ["carbon"], "max_tire_clearance_mm": 40, "note": "Not yet confirmed for sale as standalone frameset at any checked retailer"},
+    {"brand": "Specialized", "model": "Crux DSW", "materials": ["carbon"], "max_tire_clearance_mm": null, "note": "CONFIRMED for sale as frameset ('Crux DSW Frame Kit') on bike-components.de (~1260 EUR). Clearance not yet verified against the 32-45mm rule -- check before relying on this entry"},
+    {"brand": "Rose", "model": "Backroad FF", "materials": ["carbon"], "max_tire_clearance_mm": 45, "note": "CONFIRMED 45mm clearance via official Rose spec (their race-gravel platform). Frame-only availability NOT confirmed -- only found as complete bikes plus a crash-replacement frame/fork parts doc, not a clear retail frameset page. Worth checking rosebikes.de directly"}
   ]
 }
