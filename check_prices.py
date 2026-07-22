@@ -51,9 +51,14 @@ def to_float(euro_str):
 
 
 def first_price(text):
-    """Return the first '12,34' style amount found in a text chunk, or None."""
-    m = re.search(r"(\d{1,4},\d{2})\s*€", text)
-    return to_float(m.group(1)) if m else None
+    """Return the first euro amount found in a text chunk, or None.
+    Handles Logitel's price rendering, where the cents are in a separate
+    DOM node from the euros, so a line break can land between the comma
+    and the two cent digits (e.g. "44,\n99 €" really means 44,99 €)."""
+    m = re.search(r"(\d{1,4}),\s*(\d{2})\s*€", text)
+    if not m:
+        return None
+    return float(f"{m.group(1)}.{m.group(2)}")
 
 
 def fetch_text(url):
@@ -265,11 +270,6 @@ def main():
 
             print(f"Found {len(offers)} raw offers.")
             if not offers:
-                # Search for a landmark string that should be near the
-                # tariff cards. If it's missing entirely, the content is
-                # probably injected by JavaScript after page load, which a
-                # plain requests.get() never sees - a real regex fix won't
-                # help in that case, we'd need a different approach.
                 landmark = "Effektivpreis" if site == "handyhase" else "Tarifempfehlungen"
                 idx = text.find(landmark)
                 if idx == -1:
