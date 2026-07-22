@@ -1,11 +1,23 @@
 """
 bike-components.de adapter.
 
-Category confirmed to exist: /en/components/frames/cyclocross-gravel/
-Selectors below are a reasonable starting point (typical product-grid markup
-for this class of shop) but are NOT verified against live HTML — check with
-browser dev tools before relying on this. Update the SELECTORS dict below;
-the rest of the function shouldn't need to change.
+Real category confirmed via fetch: /en/components/frames/cyclocross-gravel/
+(52 items across 3 pages as of 2026-07-22). No on-page text search box was
+found in the fetched page -- this iterates the paginated category listing
+and matches product titles against the tracked model list, instead of
+searching.
+
+Price format on this site's /en/ pages is English-style: "1,000.00€"
+(comma thousands separator, period decimal) -- confirmed from real listings
+(e.g. "bc original Flint Gravel Frame ... 210.99€", "OPEN NEW U.P. Frameset
+... 1,000.00€"). This is DIFFERENT from bike24.com's German-style format --
+don't reuse this regex for other sites.
+
+Selectors use link-href pattern matching (product URLs look like
+/en/{Brand}/{Model-slug}-p{id}/?v={variant}) plus the link's visible text,
+rather than guessed CSS classes -- classes weren't visible in what I could
+fetch (page content, not raw DOM), but the URL/text patterns were, and are
+more likely to survive a markup change anyway.
 """
 
 import re
@@ -13,28 +25,17 @@ from .base import Offer
 
 RETAILER = "bike-components.de"
 CATEGORY_URL = "https://www.bike-components.de/en/components/frames/cyclocross-gravel/"
+MAX_PAGES = 5  # confirmed 3 pages as of writing; capped higher in case inventory grows
 
-# TODO: verify these against the live page (dev tools -> inspect a product tile)
-SELECTORS = {
-    "product_tile": ".product-list-item, article.product",
-    "title": ".product-list-item__title, .product-name",
-    "price": ".product-list-item__price, .price",
-    "link": "a",
-}
-
-PRICE_RE = re.compile(r"([\d.,]+)\s*€|€\s*([\d.,]+)")
+PRICE_RE = re.compile(r"([\d,]+\.\d{2})\s*€")
+PRODUCT_LINK_RE = re.compile(r"/en/[^/]+/[^/]+-p\d+/")
 
 
 def _parse_price(text: str) -> float | None:
     match = PRICE_RE.search(text)
     if not match:
         return None
-    raw = match.group(1) or match.group(2)
-    raw = raw.replace(".", "").replace(",", ".")
-    try:
-        return float(raw)
-    except ValueError:
-        return None
+    return float(match.group(1).replace(",", ""))
 
 
 def _guess_material(title: str) -> str | None:
@@ -47,39 +48,43 @@ def _guess_material(title: str) -> str | None:
 
 
 def fetch_offers(page, model: dict) -> list[Offer]:
-    """Search the gravel-frame category for listings matching this model."""
     offers = []
-    query = f"{model['brand']} {model['model']}"
-    page.goto(CATEGORY_URL, wait_until="networkidle")
+    search_term = model["model"].lower()
+    brand_term = model["brand"].lower()
 
-    # Site has an on-page search/filter — adjust selector for the actual
-    # search input once verified.
-    search_box = page.locator("input[type='search']").first
-    if search_box.count():
-        search_box.fill(query)
-        search_box.press("Enter")
-        page.wait_for_load_state("networkidle")
+    for page_num in range(1, MAX_PAGES + 1):
+        url = CATEGORY_URL if page_num == 1 else f"{CATEGORY_URL}?page={page_num}"
+        page.goto(url, wait_until="networkidle")
 
-    tiles = page.locator(SELECTORS["product_tile"])
-    for i in range(tiles.count()):
-        tile = tiles.nth(i)
-        title = tile.locator(SELECTORS["title"]).inner_text().strip()
-        if model["brand"].lower() not in title.lower():
-            continue
+        links = page.locator("a").all()
+        found_any_product_link = False
+        for link in links:
+            href = link.get_attribute("href") or ""
+            if not PRODUCT_LINK_RE.search(href):
+                continue
+            found_any_product_link = True
 
-        price = _parse_price(tile.locator(SELECTORS["price"]).inner_text())
-        material = _guess_material(title)
-        if price is None or material is None or material not in model["materials"]:
-            continue
+            text = link.inner_text().strip()
+            lower_text = text.lower()
+            if brand_term not in lower_text and search_term not in lower_text:
+                continue
 
-        href = tile.locator(SELECTORS["link"]).first.get_attribute("href")
-        offers.append(Offer(
-            brand=model["brand"],
-            model=model["model"],
-            material=material,
-            price_eur=price,
-            size=None,  # size usually only visible on the product detail page
-            url=href if href and href.startswith("http") else f"https://www.bike-components.de{href}",
-            retailer=RETAILER,
-        ))
+            price = _parse_price(text)
+            material = _guess_material(text)
+            if price is None or material is None or material not in model["materials"]:
+                continue
+
+            offers.append(Offer(
+                brand=model["brand"],
+                model=model["model"],
+                material=material,
+                price_eur=price,
+                size=None,  # size is chosen on the product detail page, not the listing
+                url=href if href.startswith("http") else f"https://www.bike-components.de{href}",
+                retailer=RETAILER,
+            ))
+
+        if not found_any_product_link:
+            break  # ran past the last real page
+
     return offers
