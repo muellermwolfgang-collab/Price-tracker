@@ -57,8 +57,18 @@ def discover(page) -> list[dict]:
     candidates = []
 
     for url in config.DISCOVERY_SOURCES:
-        page.goto(url, wait_until="networkidle")
-        text = page.inner_text("body")
+        try:
+            # networkidle can hang/timeout on sites with persistent background
+            # activity (chat widgets, analytics, personalization) that never
+            # go fully quiet. domcontentloaded + a short settle time is more
+            # reliable for a text-scan use case like this, which doesn't need
+            # every last async widget to finish loading.
+            page.goto(url, wait_until="domcontentloaded", timeout=30000)
+            page.wait_for_timeout(2000)
+            text = page.inner_text("body")
+        except Exception as exc:
+            print(f"[discover] skipping {url}: {exc}")
+            continue
 
         for brand in config.KNOWN_BRANDS:
             clearances = _scan_text(text, brand)
