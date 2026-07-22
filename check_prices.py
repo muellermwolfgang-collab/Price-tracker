@@ -245,12 +245,21 @@ def parse_logitel(text, market_value_eur, months):
     ourselves using the same style of formula Handyhase uses:
     (monthly_fee * months + device_cost + connection fee + shipping - bonus
      - market_value) / months
+
+    Note: Logitel's price widgets render the Euro-cents part separately from
+    the Euro part (a common responsive-design trick), which can cause a
+    plain text extraction to see the same amount fragmented or duplicated.
+    That's why we always take the FIRST plausible "xx,xx €" match after each
+    label rather than assuming a clean single number.
     """
     offers = []
 
-    # A card starts with a known provider name at the start of a line.
-    # The provider is usually its own bold DOM element, so the tariff name
-    # frequently ends up on the *next* text line - \s+ bridges that.
+    # A card starts with a known provider name at the start of a line,
+    # e.g. "Vodafone Smart L" or "Telekom MagentaMobil L mit Handy". The
+    # provider is usually its own bold DOM element, so the tariff name
+    # frequently ends up on the *next* text line rather than the same one -
+    # \s+ (which also matches newlines) bridges that instead of requiring
+    # them on one line.
     anchor_pattern = re.compile(
         r"^(?P<provider>" + "|".join(KNOWN_PROVIDERS) + r")\s+(?P<tariff>[^\n]+)",
         re.MULTILINE,
@@ -361,6 +370,16 @@ def main():
                 print(f"Could not fetch {url}: {exc}")
                 continue
 
+            if site == "check24":
+                idx = text.find("Durchschnitt")
+                print("--- Check24 raw text around first 'Durchschnitt' (verification) ---")
+                if idx == -1:
+                    print("'Durchschnitt' not found at all. First 500 chars:")
+                    print(text[:500])
+                else:
+                    print(text[max(0, idx - 1500):idx + 2000])
+                print("--- end raw text ---")
+
             if site == "handyhase":
                 offers = parse_handyhase(text)
             elif site == "logitel":
@@ -383,14 +402,15 @@ def main():
                 if idx == -1:
                     print(
                         f"Landmark '{landmark}' not found ANYWHERE in the fetched "
-                        f"page. Either the content didn't render in time, or a "
-                        f"bot-wall blocked the browser."
+                        f"page. This suggests the tariff content is loaded by "
+                        f"JavaScript after the page loads, so a plain HTTP fetch "
+                        f"never sees it - a regex fix alone won't solve this."
                     )
                     print("First 500 chars fetched:")
                     print(text[:500])
                 else:
                     print(f"Landmark '{landmark}' found at position {idx}. Text around it:")
-                    print(text[idx:idx + 2500])
+                    print(text[idx:idx + 1500])
                 continue
 
             for offer in offers:
