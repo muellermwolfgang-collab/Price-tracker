@@ -42,6 +42,17 @@ jobs:
         working-directory: gravel_frameset_tracker
         run: python -u main.py
 
+      - name: Upload debug artifacts (only created if bike24.de finds zero products)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-artifacts
+          path: |
+            gravel_frameset_tracker/debug_*.png
+            gravel_frameset_tracker/debug_*.html
+          if-no-files-found: ignore
+
+
       - name: Commit updated model list / discovered candidates
         run: |
           git config user.name "github-actions[bot]"
