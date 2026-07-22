@@ -170,6 +170,7 @@ def parse_logitel(text, market_value_eur, months):
     )
     anchors = list(anchor_pattern.finditer(text))
 
+    seen = set()
     for i, anchor in enumerate(anchors):
         block_start = anchor.end()
         block_end = anchors[i + 1].start() if i + 1 < len(anchors) else len(text)
@@ -177,7 +178,10 @@ def parse_logitel(text, market_value_eur, months):
 
         data_m = re.search(r"(\d+)\s*GB\s*5G", block)
         device_m = re.search(r"Gerät einm\.?\s*nur:\s*([\d,]+)\s*€", block)
-        bonus_m = re.search(r"(\d+)\s*€\s*Wechselbonus", block)
+        # Bonuses show up under several names: a Wechselbonus for porting
+        # your number, a Telekom-style Cashback, or a Guthaben (credit).
+        # Netting out only "Wechselbonus" undercounts real discounts.
+        bonus_m = re.search(r"(\d+)\s*€\s*(?:Wechselbonus|Cashback|Guthaben|Online-Bonus)", block)
         connection_m = re.search(r"Anschlusspreis:?\s*\n?\s*(Gratis|[\d,]+)\s*€?", block)
         shipping_m = re.search(r"Versandkosten\s*([\d,]+)\s*€", block)
 
@@ -197,15 +201,24 @@ def parse_logitel(text, market_value_eur, months):
         shipping = to_float(shipping_m.group(1)) if shipping_m else 0.0
         bonus = float(bonus_m.group(1)) if bonus_m else 0.0
         device_cost = to_float(device_m.group(1))
+        tariff = anchor.group("tariff").strip()
+        data_gb = int(data_m.group(1))
 
         total = fee * months + device_cost + connection + shipping - bonus - market_value_eur
         effective_price = round(total / months, 2)
 
+        # The page lists the same cards more than once (e.g. a featured
+        # carousel plus the full list below) - keep only the first copy.
+        dedup_key = (anchor.group("provider"), tariff, data_gb, fee, device_cost)
+        if dedup_key in seen:
+            continue
+        seen.add(dedup_key)
+
         offers.append(
             {
                 "provider": anchor.group("provider"),
-                "tariff": anchor.group("tariff").strip(),
-                "data_gb": int(data_m.group(1)),
+                "tariff": tariff,
+                "data_gb": data_gb,
                 "months": months,
                 "monthly_fee": fee,
                 "device_cost": device_cost,
