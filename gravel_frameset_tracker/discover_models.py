@@ -12,12 +12,19 @@ unless AUTO_APPROVE is set in config.py.
 
 import json
 import re
+import unicodedata
 from pathlib import Path
 
 import config
 
 CLEARANCE_RE = re.compile(r"(\d{2})\s*mm")
 GRAVEL_KEYWORDS = ["gravel", "frameset", "rahmenset"]
+
+
+def _normalize(s: str) -> str:
+    """Strip accents so 'Cervélo' and 'Cervelo' compare equal."""
+    decomposed = unicodedata.normalize("NFKD", s)
+    return "".join(c for c in decomposed if not unicodedata.combining(c)).lower()
 
 
 def _load_json(path: str) -> dict:
@@ -33,6 +40,10 @@ def _save_json(path: str, data: dict) -> None:
 
 def _known_model_names(models_data: dict) -> set[str]:
     return {f"{m['brand']} {m['model']}".lower() for m in models_data["models"]}
+
+
+def _known_brands(models_data: dict) -> set[str]:
+    return {_normalize(m["brand"]) for m in models_data["models"]}
 
 
 def _scan_text(text: str, brand: str) -> list[int]:
@@ -53,7 +64,7 @@ def discover(page) -> list[dict]:
     `page` is a Playwright page, reused across sources.
     """
     models_data = _load_json(config.MODELS_FILE)
-    known = _known_model_names(models_data)
+    known_brands = _known_brands(models_data)
     candidates = []
 
     for url in config.DISCOVERY_SOURCES:
@@ -71,6 +82,9 @@ def discover(page) -> list[dict]:
             continue
 
         for brand in config.KNOWN_BRANDS:
+            if _normalize(brand) in known_brands:
+                continue  # already tracked -- not a "new" candidate
+
             clearances = _scan_text(text, brand)
             in_range = [
                 c for c in clearances
