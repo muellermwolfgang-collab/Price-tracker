@@ -28,7 +28,7 @@ jobs:
 
       - name: Run tracker
         working-directory: gravel_frameset_tracker
-        run: python main.py
+        run: python -u main.py
 
       - name: Commit updated model list / discovered candidates
         run: |
