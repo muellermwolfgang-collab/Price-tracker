@@ -1,0 +1,12 @@
+{
+  "candidates": [
+    {
+      "brand": "Cervélo",
+      "source_url": "https://www.bikeradar.com/advice/buyers-guides/best-gravel-bikes",
+      "clearance_mentions_mm": [
+        45
+      ],
+      "note": "Detected via keyword scan — confirm model name and material before adding to models.json"
+    }
+  ]
+}
