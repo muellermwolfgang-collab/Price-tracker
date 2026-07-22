@@ -18,6 +18,14 @@ Selectors use link-href pattern matching (product URLs look like
 rather than guessed CSS classes -- classes weren't visible in what I could
 fetch (page content, not raw DOM), but the URL/text patterns were, and are
 more likely to survive a markup change anyway.
+
+PERFORMANCE NOTE: the category is only fetched and paginated through once
+per run, not once per tracked model. `_get_all_products()` caches the raw
+(text, href) pairs at module level on first call; every subsequent
+fetch_offers() call for a different model reuses that cache instead of
+re-navigating. This is the single biggest speed lever for this adapter --
+fetching 11 models' worth of pages individually would mean re-loading the
+same 3 category pages ~11 times over.
 """
 
 import re
@@ -29,6 +37,8 @@ MAX_PAGES = 5  # confirmed 3 pages as of writing; capped higher in case inventor
 
 PRICE_RE = re.compile(r"([\d,]+\.\d{2})\s*€")
 PRODUCT_LINK_RE = re.compile(r"/en/[^/]+/[^/]+-p\d+/")
+
+_product_cache: list[tuple[str, str]] | None = None  # [(link text, href), ...]
 
 
 def _parse_price(text: str) -> float | None:
@@ -47,11 +57,13 @@ def _guess_material(title: str) -> str | None:
     return None
 
 
-def fetch_offers(page, model: dict) -> list[Offer]:
-    offers = []
-    search_term = model["model"].lower()
-    brand_term = model["brand"].lower()
+def _get_all_products(page) -> list[tuple[str, str]]:
+    """Fetch and paginate the category once; cache for the rest of the run."""
+    global _product_cache
+    if _product_cache is not None:
+        return _product_cache
 
+    products = []
     for page_num in range(1, MAX_PAGES + 1):
         url = CATEGORY_URL if page_num == 1 else f"{CATEGORY_URL}?page={page_num}"
         page.goto(url, wait_until="domcontentloaded", timeout=30000)
@@ -64,28 +76,38 @@ def fetch_offers(page, model: dict) -> list[Offer]:
             if not PRODUCT_LINK_RE.search(href):
                 continue
             found_any_product_link = True
-
-            text = link.inner_text().strip()
-            lower_text = text.lower()
-            if brand_term not in lower_text and search_term not in lower_text:
-                continue
-
-            price = _parse_price(text)
-            material = _guess_material(text)
-            if price is None or material is None or material not in model["materials"]:
-                continue
-
-            offers.append(Offer(
-                brand=model["brand"],
-                model=model["model"],
-                material=material,
-                price_eur=price,
-                size=None,  # size is chosen on the product detail page, not the listing
-                url=href if href.startswith("http") else f"https://www.bike-components.de{href}",
-                retailer=RETAILER,
-            ))
+            products.append((link.inner_text().strip(), href))
 
         if not found_any_product_link:
             break  # ran past the last real page
+
+    _product_cache = products
+    return products
+
+
+def fetch_offers(page, model: dict) -> list[Offer]:
+    offers = []
+    search_term = model["model"].lower()
+    brand_term = model["brand"].lower()
+
+    for text, href in _get_all_products(page):
+        lower_text = text.lower()
+        if brand_term not in lower_text and search_term not in lower_text:
+            continue
+
+        price = _parse_price(text)
+        material = _guess_material(text)
+        if price is None or material is None or material not in model["materials"]:
+            continue
+
+        offers.append(Offer(
+            brand=model["brand"],
+            model=model["model"],
+            material=material,
+            price_eur=price,
+            size=None,  # size is chosen on the product detail page, not the listing
+            url=href if href.startswith("http") else f"https://www.bike-components.de{href}",
+            retailer=RETAILER,
+        ))
 
     return offers
