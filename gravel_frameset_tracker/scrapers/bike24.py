@@ -55,9 +55,8 @@ def fetch_offers(page, model: dict) -> list[Offer]:
 
     for page_num in range(1, MAX_PAGES + 1):
         url = CATEGORY_URL if page_num == 1 else f"{CATEGORY_URL}?page={page_num}"
-                page.goto(url, wait_until="domcontentloaded", timeout=30000)
+        page.goto(url, wait_until="domcontentloaded", timeout=30000)
         page.wait_for_timeout(2000)  # let JS-rendered product tiles settle
-
 
         links = page.locator("a").all()
         found_any_product_link = False
