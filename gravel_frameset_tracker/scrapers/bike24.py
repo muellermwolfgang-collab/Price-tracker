@@ -15,6 +15,9 @@ adapter parses its own site's format, don't share the regex.
 Uses link-href pattern matching (product pages are bike24.com/p{id}.html)
 plus the link's visible text, same reasoning as bike_components.py: I
 could confirm real URL/text patterns via fetch but not real CSS classes.
+
+PERFORMANCE NOTE: same fetch-once-per-run caching as bike_components.py --
+see that file's docstring for why this matters.
 """
 
 import re
@@ -28,6 +31,8 @@ PRICE_RE = re.compile(r"([\d.]+,\d{2})\s*€")
 PRODUCT_LINK_RE = re.compile(r"/p\d+\.html")
 
 MATERIAL_KEYWORDS = ["carbon", "aluminium", "alu", "titanium", "steel"]
+
+_product_cache: list[tuple[str, str]] | None = None  # [(link text, href), ...]
 
 
 def _parse_price(text: str) -> float | None:
@@ -48,11 +53,13 @@ def _guess_material(title: str) -> str | None:
     return None
 
 
-def fetch_offers(page, model: dict) -> list[Offer]:
-    offers = []
-    search_term = model["model"].lower()
-    brand_term = model["brand"].lower()
+def _get_all_products(page) -> list[tuple[str, str]]:
+    """Fetch and paginate the category once; cache for the rest of the run."""
+    global _product_cache
+    if _product_cache is not None:
+        return _product_cache
 
+    products = []
     for page_num in range(1, MAX_PAGES + 1):
         url = CATEGORY_URL if page_num == 1 else f"{CATEGORY_URL}?page={page_num}"
         page.goto(url, wait_until="domcontentloaded", timeout=30000)
@@ -65,28 +72,38 @@ def fetch_offers(page, model: dict) -> list[Offer]:
             if not PRODUCT_LINK_RE.search(href):
                 continue
             found_any_product_link = True
-
-            text = link.inner_text().strip()
-            lower_text = text.lower()
-            if brand_term not in lower_text and search_term not in lower_text:
-                continue
-
-            price = _parse_price(text)
-            material = _guess_material(text)
-            if price is None or material is None or material not in model["materials"]:
-                continue
-
-            offers.append(Offer(
-                brand=model["brand"],
-                model=model["model"],
-                material=material,
-                price_eur=price,
-                size=None,
-                url=href if href.startswith("http") else f"https://www.bike24.com{href}",
-                retailer=RETAILER,
-            ))
+            products.append((link.inner_text().strip(), href))
 
         if not found_any_product_link:
             break
+
+    _product_cache = products
+    return products
+
+
+def fetch_offers(page, model: dict) -> list[Offer]:
+    offers = []
+    search_term = model["model"].lower()
+    brand_term = model["brand"].lower()
+
+    for text, href in _get_all_products(page):
+        lower_text = text.lower()
+        if brand_term not in lower_text and search_term not in lower_text:
+            continue
+
+        price = _parse_price(text)
+        material = _guess_material(text)
+        if price is None or material is None or material not in model["materials"]:
+            continue
+
+        offers.append(Offer(
+            brand=model["brand"],
+            model=model["model"],
+            material=material,
+            price_eur=price,
+            size=None,
+            url=href if href.startswith("http") else f"https://www.bike24.com{href}",
+            retailer=RETAILER,
+        ))
 
     return offers
