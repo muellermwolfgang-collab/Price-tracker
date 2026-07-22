@@ -1,5 +1,5 @@
 {
-  "ntfy_topic": "REPLACE-WITH-YOUR-OWN-NTFY-TOPIC",
+  "ntfy_topic": "handysuche-iphone-xx2ab",
   "contract_months": 24,
   "provider_filter": ["Vodafone", "Telekom"],
   "min_data_gb": 20,
