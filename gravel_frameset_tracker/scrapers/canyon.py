@@ -1,76 +1,29 @@
 """
-canyon.com adapter — Canyon sells the Grail CF and Grail AL as standalone
-framesets (confirmed via canyon.com/en-de/gravel/all-road/grail/). Only
-covers Canyon models; fetch_offers() returns [] for anything else so it's
-safe to include in the full adapter list unconditionally.
+canyon.com adapter -- DISABLED pending manual check.
 
-Selectors are a starting point, not verified against live HTML.
+Fetched https://www.canyon.com/en-de/gravel/all-road/grail/grail-al/ and it
+redirected to the general Grail category page ("Choose your Grail"), which
+only lists complete bikes (Grail CF SL 7 AERO, Grail CFR Di2, Grail CF 8
+1by, etc. -- all with groupsets/wheels specified, prices EUR 1,799-6,999).
+No frame-only ("frameset") listing was visible on that page.
+
+Two things this also confirmed, already reflected in models.json:
+- The current Grail generation is carbon-only. There is no "Grail AL"
+  anymore -- that variant has been discontinued.
+- Whether Canyon sells the Grail as a standalone frameset at all right now
+  is genuinely unclear from what I could fetch. It's possible there's a
+  frame-only path via their "Customise" / "My Canyon Custom Bike" tool, or
+  it may simply not be offered as a separate SKU currently.
+
+Rather than guess selectors against a page structure I'm not confident
+represents a real purchase path, this adapter is a no-op until confirmed.
+If you check the site (or the Customise tool) and find a real frame-only
+URL, this is the place to implement it -- same interface as the other
+adapters.
 """
 
-import re
 from .base import Offer
-
-RETAILER = "canyon.com"
-GRAIL_URLS = {
-    "Grail CF": "https://www.canyon.com/en-de/gravel/all-road/grail/grail-cf/",
-    "Grail AL": "https://www.canyon.com/en-de/gravel/all-road/grail/grail-al/",
-}
-
-# TODO: verify against live page
-SELECTORS = {
-    "variant_option": ".pdp-variant-selector__option",
-    "price": ".pdp-price, .price__value",
-    "size_selector": ".pdp-size-selector__option",
-}
-
-PRICE_RE = re.compile(r"([\d.,]+)")
-
-
-def _parse_price(text: str) -> float | None:
-    match = PRICE_RE.search(text.replace("€", ""))
-    if not match:
-        return None
-    raw = match.group(1).replace(".", "").replace(",", ".")
-    try:
-        return float(raw)
-    except ValueError:
-        return None
 
 
 def fetch_offers(page, model: dict) -> list[Offer]:
-    url = GRAIL_URLS.get(model["model"])
-    if not url:
-        return []  # not a Canyon model this adapter knows about
-
-    material = "carbon" if "carbon" in model["materials"] and model["model"] == "Grail CF" else (
-        "aluminium" if model["model"] == "Grail AL" else None
-    )
-    if material is None:
-        return []
-
-    page.goto(url, wait_until="networkidle")
-
-    # Frameset-only variant (as opposed to complete-bike builds) needs to be
-    # selected explicitly — Canyon's PDP typically exposes this as one of
-    # several "build" options.
-    frameset_option = page.locator("text=/frameset/i").first
-    if frameset_option.count():
-        frameset_option.click()
-        page.wait_for_timeout(500)
-
-    price_el = page.locator(SELECTORS["price"]).first
-    if not price_el.count():
-        return []
-    price = _parse_price(price_el.inner_text())
-    if price is None:
-        return []
-
-    return [Offer(
-        brand="Canyon",
-        model=model["model"],
-        material=material,
-        price_eur=price,
-        size=None,
-        url=url,
-        retailer=RETAILER,
-    )]
+    return []
