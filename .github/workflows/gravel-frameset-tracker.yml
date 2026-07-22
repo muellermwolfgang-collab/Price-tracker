@@ -22,9 +22,8 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        working-directory: gravel_frameset_tracker
         run: |
-          pip install -r requirements.txt
+          pip install playwright requests
           playwright install --with-deps chromium
 
       - name: Run tracker
