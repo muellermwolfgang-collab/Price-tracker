@@ -21,6 +21,7 @@ see that file's docstring for why this matters.
 """
 
 import re
+from pathlib import Path
 from .base import Offer
 
 RETAILER = "bike24.de"
@@ -75,6 +76,20 @@ def _get_all_products(page) -> list[tuple[str, str]]:
             products.append((link.inner_text().strip(), href))
 
         if not found_any_product_link:
+            if page_num == 1:
+                # Unexpected -- the category is confirmed to have real listings
+                # (e.g. Ridley Kanzo Fast). Zero matches on page 1 means Playwright
+                # is seeing something different than a plain fetch does (cookie
+                # banner, lazy-loaded grid, bot detection, etc.) -- capture what
+                # it actually sees instead of guessing which.
+                try:
+                    page.screenshot(path="debug_bike24_page1.png", full_page=True)
+                    Path("debug_bike24_page1.html").write_text(page.content())
+                    print("[bike24.de] no product links found on page 1 -- "
+                          "saved debug_bike24_page1.png / .html for inspection")
+                except Exception as exc:
+                    print(f"[bike24.de] no product links found on page 1, "
+                          f"and debug capture also failed: {exc}")
             break
 
     _product_cache = products
