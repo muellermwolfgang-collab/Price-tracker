@@ -99,52 +99,65 @@ def fetch_text_browser(url):
 # ---------------------------------------------------------------------------
 def parse_check24(text, market_value_eur, months):
     """
-    Check24 shows a "Durchschnitt pro Monat" per offer: all fixed costs of
-    the first 24 months averaged per month (device value NOT netted out).
-    So: effective_price = durchschnitt - market_value / months.
+    Check24 offer cards are anchored on "(über <shop>)" - the fulfillment
+    shop name. Right after that comes: tariff name, delivery estimate,
+    then data volume ("Unlimited" or "<N> GB") as the 3rd non-empty line.
+    Further down, "Ø pro Monat" holds the pre-computed average monthly
+    cost (device value NOT netted out, per Check24's own explanation
+    text), so effective_price = avg - market_value/months, same idea as
+    Handyhase/Logitel.
 
-    FIRST-RUN NOTE: written without having seen the rendered card layout,
-    so the anchors below are a best-effort guess. If it finds 0 offers,
-    the debug output in main() prints the rendered text so the pattern
-    can be fixed against reality - same loop as with Logitel.
+    Check24 shows the network only as a logo icon, never as text, so we
+    infer it from well-known tariff-name branding (MagentaMobil ->
+    Telekom, "Smart ..." -> Vodafone, "Mobile Unlimited"/"Blue" -> o2).
+    Generic reseller tariffs like "Allnet Flat X GB" give no reliable
+    signal and stay "unbekannt" - safer to miss an offer than to
+    mislabel its network.
     """
     offers = []
     seen = set()
 
-    # Cards typically end in a call-to-action; use it to slice the text.
-    chunks = re.split(r"[Zz]um (?:Angebot|Tarif)", text)
-    for chunk in chunks:
-        data_m = re.search(r"(\d+)\s*GB", chunk)
-        prices = re.findall(r"(\d{1,3}),\s*(\d{2})\s*€", chunk)
-        if not (data_m and prices):
-            continue
+    anchor_pattern = re.compile(r"\(über\s+([^)]+)\)")
+    anchors = list(anchor_pattern.finditer(text))
 
-        # Network detection: only accept a chunk that names the network
-        # explicitly; anything ambiguous stays "unbekannt" and is filtered
-        # out later (no false alerts, possibly a missed offer - safer).
-        low = chunk.lower()
-        if "telekom" in low or "magenta" in low:
+    for i, anchor in enumerate(anchors):
+        shop = anchor.group(1).strip()
+        block_start = anchor.end()
+        block_end = anchors[i + 1].start() if i + 1 < len(anchors) else len(text)
+        block = text[block_start:block_end]
+
+        lines = [ln.strip() for ln in block.split("\n") if ln.strip()]
+        if len(lines) < 3:
+            continue
+        tariff = lines[0]
+        data_line = lines[2]
+
+        if data_line == "Unlimited":
+            data_gb = 9999
+        else:
+            dm = re.match(r"(\d+)\s*GB", data_line)
+            if not dm:
+                continue
+            data_gb = int(dm.group(1))
+
+        avg_m = re.search(r"Ø\s*pro\s*Monat\s*([\d,]+)\s*€", block)
+        if not avg_m:
+            continue
+        avg = to_float(avg_m.group(1))
+
+        low = tariff.lower()
+        if "magenta" in low:
             provider = "Telekom"
-        elif "vodafone" in low:
+        elif low.startswith("smart"):
             provider = "Vodafone"
-        elif "o2" in low or "telefónica" in low or "telefonica" in low:
+        elif "mobile unlimited" in low or low.startswith("blue"):
             provider = "o2"
         else:
             provider = "unbekannt"
 
-        # Tariff name: last non-numeric line before the data volume.
-        name_lines = [
-            ln.strip() for ln in chunk[: data_m.start()].split("\n")
-            if ln.strip() and not re.fullmatch(r"[\d,.\s€%*]+", ln.strip())
-        ]
-        tariff = name_lines[-1] if name_lines else "unbekannt"
-
-        # The comparison figure is usually the LAST price in the card.
-        avg = float(f"{prices[-1][0]}.{prices[-1][1]}")
         effective_price = round(avg - market_value_eur / months, 2)
-        data_gb = int(data_m.group(1))
 
-        dedup_key = (provider, tariff, data_gb, avg)
+        dedup_key = (provider, tariff, data_gb, avg, shop)
         if dedup_key in seen:
             continue
         seen.add(dedup_key)
@@ -152,7 +165,7 @@ def parse_check24(text, market_value_eur, months):
         offers.append(
             {
                 "provider": provider,
-                "tariff": tariff,
+                "tariff": f"{tariff} ({shop})",
                 "data_gb": data_gb,
                 "months": months,
                 "monthly_fee": avg,
@@ -370,16 +383,6 @@ def main():
                 print(f"Could not fetch {url}: {exc}")
                 continue
 
-            if site == "check24":
-                idx = text.find("Durchschnitt")
-                print("--- Check24 raw text around first 'Durchschnitt' (verification) ---")
-                if idx == -1:
-                    print("'Durchschnitt' not found at all. First 500 chars:")
-                    print(text[:500])
-                else:
-                    print(text[max(0, idx - 1500):idx + 2000])
-                print("--- end raw text ---")
-
             if site == "handyhase":
                 offers = parse_handyhase(text)
             elif site == "logitel":
@@ -392,10 +395,15 @@ def main():
 
             print(f"Found {len(offers)} raw offers.")
             if not offers:
+                # Search for a landmark string that should be near the
+                # tariff cards. If it's missing entirely, the content is
+                # probably injected by JavaScript after page load (or a
+                # bot-wall blocked the browser) - the debug text below
+                # tells us which case we're in.
                 landmarks = {
                     "handyhase": "Effektivpreis",
                     "logitel": "Tarifempfehlungen",
-                    "check24": "Durchschnitt",
+                    "check24": "über",
                 }
                 landmark = landmarks.get(site, "€")
                 idx = text.find(landmark)
