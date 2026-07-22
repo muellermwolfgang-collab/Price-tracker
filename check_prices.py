@@ -154,9 +154,13 @@ def parse_logitel(text, market_value_eur, months):
     offers = []
 
     # A card starts with a known provider name at the start of a line,
-    # e.g. "Vodafone Smart L" or "Telekom MagentaMobil L mit Handy".
+    # e.g. "Vodafone Smart L" or "Telekom MagentaMobil L mit Handy". The
+    # provider is usually its own bold DOM element, so the tariff name
+    # frequently ends up on the *next* text line rather than the same one -
+    # \s+ (which also matches newlines) bridges that instead of requiring
+    # them on one line.
     anchor_pattern = re.compile(
-        r"^(?P<provider>" + "|".join(KNOWN_PROVIDERS) + r")\s+(?P<tariff>[^\n]+)$",
+        r"^(?P<provider>" + "|".join(KNOWN_PROVIDERS) + r")\s+(?P<tariff>[^\n]+)",
         re.MULTILINE,
     )
     anchors = list(anchor_pattern.finditer(text))
