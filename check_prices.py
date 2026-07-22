@@ -265,10 +265,25 @@ def main():
 
             print(f"Found {len(offers)} raw offers.")
             if not offers:
-                # Nothing matched - print a slice of the page text so the
-                # regex can be fixed together.
-                print("No offers parsed. First 800 chars of page text:")
-                print(text[:800])
+                # Search for a landmark string that should be near the
+                # tariff cards. If it's missing entirely, the content is
+                # probably injected by JavaScript after page load, which a
+                # plain requests.get() never sees - a real regex fix won't
+                # help in that case, we'd need a different approach.
+                landmark = "Effektivpreis" if site == "handyhase" else "Tarifempfehlungen"
+                idx = text.find(landmark)
+                if idx == -1:
+                    print(
+                        f"Landmark '{landmark}' not found ANYWHERE in the fetched "
+                        f"page. This suggests the tariff content is loaded by "
+                        f"JavaScript after the page loads, so a plain HTTP fetch "
+                        f"never sees it - a regex fix alone won't solve this."
+                    )
+                    print("First 500 chars fetched:")
+                    print(text[:500])
+                else:
+                    print(f"Landmark '{landmark}' found at position {idx}. Text around it:")
+                    print(text[idx:idx + 1500])
                 continue
 
             for offer in offers:
