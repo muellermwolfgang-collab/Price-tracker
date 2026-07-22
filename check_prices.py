@@ -1,18 +1,15 @@
 """
 Price tracker for iPhone 17 / 17 Pro / 17 Pro Max mobile contract bundles.
 
-Checks handyhase.de and logitel.de for offers matching:
+Checks handyhase.de, logitel.de and check24.de for offers matching:
 - provider Vodafone or Telekom
 - at least `min_data_gb` of data
 - no "Young" or "GigaKombi"/"Kombi" tariffs
 - effective price below the per-device threshold
 
 Sends a push notification via ntfy.sh when a qualifying offer is found.
-
-NOTE FOR FIRST RUN: this is a first version written without being able to
-test against the live sites from this environment. If a source returns
-0 offers, the script prints a chunk of the raw page text it saw - paste
-that back to Claude so the regex can be adjusted together.
+Check24 is fetched with a headless Chromium browser (Playwright) because
+its tariff list is rendered by JavaScript after the page loads.
 """
 
 import json
@@ -70,12 +67,10 @@ def fetch_text(url):
 
 def fetch_text_browser(url, wait_ms=8000, extra_click_labels=()):
     """Fetch a page with a real (headless) Chromium browser via Playwright.
-    Needed for sites like Check24/Tariffuxx that build the tariff list
-    with JavaScript after the page loads - a plain HTTP fetch only sees
-    an empty shell there. Clicks away the cookie banner if one appears,
-    optionally clicks other labels (e.g. an "apply filters" button some
-    sites need before showing real tariffs), then waits for the list to
-    render."""
+    Needed for sites like Check24 that build the tariff list with
+    JavaScript after the page loads - a plain HTTP fetch only sees an
+    empty shell there. Clicks away the cookie banner if one appears,
+    optionally clicks other labels, then waits for the list to render."""
     from playwright.sync_api import sync_playwright
 
     with sync_playwright() as p:
@@ -188,78 +183,6 @@ def parse_check24(text, market_value_eur, months):
 
 
 # ---------------------------------------------------------------------------
-# Tariffuxx parser
-# ---------------------------------------------------------------------------
-def parse_tariffuxx(text, market_value_eur, months):
-    """
-    Tariffuxx cards end in "Zum Tarif". Each card holds a small cost table
-    (Grundgebühr / Handy Zuzahlung / Bonus / Einmalig) and a "Durchschnitt
-    p. Monat" figure - the same style of pre-computed, non-netted average
-    as the other three sites, so effective_price = avg - market_value/months.
-
-    FIRST-RUN NOTE, more so than the other three sites: Tariffuxx also
-    login-walls full pricing on tariffs that pay no commission (shown only
-    as a "Vorschau"/preview otherwise), and its filter panel may need an
-    explicit "Übernehmen" click before real tariffs replace the page's
-    default placeholder cards. This is a genuine first guess - if it comes
-    back with 0 offers, the debug dump below shows what's really there so
-    we can fix it against reality, same loop as the other three sites.
-    """
-    offers = []
-    seen = set()
-
-    end_markers = list(re.finditer(r"Zum Tarif", text))
-    block_start = 0
-    for m in end_markers:
-        block = text[block_start:m.start()]
-        block_start = m.end()
-
-        avg_m = re.search(r"Durchschnitt\s*p\.\s*Monat\D{0,10}?([\d,]+)\s*€", block)
-        if not avg_m:
-            continue
-        avg = to_float(avg_m.group(1))
-
-        net_m = re.search(r"\b(Telekom|Vodafone|o2|Telefónica|1&1)\b", block)
-        if net_m:
-            raw = net_m.group(1)
-            provider = "o2" if raw.lower() in ("o2", "telefónica") else raw
-        else:
-            provider = "unbekannt"
-
-        data_m = re.search(r"Unlimited|(\d+)\s*GB", block)
-        if not data_m:
-            continue
-        data_gb = 9999 if data_m.group(0) == "Unlimited" else int(data_m.group(1))
-
-        # Tariff name: last non-empty line before the data-volume mention.
-        pre_lines = [
-            ln.strip() for ln in block[: data_m.start()].split("\n") if ln.strip()
-        ]
-        tariff = pre_lines[-1] if pre_lines else "unbekannt"
-
-        effective_price = round(avg - market_value_eur / months, 2)
-
-        dedup_key = (provider, tariff, data_gb, avg)
-        if dedup_key in seen:
-            continue
-        seen.add(dedup_key)
-
-        offers.append(
-            {
-                "provider": provider,
-                "tariff": tariff,
-                "data_gb": data_gb,
-                "months": months,
-                "monthly_fee": avg,
-                "device_cost": 0.0,
-                "bonus": 0.0,
-                "effective_price": effective_price,
-            }
-        )
-    return offers
-
-
-# ---------------------------------------------------------------------------
 # Handyhase parser
 # ---------------------------------------------------------------------------
 def parse_handyhase(text):
@@ -272,8 +195,6 @@ def parse_handyhase(text):
     """
     offers = []
 
-    # Build a tariff-name -> network lookup from the detail section
-    # ("Tarif: X ... Netz: Y").
     network_by_tariff = {}
     for m in re.finditer(
         r"Tarif:\s*(?P<name>.+?)\n.*?Netz:\s*(?P<netz>\w+)",
@@ -282,10 +203,6 @@ def parse_handyhase(text):
     ):
         network_by_tariff[m.group("name").strip()] = m.group("netz").strip()
 
-    # Step 1: find the start of every offer block (tariff name immediately
-    # followed by "X Monate" and "Netz" and a data volume). Each match gives
-    # us where a block starts; the next match's start (or end of text) is
-    # where it ends.
     anchor_pattern = re.compile(
         r"(?P<tariff>[^\n]+?)\n"
         r"(?P<months>\d+)\s*Monate\n"
@@ -305,7 +222,7 @@ def parse_handyhase(text):
         bonus_m = re.search(r"([\d,]+)\s*€\s*Bonus", block)
 
         if not (fee_m and device_m and eff_m):
-            continue  # this block didn't match the expected shape - skip it
+            continue
 
         tariff = anchor.group("tariff").strip()
         data_gb = 999 if anchor.group("data") == "endlos" else int(anchor.group("data"))
@@ -340,21 +257,9 @@ def parse_logitel(text, market_value_eur, months):
     ourselves using the same style of formula Handyhase uses:
     (monthly_fee * months + device_cost + connection fee + shipping - bonus
      - market_value) / months
-
-    Note: Logitel's price widgets render the Euro-cents part separately from
-    the Euro part (a common responsive-design trick), which can cause a
-    plain text extraction to see the same amount fragmented or duplicated.
-    That's why we always take the FIRST plausible "xx,xx €" match after each
-    label rather than assuming a clean single number.
     """
     offers = []
 
-    # A card starts with a known provider name at the start of a line,
-    # e.g. "Vodafone Smart L" or "Telekom MagentaMobil L mit Handy". The
-    # provider is usually its own bold DOM element, so the tariff name
-    # frequently ends up on the *next* text line rather than the same one -
-    # \s+ (which also matches newlines) bridges that instead of requiring
-    # them on one line.
     anchor_pattern = re.compile(
         r"^(?P<provider>" + "|".join(KNOWN_PROVIDERS) + r")\s+(?P<tariff>[^\n]+)",
         re.MULTILINE,
@@ -374,7 +279,7 @@ def parse_logitel(text, market_value_eur, months):
         shipping_m = re.search(r"Versandkosten\s*([\d,]+)\s*€", block)
 
         if not (data_m and device_m):
-            continue  # doesn't look like a full tariff card - skip
+            continue
 
         device_end = device_m.end()
         connection_start = connection_m.start() if connection_m else len(block)
@@ -419,6 +324,11 @@ def passes_filters(offer, config):
     if offer["data_gb"] < config["min_data_gb"]:
         return False
     name = offer["tariff"]
+    # A real tariff name is short. A long one is a strong sign a parser
+    # grabbed a stray sentence or table fragment instead - reject rather
+    # than risk alerting on garbage.
+    if len(name) > 70:
+        return False
     for bad_word in config["exclude_name_contains"]:
         if bad_word.lower() in name.lower():
             return False
@@ -454,10 +364,6 @@ def main():
             try:
                 if site == "check24":
                     text = fetch_text_browser(url)
-                elif site == "tariffuxx":
-                    text = fetch_text_browser(
-                        url, wait_ms=12000, extra_click_labels=["Übernehmen"]
-                    )
                 else:
                     text = fetch_text(url)
             except Exception as exc:
@@ -470,8 +376,6 @@ def main():
                 offers = parse_logitel(text, market_value, config["contract_months"])
             elif site == "check24":
                 offers = parse_check24(text, market_value, config["contract_months"])
-            elif site == "tariffuxx":
-                offers = parse_tariffuxx(text, market_value, config["contract_months"])
             else:
                 print(f"Unknown site '{site}', skipping.")
                 continue
@@ -482,7 +386,6 @@ def main():
                     "handyhase": "Effektivpreis",
                     "logitel": "Tarifempfehlungen",
                     "check24": "über",
-                    "tariffuxx": "Zum Tarif",
                 }
                 landmark = landmarks.get(site, "€")
                 idx = text.find(landmark)
