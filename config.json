@@ -13,7 +13,8 @@
       "market_value_note": "Resale/market value used to net out the device cost. Check handyhase.de/iphone-17-deals/ (look for 'Wert des Apple iPhone 17 ... laut Preisvergleich') and update this number every so often.",
       "sources": [
         {"site": "handyhase", "url": "https://www.handyhase.de/iphone-17-deals/"},
-        {"site": "logitel", "url": "https://www.logitel.de/handys/apple/iphone-17.html"}
+        {"site": "logitel", "url": "https://www.logitel.de/handys/apple/iphone-17.html"},
+        {"site": "check24", "url": "https://handyvertrag.check24.de/vergleich/iphone-17"}
       ]
     },
     {
@@ -23,7 +24,8 @@
       "market_value_note": "From handyhase.de's own device page (256GB, 'aktueller Marktpreis' as of 22.07.2026). Update periodically.",
       "sources": [
         {"site": "handyhase", "url": "https://www.handyhase.de/iphone-17-pro-deals/"},
-        {"site": "logitel", "url": "https://www.logitel.de/handys/apple/iphone-17-pro.html"}
+        {"site": "logitel", "url": "https://www.logitel.de/handys/apple/iphone-17-pro.html"},
+        {"site": "check24", "url": "https://handyvertrag.check24.de/vergleich/iphone-17-pro"}
       ]
     },
     {
@@ -33,7 +35,8 @@
       "market_value_note": "Rough placeholder - check handyhase.de/iphone-17-pro-max-deals/ and correct.",
       "sources": [
         {"site": "handyhase", "url": "https://www.handyhase.de/iphone-17-pro-max-deals/"},
-        {"site": "logitel", "url": "https://www.logitel.de/handys/apple/iphone-17-pro-max.html"}
+        {"site": "logitel", "url": "https://www.logitel.de/handys/apple/iphone-17-pro-max.html"},
+        {"site": "check24", "url": "https://handyvertrag.check24.de/vergleich/iphone-17-pro-max"}
       ]
     }
   ]
