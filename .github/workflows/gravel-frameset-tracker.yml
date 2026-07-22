@@ -22,9 +22,21 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: |
-          pip install playwright requests
-          playwright install --with-deps chromium
+        run: pip install playwright requests
+
+      - name: Install system dependencies for Chromium
+        run: playwright install-deps chromium  # OS-level libs -- fresh VM every run, not cacheable
+
+      - name: Cache Playwright browser binary
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}
+
+      - name: Download Playwright browser
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: playwright install chromium
 
       - name: Run tracker
         working-directory: gravel_frameset_tracker
