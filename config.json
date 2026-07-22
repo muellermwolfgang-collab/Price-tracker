@@ -10,19 +10,19 @@
       "name": "iPhone 17",
       "threshold_effective_price": 2.00,
       "market_value_eur": 999,
-      "market_value_note": "Resale/market value used to net out the device cost. Check handyhase.de/apple/iphone-17/ (look for 'Wert des Apple iPhone 17 ... laut Preisvergleich') and update this number every so often.",
+      "market_value_note": "Resale/market value used to net out the device cost. Check handyhase.de/iphone-17-deals/ (look for 'Wert des Apple iPhone 17 ... laut Preisvergleich') and update this number every so often.",
       "sources": [
-        {"site": "handyhase", "url": "https://www.handyhase.de/apple/iphone-17/"},
+        {"site": "handyhase", "url": "https://www.handyhase.de/iphone-17-deals/"},
         {"site": "logitel", "url": "https://www.logitel.de/handys/apple/iphone-17.html"}
       ]
     },
     {
       "name": "iPhone 17 Pro",
       "threshold_effective_price": 4.00,
-      "market_value_eur": 1059,
-      "market_value_note": "From handyhase.de's own worked example (256GB, as of 10.07.2026). Update periodically.",
+      "market_value_eur": 1086,
+      "market_value_note": "From handyhase.de's own device page (256GB, 'aktueller Marktpreis' as of 22.07.2026). Update periodically.",
       "sources": [
-        {"site": "handyhase", "url": "https://www.handyhase.de/apple/iphone-17-pro/"},
+        {"site": "handyhase", "url": "https://www.handyhase.de/iphone-17-pro-deals/"},
         {"site": "logitel", "url": "https://www.logitel.de/handys/apple/iphone-17-pro.html"}
       ]
     },
@@ -30,9 +30,9 @@
       "name": "iPhone 17 Pro Max",
       "threshold_effective_price": 4.00,
       "market_value_eur": 1150,
-      "market_value_note": "Rough placeholder - check handyhase.de/apple/iphone-17-pro-max/ and correct.",
+      "market_value_note": "Rough placeholder - check handyhase.de/iphone-17-pro-max-deals/ and correct.",
       "sources": [
-        {"site": "handyhase", "url": "https://www.handyhase.de/apple/iphone-17-pro-max/"},
+        {"site": "handyhase", "url": "https://www.handyhase.de/iphone-17-pro-max-deals/"},
         {"site": "logitel", "url": "https://www.logitel.de/handys/apple/iphone-17-pro-max.html"}
       ]
     }
