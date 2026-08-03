@@ -24,6 +24,10 @@ jobs:
       - name: Install dependencies
         run: pip install playwright requests
 
+      - name: Get installed Playwright version
+        id: playwright-version
+        run: echo "version=$(pip show playwright | grep Version | cut -d' ' -f2)" >> "$GITHUB_OUTPUT"
+
       - name: Install system dependencies for Chromium
         run: playwright install-deps chromium  # OS-level libs -- fresh VM every run, not cacheable
 
@@ -32,7 +36,12 @@ jobs:
         id: playwright-cache
         with:
           path: ~/.cache/ms-playwright
-          key: playwright-chromium-${{ runner.os }}
+          # Version is part of the key on purpose: each Playwright release pins a
+          # specific browser binary revision, so a new release must invalidate the
+          # old cache rather than silently serving a mismatched browser (that's what
+          # broke this workflow -- pip installed a newer Playwright than the cached
+          # binary matched, and the cache had no way to know it was stale).
+          key: playwright-chromium-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
 
       - name: Download Playwright browser
         if: steps.playwright-cache.outputs.cache-hit != 'true'
@@ -51,7 +60,6 @@ jobs:
             gravel_frameset_tracker/debug_*.png
             gravel_frameset_tracker/debug_*.html
           if-no-files-found: ignore
-
 
       - name: Commit updated model list / discovered candidates
         run: |
