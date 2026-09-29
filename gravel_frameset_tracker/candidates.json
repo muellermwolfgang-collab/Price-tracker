@@ -1,10 +1,27 @@
 {
   "candidates": [
     {
-      "brand": "BMC",
-      "source_url": "https://www.bikeradar.com/advice/buyers-guides/best-gravel-bikes",
+      "brand": "Scott",
+      "source_url": "https://www.cyclist.co.uk/buying-guides/best-gravel-race-bikes",
       "clearance_mentions_mm": [
-        32
+        45
+      ],
+      "note": "Detected via keyword scan — confirm model name and material before adding to models.json"
+    },
+    {
+      "brand": "BMC",
+      "source_url": "https://www.cyclist.co.uk/buying-guides/best-gravel-race-bikes",
+      "clearance_mentions_mm": [
+        40,
+        44
+      ],
+      "note": "Detected via keyword scan — confirm model name and material before adding to models.json"
+    },
+    {
+      "brand": "Wilier",
+      "source_url": "https://www.cyclist.co.uk/buying-guides/best-gravel-race-bikes",
+      "clearance_mentions_mm": [
+        45
       ],
       "note": "Detected via keyword scan — confirm model name and material before adding to models.json"
     }
