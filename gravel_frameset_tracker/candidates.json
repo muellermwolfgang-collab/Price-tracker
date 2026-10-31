@@ -23,6 +23,14 @@
         45
       ],
       "note": "Detected via keyword scan — confirm model name and material before adding to models.json"
+    },
+    {
+      "brand": "Look",
+      "source_url": "https://www.cyclist.co.uk/buying-guides/best-gravel-race-bikes",
+      "clearance_mentions_mm": [
+        45
+      ],
+      "note": "Detected via keyword scan — confirm model name and material before adding to models.json"
     }
   ]
 }
