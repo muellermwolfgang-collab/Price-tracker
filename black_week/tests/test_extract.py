@@ -213,3 +213,19 @@ def test_challenge_redirect_is_blocked():
     assert ex.detect_block(200, "Loading " + url, "", final_url=url)
     assert ex.detect_block(200, "Shop", "", final_url=url)
     assert not ex.detect_block(200, "Shop", "", has_price=True, final_url="https://s.de/p/apple-watch")
+
+
+@pytest.mark.parametrize("text", [
+    "149,63 €\ninkl. Versand 155,58 €",
+    "Gesamtpreis inkl. Versand: 155,58 €",
+])
+def test_total_incl_shipping_is_not_shipping(text):
+    assert ex.find_shipping(text) is None
+
+
+def test_shipping_not_above_price():
+    html = """<script type="application/ld+json">{"@type":"Product","name":"HomePod mini 2",
+      "offers":{"@type":"AggregateOffer","lowPrice":"149.63","highPrice":"155.58","priceCurrency":"EUR",
+      "shippingDetails":{"shippingRate":{"value":"155.58"}}}}</script>"""
+    r = ex.extract(html)
+    assert r.price == 149.63 and r.shipping is None

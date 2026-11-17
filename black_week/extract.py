@@ -110,6 +110,9 @@ def find_shipping(text: str) -> float | None:
     for val, start, end in find_euro_amounts(text):
         before = text[max(0, start - 30):start]
         after = text[end:end + 25]
+        # "inkl. Versand 155,58 €" / "Gesamtpreis inkl. Versand" is a total, not the shipping cost
+        if re.search(r"(inkl\.?|inklusive|incl\.?|gesamt\w*)\s*(versand\w*|lieferung)?\s*:?\s*$", before, re.IGNORECASE):
+            continue
         if re.search(r"(versand|versandkosten|lieferung|porto)\s*:?\s*$", before, re.IGNORECASE) or (
             re.search(r"zzgl\.?\s*$", before, re.IGNORECASE)
             and re.match(r"[ \t]*(versand|lieferung|porto)", after, re.IGNORECASE)
@@ -568,4 +571,10 @@ def extract(
             page_text if page_text is not None else visible_text(soup), result.price)
     if result.price is not None and not result.currency:
         result.currency = "EUR"
+    # shipping as high as the price itself is a misread total, not shipping
+    if result.shipping is not None and result.price is not None and result.shipping >= result.price:
+        result.shipping = None
+    for o in result.offers:
+        if o.get("shipping") is not None and o["shipping"] >= o["price"]:
+            o["shipping"] = None
     return result

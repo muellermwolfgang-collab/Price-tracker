@@ -499,6 +499,43 @@ class Fetcher:
         self.log(f"[{r['status']:<8}] {target['shop']}: {target['product']} -> {price}{note}")
 
 
+@contextlib.asynccontextmanager
+async def open_fetcher(log=print):
+    """Headless Chromium with the honest UA, locale and viewport, wrapped in a
+    Fetcher (robots.txt + per-host pacing). Shared by run.py and scout.py."""
+    from playwright.async_api import async_playwright
+
+    async with async_playwright() as p:
+        launch_kwargs = {"headless": True}
+        if os.environ.get("BLACK_WEEK_CHROMIUM"):
+            launch_kwargs["executable_path"] = os.environ["BLACK_WEEK_CHROMIUM"]
+        browser = await p.chromium.launch(**launch_kwargs)
+        try:
+            context = await browser.new_context(
+                user_agent=USER_AGENT, locale=LOCALE, timezone_id=TIMEZONE, viewport=VIEWPORT,
+            )
+            context.set_default_timeout(NAV_TIMEOUT_MS)
+            try:
+                yield Fetcher(context, log)
+            finally:
+                await context.close()
+        finally:
+            await browser.close()
+
+
+async def run_bounded(coros, budget_s: float, log=print) -> None:
+    """Run coroutines concurrently; cancel whatever is left after budget_s."""
+    tasks = [asyncio.create_task(c) for c in coros]
+    if not tasks:
+        return
+    _, pending = await asyncio.wait(tasks, timeout=budget_s)
+    for task in pending:
+        task.cancel()
+    if pending:
+        await asyncio.gather(*pending, return_exceptions=True)
+        log(f"run budget of {budget_s:.0f}s exceeded, {len(pending)} host(s) cancelled")
+
+
 async def fetch_all(targets: list[dict], log=print) -> list[dict]:
     results: dict[int, dict] = {}
     by_host: dict[str, list[tuple[int, dict]]] = {}
@@ -506,30 +543,14 @@ async def fetch_all(targets: list[dict], log=print) -> list[dict]:
         by_host.setdefault(urlsplit(t["url"] or t["site"]).hostname or "", []).append((idx, t))
 
     try:
-        from playwright.async_api import async_playwright
+        import playwright.async_api  # noqa: F401
     except ImportError as exc:
         return [empty_result(t, "error", f"playwright not installed: {exc}") for t in targets]
 
     try:
-        async with async_playwright() as p:
-            launch_kwargs = {"headless": True}
-            if os.environ.get("BLACK_WEEK_CHROMIUM"):
-                launch_kwargs["executable_path"] = os.environ["BLACK_WEEK_CHROMIUM"]
-            browser = await p.chromium.launch(**launch_kwargs)
-            context = await browser.new_context(
-                user_agent=USER_AGENT, locale=LOCALE, timezone_id=TIMEZONE, viewport=VIEWPORT,
-            )
-            context.set_default_timeout(NAV_TIMEOUT_MS)
-            fetcher = Fetcher(context, log)
-            tasks = [asyncio.create_task(fetcher.run_host(items, results)) for items in by_host.values()]
-            done, pending = await asyncio.wait(tasks, timeout=RUN_BUDGET_S)
-            for task in pending:
-                task.cancel()
-            if pending:
-                await asyncio.gather(*pending, return_exceptions=True)
-                log(f"run budget of {RUN_BUDGET_S}s exceeded, {len(pending)} host(s) cancelled")
-            await context.close()
-            await browser.close()
+        async with open_fetcher(log) as fetcher:
+            await run_bounded([fetcher.run_host(items, results) for items in by_host.values()],
+                              RUN_BUDGET_S, log)
     except Exception as exc:
         log(f"browser error: {type(exc).__name__}: {exc}")
         note = f"browser error: {type(exc).__name__}: {str(exc).splitlines()[0] if str(exc) else ''}"[:300]

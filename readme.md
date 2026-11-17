@@ -190,6 +190,36 @@ the page; their replacement may be any page with matching offers.
 If a shop answers 404 even for the current URLs from its own sitemap, it is
 reported as `blocked` (that is bot protection, not a moved product).
 
+## Adding products and finding shops (scout)
+
+`black_week/products.yaml` lists the products, `black_week/shops.yaml` the shops
+to look in. The workflow **Black Week Scout** (`.github/workflows/black-week-scout.yml`)
+runs daily at 04:23 UTC, before the morning price run. For every product and every
+shop without an entry in `targets.yaml` it searches the shop's sitemaps, opens the
+best candidates and appends verified offers to `targets.yaml` (marked
+`added_by: scout`). From then on the price runs fetch them.
+
+Verification is stricter than for URL repairs, because a wrong match would add a
+wrong product: the page must show a price, 85 % of the product words and every
+brand/model word (letters, 4+ characters), plus all `keywords`.
+The scout only adds entries. It never changes or removes them, and an entry you
+set to `active: false` is not added again.
+Results: `black_week/results/scout.md` (product × shop overview) and `scout.json`.
+
+**Adding a product:**
+- in a Claude chat with GitHub access: *"Black Week: füge Dyson V15 Detect hinzu"*,
+  optionally with keywords or shops. Claude starts the workflow with these inputs.
+- in the GitHub app or on the website: Actions → **Black Week Scout** → *Run workflow*,
+  fill in `product` (and optionally `keywords`, `shops`).
+- or add it to `products.yaml` by hand; the next daily run picks it up.
+
+With `product` filled in, the product is added to `products.yaml`, searched in all
+shops (or only the given ones; unknown domains are added to `shops.yaml`), and
+prices are fetched right after.
+
+Locally: `python black_week/scout.py --dry-run` (search and print, change nothing),
+`python black_week/scout.py --add "Dyson V15 Detect" --keywords "V15" --shops "otto.de"`.
+
 ## Results
 
 - `black_week/results/latest.json` — current run, one object per entry (`product`, `shop`,
@@ -202,7 +232,9 @@ reported as `blocked` (that is bot protection, not a moved product).
 ## Running it
 
 Automatically at 06:15 and 17:15 UTC (07:15 / 18:15 Berlin in winter) via
-`.github/workflows/black-week.yml`. Manually: Actions tab → **Black Week Prices** →
+`.github/workflows/black-week.yml`. GitHub starts scheduled runs late or drops
+them now and then, so the workflow starts again at 06:27 / 17:27 UTC; that backup
+run ends right away if the results are younger than 40 minutes. Manually: Actions tab → **Black Week Prices** →
 **Run workflow**. A failing URL never fails the job; it only fails if no result file
 could be written. Nothing is committed if nothing changed.
 
