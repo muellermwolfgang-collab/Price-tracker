@@ -121,3 +121,77 @@ pip install -r requirements.txt
 playwright install chromium
 python main.py
 ```
+
+---
+
+# black_week
+
+Self-contained module that fetches a list of product pages twice a day with a real
+headless browser (Playwright, Chromium), reads the prices and commits the results to
+`black_week/results/`. An external assistant reads these files. It does not touch the
+other trackers (own folder, own `requirements.txt`, own workflow).
+
+Fetching is deliberately polite: honest User-Agent
+(`PriceTracker/1.0 (+https://github.com/muellermwolfgang-collab/Price-tracker)`),
+robots.txt is checked before every request, one request at a time per host with a
+5–10 s pause, one retry on timeout and none on a block. No stealth plugins, fingerprint
+spoofing, proxies, captcha solving or logins — a blocked page is recorded as `blocked`
+and left alone.
+
+## Maintaining `black_week/targets.yaml`
+
+One entry per page:
+
+```yaml
+- product: Apple Watch SE 3          # free text
+  shop: Back Market                  # free text
+  type: listing                      # product = single product page, listing = category/comparison page
+  match: SE 3                        # listing only: only offers whose text contains this keyword
+  price_selector: .price .value      # optional CSS selector, last fallback
+  url: https://www.backmarket.de/de-de/p/apple-watch-se-series-3
+  active: true                       # false = skip without deleting the entry
+```
+
+Prices are taken from, in this order: JSON-LD (`Product` → `Offer`/`AggregateOffer`),
+meta tags (`product:price:amount`, `og:price:amount`, `itemprop="price"`), the
+`price_selector`, and — for listings — the visible offer tiles containing `match`
+(title, price and condition such as "Sehr gut" per tile, stored in `offers`).
+If a shop shows `no_price`, open the page, find the price element and add a
+`price_selector`.
+
+## Results
+
+- `black_week/results/latest.json` — current run, one object per entry (`product`, `shop`,
+  `url`, `status`, `http_status`, `price`, `currency`, `shipping`, `availability`,
+  `source`, `offers`, `page_title`, `fetched_at` in UTC, plus `price_high`, `offer_count`,
+  `note`)
+- `black_week/results/latest.md` — the same as a table, time stamp in Europe/Berlin
+- `black_week/results/history.csv` — every run appended
+
+## Running it
+
+Automatically at 06:15 and 17:15 UTC (07:15 / 18:15 Berlin in winter) via
+`.github/workflows/black-week.yml`. Manually: Actions tab → **Black Week Prices** →
+**Run workflow**. A failing URL never fails the job; it only fails if no result file
+could be written. Nothing is committed if nothing changed.
+
+Locally:
+
+```bash
+pip install -r black_week/requirements.txt
+python -m playwright install chromium
+python black_week/run.py --dry-run            # fetch + print to console, writes nothing
+python black_week/run.py --dry-run --only tink  # only entries whose shop/product contains "tink"
+python -m pytest black_week/tests             # offline tests (saved HTML + local test server)
+```
+
+## Status values
+
+| Status | Meaning |
+|---|---|
+| `ok` | price found |
+| `no_price` | page loaded, but no price found (consider a `price_selector`) |
+| `blocked` | HTTP 403/429/503 or a bot wall ("Access denied", "Just a moment", "Pardon Our Interruption", captcha) — logged, not bypassed |
+| `robots` | path disallowed by the shop's robots.txt — not fetched |
+| `timeout` | page did not load within 30 s (after one retry) |
+| `error` | anything else, e.g. HTTP 404, network error, robots.txt unreachable (see `note`) |

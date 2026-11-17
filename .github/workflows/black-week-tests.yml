@@ -1,0 +1,52 @@
+name: Black Week Tests
+
+on:
+  push:
+    paths:
+      - "black_week/**"
+      - "!black_week/results/**"
+      - ".github/workflows/black-week*.yml"
+  pull_request:
+    paths:
+      - "black_week/**"
+      - ".github/workflows/black-week*.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: black_week/requirements.txt
+
+      - name: Install Python dependencies
+        run: pip install -r black_week/requirements.txt
+
+      - name: Cache Playwright browser
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-${{ hashFiles('black_week/requirements.txt') }}
+
+      - name: Install Playwright browser (cache miss)
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: python -m playwright install --with-deps chromium
+
+      - name: Install Playwright system libraries (cache hit)
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: python -m playwright install-deps chromium
+
+      # unit tests use saved HTML only; the end-to-end test talks to a local
+      # server on 127.0.0.1 - no request leaves the runner
+      - name: Run tests
+        run: python -m pytest -q black_week/tests
