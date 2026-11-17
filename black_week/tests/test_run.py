@@ -102,51 +102,121 @@ class _Handler(SimpleHTTPRequestHandler):
         return super().do_GET()
 
 
-@pytest.mark.skipif(not _browser_available(), reason="Playwright browser not installed")
-def test_end_to_end_local(tmp_path, monkeypatch):
+SOLARBANK_PAGE = """<!doctype html><html lang="de"><head><meta charset="utf-8">
+<title>Anker SOLIX Solarbank 3 Pro 2.000 W Set | Baumarkt</title>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product",
+ "name":"Anker SOLIX Solarbank 3 Pro mit 2.000 W Solarmodulen",
+ "offers":{"@type":"Offer","price":"1499.00","priceCurrency":"EUR","availability":"https://schema.org/InStock"}}</script>
+</head><body><h1>Solarbank 3 Pro Set</h1><p>1.499,00 €</p></body></html>"""
+
+DECOY_PAGE = SOLARBANK_PAGE.replace("Solarbank 3 Pro", "Solarbank 2 Plus").replace("2.000 W", "800 W")
+
+
+def _site(tmp_path):
+    import gzip
     site = tmp_path / "site"
     shutil.copytree(FIXTURES, site)
-    (site / "robots.txt").write_text("User-agent: *\nDisallow: /secret\n")
     (site / "slow").write_text("<html><title>slow</title></html>")
+    (site / "p").mkdir()
+    (site / "p" / "anker-solix-solarbank-3-pro-2000w-set.html").write_text(SOLARBANK_PAGE, encoding="utf-8")
+    (site / "p" / "anker-solarbank-2-plus-800w.html").write_text(DECOY_PAGE, encoding="utf-8")
+    return site
+
+
+def _start(site):
     handler = lambda *a, **k: _Handler(*a, directory=str(site), **k)  # noqa: E731
     server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
     threading.Thread(target=server.serve_forever, daemon=True).start()
-    base = f"http://127.0.0.1:{server.server_port}"
+    return server, f"http://127.0.0.1:{server.server_port}"
+
+
+def _write_sitemaps(site, base):
+    import gzip
+    (site / "robots.txt").write_text(
+        f"User-agent: *\nDisallow: /secret\nSitemap: {base}/sitemap_index.xml\n")
+    (site / "sitemap_index.xml").write_text(
+        '<?xml version="1.0"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+        f"<sitemap><loc>{base}/sitemap-images.xml</loc></sitemap>"
+        f"<sitemap><loc>{base}/sitemap-products-1.xml.gz</loc></sitemap></sitemapindex>")
+    (site / "sitemap-images.xml").write_text("<urlset></urlset>")
+    urls = ["/p/anker-solarbank-2-plus-800w.html", "/p/anker-solix-solarbank-3-pro-2000w-set.html", "/jsonld_offer.html"]
+    xml = '<?xml version="1.0"?><urlset>' + "".join(f"<url><loc>{base}{u}</loc></url>" for u in urls) + "</urlset>"
+    (site / "sitemap-products-1.xml.gz").write_bytes(gzip.compress(xml.encode()))
+
+
+@pytest.mark.skipif(not _browser_available(), reason="Playwright browser not installed")
+def test_end_to_end_local(tmp_path, monkeypatch):
+    site = _site(tmp_path)
+    server, base = _start(site)
+    _write_sitemaps(site, base)
+    requested = []
+    orig = _Handler.do_GET
+
+    def logging_get(self):
+        requested.append(self.path)
+        return orig(self)
+    monkeypatch.setattr(_Handler, "do_GET", logging_get)
 
     monkeypatch.setattr(run, "HOST_PAUSE_S", (0.0, 0.0))
     monkeypatch.setattr(run, "PRICE_WAIT_MS", 1000)
     monkeypatch.setattr(run, "NAV_TIMEOUT_MS", 1500)
 
-    def t(name, path, **kw):
-        return {"product": name, "shop": "local", "url": base + path, "type": "product",
-                "match": None, "price_selector": None, **kw}
-
-    targets = [
-        t("offer", "/jsonld_offer.html"),
-        t("aggregate", "/jsonld_aggregate.html"),
-        t("listing", "/listing.html", type="listing", match="SE 3"),
-        t("blocked-title", "/blocked.html"),
-        t("blocked-403", "/forbidden"),
-        t("robots", "/secret/page.html"),
-        t("no-price", "/no_price.html"),
-        t("missing", "/does-not-exist.html"),
-        t("timeout", "/slow"),
-    ]
+    yaml_text = f"""
+- {{product: Eve Thermo 5. Gen. 3er, shop: A, url: '{base}/jsonld_offer.html'}}
+- {{product: LG StanbyME 2 Max, shop: A, url: '{base}/jsonld_aggregate.html'}}
+- {{product: Apple Watch SE 3, shop: A, type: listing, match: SE 3, url: '{base}/listing.html'}}
+- {{product: Blocked Product, shop: A, url: '{base}/blocked.html'}}
+- {{product: Forbidden Product, shop: A, url: '{base}/forbidden'}}
+- {{product: Robots Product, shop: A, url: '{base}/secret/page.html'}}
+- {{product: Venjakob Kalea, shop: A, url: '{base}/no_price.html'}}
+- {{product: HomePod mini 2, shop: A, url: '{base}/does-not-exist.html'}}
+- {{product: Slow Product, shop: A, url: '{base}/slow'}}
+- {{product: Anker Solarbank 3 Pro 2.000 W, shop: A, url: '{base}/p/old-solarbank'}}
+- {{product: Anker Solarbank 3 Pro 2.000 W, shop: B, site: '{base}'}}
+"""
+    tfile = tmp_path / "targets.yaml"
+    tfile.write_text(yaml_text)
+    targets = run.load_targets(tfile)
     try:
         results = asyncio.run(run.fetch_all(targets, log=lambda *_: None))
     finally:
         server.shutdown()
 
-    by = {r["product"]: r for r in results}
-    assert by["offer"]["status"] == "ok" and by["offer"]["price"] == 209.99
-    assert by["offer"]["shipping"] == 4.95 and by["offer"]["http_status"] == 200
-    assert by["aggregate"]["price"] == 1049.0 and by["aggregate"]["offer_count"] == 17
-    assert by["listing"]["source"] == "listing" and len(by["listing"]["offers"]) == 2
-    assert all("versteckt" not in o["title"] for o in by["listing"]["offers"])
-    assert by["blocked-title"]["status"] == "blocked"
-    assert by["blocked-403"]["status"] == "blocked" and by["blocked-403"]["http_status"] == 403
-    assert by["robots"]["status"] == "robots"
-    assert by["no-price"]["status"] == "no_price"
-    assert by["missing"]["status"] == "error" and by["missing"]["http_status"] == 404
-    assert by["timeout"]["status"] == "timeout"
+    by = {(r["product"], r["shop"]): r for r in results}
+    g = lambda name, shop="A": by[(name, shop)]  # noqa: E731
+    assert g("Eve Thermo 5. Gen. 3er")["status"] == "ok" and g("Eve Thermo 5. Gen. 3er")["price"] == 209.99
+    assert g("Eve Thermo 5. Gen. 3er")["shipping"] == 4.95 and g("Eve Thermo 5. Gen. 3er")["url_check"] == "ok"
+    assert g("LG StanbyME 2 Max")["price"] == 1049.0 and g("LG StanbyME 2 Max")["offer_count"] == 17
+    listing = g("Apple Watch SE 3")
+    assert listing["source"] == "listing" and len(listing["offers"]) == 2
+    assert all("versteckt" not in o["title"] for o in listing["offers"])
+    assert g("Blocked Product")["status"] == "blocked" and g("Blocked Product")["url_check"] == "not_checked"
+    assert g("Forbidden Product")["status"] == "blocked" and g("Forbidden Product")["http_status"] == 403
+    assert g("Robots Product")["status"] == "robots"
+    assert g("Venjakob Kalea")["status"] == "no_price" and g("Venjakob Kalea")["url_check"] == "broken"
+    assert g("HomePod mini 2")["status"] == "error" and g("HomePod mini 2")["http_status"] == 404
+    assert g("HomePod mini 2")["url_check"] == "broken" and "no replacement" in g("HomePod mini 2")["note"]
+    assert g("Slow Product")["status"] == "timeout"
+
+    # moved product: 404 -> found via gzipped sitemap -> verified -> updated
+    moved = g("Anker Solarbank 3 Pro 2.000 W")
+    assert moved["url_check"] == "updated", moved
+    assert moved["url"] == f"{base}/p/anker-solix-solarbank-3-pro-2000w-set.html"
+    assert moved["previous_url"] == f"{base}/p/old-solarbank"
+    assert moved["status"] == "ok" and moved["price"] == 1499.0
+    # product defined only by shop site, no URL at all
+    fresh = g("Anker Solarbank 3 Pro 2.000 W", "B")
+    assert fresh["url_check"] == "updated" and fresh["price"] == 1499.0
+    # decoy (Solarbank 2 Plus) and image sitemap never opened
+    assert "/p/anker-solarbank-2-plus-800w.html" not in requested
+    assert "/sitemap-images.xml" not in requested
+    assert requested.count("/sitemap-products-1.xml.gz") == 1      # cached within a run
     assert all(r["fetched_at"].endswith("Z") for r in results)
+
+    # final update: state file keeps the new URL for the next run
+    state = run.update_url_state({}, targets, results)
+    key = "Anker Solarbank 3 Pro 2.000 W | A"
+    assert state[key]["url"] == moved["url"] and state[key]["seed_url"] == f"{base}/p/old-solarbank"
+    targets2 = run.load_targets(tfile)
+    run.apply_url_state(targets2, state)
+    assert [t for t in targets2 if t["shop"] == "A" and t["product"].startswith("Anker")][0]["url"] == moved["url"]

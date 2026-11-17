@@ -1,13 +1,26 @@
 # Targets for the black_week price fetcher (see readme.md, section "black_week").
 #
+# You define products and shops - URLs are maintained automatically: if a page
+# disappears (404), shows no price any more or shows a different product, the
+# shop's sitemap is searched for the product and the new URL is used and saved
+# in black_week/urls.json. Editing a url here always overrides that file.
+#
 # Fields per entry:
-#   product         free text, shown in the results
+#   product         product name - also used to recognise the right page
 #   shop            free text, shown in the results
-#   url             page to fetch
-#   type            "product" (single product page) or "listing" (category / comparison page)
+#   url             optional: starting URL (product page or listing)
+#   site            optional: shop address (e.g. toom.de) - needed only without url
+#   keywords        optional: words the product page must contain, e.g. ["2.000 W"]
+#   type            "product" (default) or "listing" (category / comparison page)
 #   match           optional, listing only: keyword an offer's text must contain (e.g. "SE 3")
 #   price_selector  optional CSS selector, used as last fallback before listing tiles
 #   active          true/false - inactive entries are skipped entirely
+#
+# Minimal entry for a new product:
+#   - product: Anker Solarbank 3 Pro 2.000 W
+#     shop: toom
+#     site: toom.de
+#     active: true
 
 - product: Apple Watch SE 3
   shop: Back Market

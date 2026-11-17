@@ -161,6 +161,7 @@ class Extraction:
     source: str | None = None           # jsonld / meta / selector / listing
     price_high: float | None = None     # AggregateOffer highPrice
     offer_count: int | None = None      # AggregateOffer offerCount
+    name: str | None = None             # product name from JSON-LD, if any
     offers: list[dict] = field(default_factory=list)  # listing offers
 
 
@@ -322,6 +323,8 @@ def extract_jsonld(html_or_soup, match: str | None = None) -> Extraction | None:
             ext = _extract_offers(node.get("offers"))
             if ext is None:
                 continue
+            if isinstance(node.get("name"), str):
+                ext.name = node["name"].strip()[:300] or None
             if not match:
                 return ext
             if best is None or ext.price < best.price:

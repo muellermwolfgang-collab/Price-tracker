@@ -60,3 +60,10 @@ def test_unavailable_is_flagged():
     assert rules_from_response(503, None).unavailable
     assert rules_from_response(429, None).unavailable
     assert rules_from_response(200, "User-agent: *\nDisallow: /\n").unavailable is None
+
+
+def test_sitemap_lines_collected():
+    r = RobotsRules("Sitemap: https://s.de/sitemap_index.xml\nUser-agent: *\nDisallow: /cart\n"
+                    "sitemap: https://s.de/sitemap-products.xml\nSitemap: /relative.xml\n")
+    assert r.sitemaps == ["https://s.de/sitemap_index.xml", "https://s.de/sitemap-products.xml"]
+    assert not r.can_fetch(UA, "https://s.de/cart")

@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import contextlib
 import csv
 import json
 import os
@@ -35,12 +36,14 @@ from zoneinfo import ZoneInfo
 
 import yaml
 
+import discover
 import extract as ex
 from robots import RobotsRules, rules_from_response
 
 MODULE_DIR = Path(__file__).resolve().parent
 TARGETS_PATH = MODULE_DIR / "targets.yaml"
 RESULTS_DIR = MODULE_DIR / "results"
+URLS_PATH = MODULE_DIR / "urls.json"      # maintained automatically, see discover.py
 
 REPO_URL = "https://github.com/muellermwolfgang-collab/Price-tracker"
 USER_AGENT = f"PriceTracker/1.0 (+{REPO_URL})"
@@ -60,11 +63,12 @@ STATUSES = ("ok", "no_price", "blocked", "robots", "timeout", "error")
 FIELDS = [
     "product", "shop", "url", "status", "http_status", "price", "currency",
     "shipping", "availability", "source", "offers", "page_title", "fetched_at",
-    "price_high", "offer_count", "note",
+    "price_high", "offer_count", "note", "url_check", "previous_url",
 ]
 HISTORY_FIELDS = [
     "run_at", "product", "shop", "status", "http_status", "price", "currency",
     "shipping", "availability", "source", "offer_count", "page_title", "url", "fetched_at",
+    "url_check",
 ]
 
 BERLIN = ZoneInfo("Europe/Berlin")
@@ -86,7 +90,9 @@ def load_targets(path: Path) -> list[dict]:
     for i, entry in enumerate(data, 1):
         if not isinstance(entry, dict):
             raise ValueError(f"{path}: entry {i} is not a mapping")
-        missing = [k for k in ("product", "shop", "url") if not entry.get(k)]
+        missing = [k for k in ("product", "shop") if not entry.get(k)]
+        if not entry.get("url") and not entry.get("site"):
+            missing.append("url or site")
         if missing:
             raise ValueError(f"{path}: entry {i} is missing {', '.join(missing)}")
         page_type = entry.get("type", "product")
@@ -94,15 +100,75 @@ def load_targets(path: Path) -> list[dict]:
             raise ValueError(f"{path}: entry {i} has unknown type {page_type!r}")
         if not entry.get("active", True):
             continue
+        url = str(entry["url"]).strip() if entry.get("url") else None
+        site = str(entry["site"]).strip() if entry.get("site") else None
+        if site and not site.startswith(("http://", "https://")):
+            site = "https://" + site
+        if not site:
+            parts = urlsplit(url)
+            site = f"{parts.scheme}://{parts.netloc}"
+        keywords = entry.get("keywords") or []
+        if isinstance(keywords, str):
+            keywords = [keywords]
         targets.append({
             "product": str(entry["product"]),
             "shop": str(entry["shop"]),
-            "url": str(entry["url"]),
+            "url": url,
+            "seed_url": url,
+            "site": site.rstrip("/"),
             "type": page_type,
             "match": str(entry["match"]) if entry.get("match") not in (None, "") else None,
             "price_selector": entry.get("price_selector") or None,
+            "keywords": [str(k) for k in keywords],
         })
     return targets
+
+
+def target_key(target: dict) -> str:
+    return f"{target['product']} | {target['shop']}"
+
+
+def load_url_state(path: Path) -> dict:
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        return data if isinstance(data, dict) else {}
+    except (OSError, ValueError):
+        return {}
+
+
+def apply_url_state(targets: list[dict], state: dict) -> None:
+    """Use the automatically maintained URL instead of the one from
+    targets.yaml - unless targets.yaml was edited since (new url there wins)."""
+    for t in targets:
+        entry = state.get(target_key(t))
+        if entry and entry.get("url") and entry.get("seed_url") == t["seed_url"]:
+            t["url"] = entry["url"]
+
+
+def update_url_state(state: dict, targets: list[dict], results: list[dict]) -> dict:
+    new_state = {}
+    for t, r in zip(targets, results):
+        key = target_key(t)
+        old = state.get(key) if (state.get(key) or {}).get("seed_url") == t["seed_url"] else None
+        entry = dict(old or {"seed_url": t["seed_url"], "url": t["seed_url"]})
+        entry["seed_url"] = t["seed_url"]
+        if r.get("url_check") == "updated":
+            history = entry.get("previous_urls", [])
+            if entry.get("url") and entry["url"] != r["url"]:
+                history = (history + [entry["url"]])[-5:]
+            entry.update(url=r["url"], previous_urls=history, updated_at=r["fetched_at"])
+        if r.get("url_check") in ("ok", "updated"):
+            entry["last_ok"] = r["fetched_at"]
+            entry.pop("broken_since", None)
+        elif r.get("url_check") == "broken":
+            entry.setdefault("broken_since", r["fetched_at"])
+        if not entry.get("url"):
+            entry.pop("url", None)
+        new_state[key] = entry
+    # keep entries of targets that were not part of this run (e.g. --only)
+    for key, entry in state.items():
+        new_state.setdefault(key, entry)
+    return new_state
 
 
 def empty_result(target: dict, status: str, note: str | None = None) -> dict:
@@ -113,7 +179,31 @@ def empty_result(target: dict, status: str, note: str | None = None) -> dict:
         "offers": [] if target["type"] == "listing" else None,
         "page_title": None, "fetched_at": utc_now(),
         "price_high": None, "offer_count": None, "note": note,
+        "url_check": None, "previous_url": None,
     }
+
+
+# --------------------------------------------------------------------------
+# URL check
+# --------------------------------------------------------------------------
+
+def check_url(target: dict, result: dict) -> tuple[str, str]:
+    """Is the stored URL still the right page? Returns (verdict, reason) with
+    verdict "ok", "broken" (-> search for a new URL) or "not_checked"
+    (blocked / robots / timeout / network error: we can't tell)."""
+    status, http = result["status"], result["http_status"]
+    if status == "error" and http is not None and 400 <= http < 500 and http not in ex.BLOCK_STATUS:
+        return "broken", f"HTTP {http}"
+    if status not in ("ok", "no_price"):
+        return "not_checked", status
+    if target["type"] == "listing":
+        return "ok", ""
+    if status == "no_price":
+        return "broken", "no price on page"
+    score = discover.name_score(target, result.get("_name"), result.get("page_title"))
+    if score < discover.MISMATCH_MAX_NAME_SCORE:
+        return "broken", "page shows a different product"
+    return "ok", ""
 
 
 # --------------------------------------------------------------------------
@@ -180,6 +270,25 @@ class Fetcher:
         self.log = log
         self.robots: dict[str, RobotsRules] = {}
         self.sem = asyncio.Semaphore(MAX_PARALLEL_PAGES)
+        self.host_locks: dict[str, asyncio.Lock] = {}
+        self.host_last: dict[str, float] = {}
+
+    @contextlib.asynccontextmanager
+    async def slot(self, url: str):
+        """One request at a time per host, 5-10 s apart - for every kind of
+        request (robots.txt, sitemaps, pages)."""
+        host = urlsplit(url).hostname or ""
+        lock = self.host_locks.setdefault(host, asyncio.Lock())
+        async with lock:
+            last = self.host_last.get(host)
+            if last is not None:
+                wait = last + random.uniform(*HOST_PAUSE_S) - time.monotonic()
+                if wait > 0:
+                    await asyncio.sleep(wait)
+            try:
+                yield
+            finally:
+                self.host_last[host] = time.monotonic()
 
     async def robots_for(self, url: str) -> RobotsRules:
         parts = urlsplit(url)
@@ -187,18 +296,36 @@ class Fetcher:
         if origin not in self.robots:
             status, text = None, None
             try:
-                resp = await self.context.request.get(
-                    origin + "/robots.txt", timeout=15_000, max_redirects=5, fail_on_status_code=False,
-                )
-                status = resp.status
-                if 200 <= status < 300:
-                    text = (await resp.body()).decode("utf-8", errors="replace")
+                async with self.slot(origin):
+                    resp = await self.context.request.get(
+                        origin + "/robots.txt", timeout=15_000, max_redirects=5, fail_on_status_code=False,
+                    )
+                    status = resp.status
+                    if 200 <= status < 300:
+                        text = (await resp.body()).decode("utf-8", errors="replace")
             except Exception as exc:  # network error -> stay away (RFC 9309)
                 self.log(f"  robots.txt {origin}: {type(exc).__name__}: {exc}".splitlines()[0])
             self.robots[origin] = rules_from_response(status, text)
             if status is not None:
                 self.log(f"  robots.txt {origin}: HTTP {status}")
         return self.robots[origin]
+
+    async def get_bytes(self, url: str) -> bytes | None:
+        """Plain GET (no browser rendering) for sitemaps, robots.txt-checked
+        and paced like page fetches. None on any problem."""
+        rules = await self.robots_for(url)
+        if not rules.can_fetch(ROBOTS_TOKEN, url):
+            return None
+        try:
+            async with self.slot(url):
+                resp = await self.context.request.get(url, timeout=NAV_TIMEOUT_MS, max_redirects=5,
+                                                      fail_on_status_code=False)
+                if resp.status != 200:
+                    return None
+                return await resp.body()
+        except Exception as exc:
+            self.log(f"  sitemap {url}: {type(exc).__name__}: {exc}".splitlines()[0])
+            return None
 
     async def fetch(self, target: dict) -> tuple[dict, bool]:
         """Fetch one target once. Returns (result, retry_worthwhile)."""
@@ -264,6 +391,7 @@ class Fetcher:
                 price=data.price, currency=data.currency, shipping=data.shipping,
                 availability=data.availability, source=data.source,
                 price_high=data.price_high, offer_count=data.offer_count, note=None,
+                _name=data.name,
             )
             if target["type"] == "listing":
                 result["offers"] = data.offers
@@ -282,30 +410,62 @@ class Fetcher:
             except Exception:
                 pass
 
+    async def fetch_paced(self, target: dict) -> dict:
+        """robots.txt check, then fetch with pacing and one retry on timeout."""
+        rules = await self.robots_for(target["url"])
+        if not rules.can_fetch(ROBOTS_TOKEN, target["url"]):
+            if rules.unavailable:
+                status = "blocked" if "429" in rules.unavailable else "error"
+                return empty_result(target, status, rules.unavailable + ", page not fetched")
+            return empty_result(target, "robots", "disallowed by robots.txt")
+        for attempt in (1, 2):
+            async with self.slot(target["url"]):
+                async with self.sem:
+                    result, retry = await self.fetch(target)
+            if not (retry and attempt == 1):
+                break
+            self.log(f"[retry   ] {target['shop']}: {target['product']} ({result['note']})")
+        return result
+
+    async def process(self, target: dict) -> dict:
+        """1. check the stored URL, 2. look for a new one if it is broken,
+        3. use the new one (the final fetch is the verification)."""
+        if target["url"]:
+            result = await self.fetch_paced(target)
+            verdict, reason = check_url(target, result)
+        else:
+            result = empty_result(target, "error", "no URL yet")
+            verdict, reason = "broken", "no URL yet"
+        result["url_check"] = verdict
+        if verdict != "broken":
+            return result
+        if target["type"] != "product":
+            result["note"] = f"URL looks broken ({reason}) - automatic search only covers product pages"
+            return result
+
+        self.log(f"[search  ] {target['shop']}: {target['product']} - {reason}, searching sitemaps")
+        exclude = {u for u in (target["url"], target["seed_url"]) if u}
+        try:
+            candidates, how = await discover.collect_candidates(self, target["site"], target, exclude)
+        except Exception as exc:
+            candidates, how = [], f"search failed: {type(exc).__name__}"
+        for url in candidates:
+            cand = dict(target, url=url)
+            res = await self.fetch_paced(cand)
+            ok = res["status"] == "ok" and discover.page_matches(target, res.get("_name"), res.get("page_title"))
+            self.log(f"  candidate {url} -> {res['status']}{' (match)' if ok else ''}")
+            if ok:
+                res.update(url_check="updated", previous_url=target["url"],
+                           note=f"new URL found ({reason} before)")
+                return res
+        result["note"] = f"{reason}; no replacement found ({how})"
+        return result
+
     async def run_host(self, items: list[tuple[int, dict]], results: dict[int, dict]) -> None:
-        """All targets of one host, strictly one after another with a pause."""
-        first = True
+        """All targets of one host, strictly one after another."""
         for idx, target in items:
             try:
-                rules = await self.robots_for(target["url"])
-                if not rules.can_fetch(ROBOTS_TOKEN, target["url"]):
-                    if rules.unavailable:
-                        status = "blocked" if "429" in rules.unavailable else "error"
-                        results[idx] = empty_result(target, status, rules.unavailable + ", page not fetched")
-                    else:
-                        results[idx] = empty_result(target, "robots", "disallowed by robots.txt")
-                    self._log_result(target, results[idx])
-                    continue
-                for attempt in (1, 2):
-                    if not first:
-                        await asyncio.sleep(random.uniform(*HOST_PAUSE_S))
-                    first = False
-                    async with self.sem:
-                        result, retry = await self.fetch(target)
-                    results[idx] = result
-                    if not (retry and attempt == 1):
-                        break
-                    self.log(f"[retry   ] {target['shop']}: {target['product']} ({result['note']})")
+                results[idx] = await self.process(target)
             except Exception as exc:
                 results[idx] = empty_result(target, "error", f"{type(exc).__name__}: {exc}"[:300])
             self._log_result(target, results[idx])
@@ -320,7 +480,7 @@ async def fetch_all(targets: list[dict], log=print) -> list[dict]:
     results: dict[int, dict] = {}
     by_host: dict[str, list[tuple[int, dict]]] = {}
     for idx, t in enumerate(targets):
-        by_host.setdefault(urlsplit(t["url"]).hostname or "", []).append((idx, t))
+        by_host.setdefault(urlsplit(t["url"] or t["site"]).hostname or "", []).append((idx, t))
 
     try:
         from playwright.async_api import async_playwright
@@ -399,9 +559,19 @@ def render_markdown(results: list[dict], run_at: datetime) -> str:
                 _md_cell(r["product"]), _md_cell(r["shop"]), _md_cell(r["status"]),
                 price if r["price"] is not None else "–",
                 fmt_eur(r["shipping"]) if r["shipping"] is not None else "–",
-                _md_cell(r["source"]), f"[Link]({r['url']})",
+                _md_cell(r["source"]),
+                (f"[Link]({r['url']})" if r["url"] else "–") + (" (neu)" if r.get("url_check") == "updated" else ""),
             ]) + " |"
         )
+    updated = [r for r in results if r.get("url_check") == "updated"]
+    broken = [r for r in results if r.get("url_check") == "broken"]
+    if updated or broken:
+        lines += ["", "## URL-Pflege", ""]
+        for r in updated:
+            lines.append(f"- Neue URL: {_md_cell(r['product'])} / {_md_cell(r['shop'])} → [Link]({r['url']})")
+        for r in broken:
+            lines.append(f"- Keine passende URL gefunden: {_md_cell(r['product'])} / {_md_cell(r['shop'])} "
+                         f"({_md_cell(r.get('note'))})")
     lines += [
         "",
         "Status: ok = Preis gefunden · no_price = Seite geladen, kein Preis · blocked = Bot-Schutz/Rate-Limit "
@@ -461,6 +631,8 @@ def main(argv: list[str] | None = None) -> int:
     if not targets:
         print("no active targets", file=sys.stderr)
         return 1
+    url_state = load_url_state(URLS_PATH)
+    apply_url_state(targets, url_state)
 
     run_at = datetime.now(timezone.utc)
     print(f"black_week: {len(targets)} target(s), UA {USER_AGENT!r}")
@@ -479,6 +651,11 @@ def main(argv: list[str] | None = None) -> int:
     except Exception as exc:
         print(f"cannot write results: {exc}", file=sys.stderr)
         return 1
+    try:
+        new_state = update_url_state(url_state, targets, results)
+        _atomic_write(URLS_PATH, json.dumps(new_state, indent=2, ensure_ascii=False, sort_keys=True) + "\n")
+    except Exception as exc:   # results are written; a lost URL update is retried next run
+        print(f"cannot write {URLS_PATH.name}: {exc}", file=sys.stderr)
     print(f"results written to {args.out_dir}")
     return 0
 
