@@ -161,6 +161,7 @@ class Extraction:
     source: str | None = None           # jsonld / meta / selector / listing
     price_high: float | None = None     # AggregateOffer highPrice
     offer_count: int | None = None      # AggregateOffer offerCount
+    name: str | None = None             # product name from JSON-LD, if any
     offers: list[dict] = field(default_factory=list)  # listing offers
 
 
@@ -322,6 +323,8 @@ def extract_jsonld(html_or_soup, match: str | None = None) -> Extraction | None:
             ext = _extract_offers(node.get("offers"))
             if ext is None:
                 continue
+            if isinstance(node.get("name"), str):
+                ext.name = node["name"].strip()[:300] or None
             if not match:
                 return ext
             if best is None or ext.price < best.price:
@@ -485,10 +488,14 @@ BLOCK_MARKERS = [
     "attention required", "checking your browser", "are you a robot",
     "request blocked", "zugriff verweigert", "bot protection", "verify you are human",
     "bitte bestätigen sie, dass sie kein roboter sind", "ungewöhnliche aktivität",
+    "challengepage", "sichere verbindung wird überprüft",
 ]
+# a redirect to such a path is a bot check, whatever the page says
+_BLOCK_URL = re.compile(r"challenge|captcha|/cdn-cgi/|/_incapsula_|/distil_", re.IGNORECASE)
 
 
-def detect_block(http_status: int | None, title: str | None, text: str | None, has_price: bool = False) -> bool:
+def detect_block(http_status: int | None, title: str | None, text: str | None, has_price: bool = False,
+                 final_url: str | None = None) -> bool:
     """True if the response looks like a bot wall / rate limit.
 
     The HTTP status and the page title are always checked. The body text is
@@ -499,6 +506,8 @@ def detect_block(http_status: int | None, title: str | None, text: str | None, h
         return True
     t = (title or "").lower()
     if any(m in t for m in BLOCK_MARKERS):
+        return True
+    if final_url and _BLOCK_URL.search(final_url) and not has_price:
         return True
     if has_price:
         return False

@@ -43,6 +43,7 @@ class RobotsRules:
         # we stay away, but report it as an error rather than a robots ban
         self.unavailable = unavailable
         self.groups: list[_Group] = []
+        self.sitemaps: list[str] = []     # "Sitemap:" lines (apply to all agents)
         if text:
             self._parse(text)
 
@@ -55,6 +56,10 @@ class RobotsRules:
                 continue
             key, value = (p.strip() for p in line.split(":", 1))
             key = key.lower()
+            if key == "sitemap":
+                if value.startswith(("http://", "https://")) and value not in self.sitemaps:
+                    self.sitemaps.append(value)
+                continue
             if key == "user-agent":
                 if current is None or not last_was_agent:
                     current = _Group()

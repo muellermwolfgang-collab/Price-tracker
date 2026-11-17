@@ -1,0 +1,73 @@
+{
+  "Anker Solarbank 3 Pro 2.000 W | toom": {
+    "broken_since": "2026-11-17T17:01:18Z",
+    "seed_url": "https://toom.de/p/solarmodul-set-4-x-500-w-mit-solarbank-3-e2700-pro-und-smart-meter/10520584",
+    "url": "https://toom.de/p/solarmodul-set-4-x-500-w-mit-solarbank-3-e2700-pro-und-smart-meter/10520584"
+  },
+  "Anker Solarbank 3 Pro 910 W | MediaMarkt": {
+    "last_ok": "2026-11-17T17:18:31Z",
+    "seed_url": "https://www.mediamarkt.de/de/product/_anker-solix-solarbank-3-pro-mit-900w-pv-balkonkraftwerk-162854333.html",
+    "url": "https://www.mediamarkt.de/de/product/_anker-solix-solarbank-3-pro-mit-900w-pv-balkonkraftwerk-162854333.html"
+  },
+  "Apple Watch SE 3 40 mm Cellular | Back Market": {
+    "seed_url": "https://www.backmarket.de/de-de/p/apple-watch-2025-gps-cellular-40-mm-aluminium-polarstern-sportarmband-wei/79f98011-e24f-49a7-b174-9128e5d2e8d7",
+    "url": "https://www.backmarket.de/de-de/p/apple-watch-2025-gps-cellular-40-mm-aluminium-polarstern-sportarmband-wei/79f98011-e24f-49a7-b174-9128e5d2e8d7"
+  },
+  "Apple Watch SE 3 40 mm | refurbed": {
+    "last_ok": "2026-11-17T17:18:30Z",
+    "seed_url": "https://www.refurbed.de/p/apple-watch-se-3-40mm-2025/",
+    "url": "https://www.refurbed.de/p/apple-watch-se-3-40mm-2025/"
+  },
+  "Apple Watch SE 3 | Back Market": {
+    "last_ok": "2026-11-17T17:01:08Z",
+    "seed_url": "https://www.backmarket.de/de-de/p/apple-watch-se-series-3",
+    "url": "https://www.backmarket.de/de-de/p/apple-watch-se-series-3"
+  },
+  "Apple Watch SE 3 | Clevertronic": {
+    "seed_url": "https://www.clevertronic.de/kaufen/smartwatch-kaufen/apple/se-3",
+    "url": "https://www.clevertronic.de/kaufen/smartwatch-kaufen/apple/se-3"
+  },
+  "Apple Watch SE 3 | rebuy": {
+    "broken_since": "2026-11-17T17:13:06Z",
+    "last_ok": "2026-11-17T17:07:41Z",
+    "seed_url": "https://www.rebuy.de/kaufen/apple-apple-watch",
+    "url": "https://www.rebuy.de/kaufen/apple-apple-watch"
+  },
+  "Eve Thermo 5. Gen. 3er | Geizhals": {
+    "last_ok": "2026-11-17T17:18:33Z",
+    "seed_url": "https://geizhals.de/eve-thermo-2025-5-generation-matter-heizkoerperthermostat-10ecd1751-3x-a3722719.html",
+    "url": "https://geizhals.de/eve-thermo-2025-5-generation-matter-heizkoerperthermostat-10ecd1751-3x-a3722719.html"
+  },
+  "Eve Thermo 5. Gen. 3er | tink": {
+    "last_ok": "2026-11-17T17:18:34Z",
+    "seed_url": "https://www.tink.de/p/eve-thermo-matter-5-gen-heizkoerperthermostat-3er-set-n",
+    "url": "https://www.tink.de/p/eve-thermo-matter-5-gen-heizkoerperthermostat-3er-set-n"
+  },
+  "HomePod 2. Gen. | Check24": {
+    "last_ok": "2026-11-17T17:18:35Z",
+    "seed_url": "https://preisvergleich.check24.de/ul/sprachassistenten/CAWGCSSWH2K4Q-apple-mqj73da-homepod-2-generation-smart-speaker-midnight.html",
+    "url": "https://preisvergleich.check24.de/ul/sprachassistenten/CAWGCSSWH2K4Q-apple-mqj73da-homepod-2-generation-smart-speaker-midnight.html"
+  },
+  "HomePod mini 2 | billiger.de": {
+    "last_ok": "2026-11-17T17:18:27Z",
+    "seed_url": "https://www.billiger.de/baseproducts/120834-apple-homepod-mini-2",
+    "url": "https://www.billiger.de/baseproducts/120834-apple-homepod-mini-2"
+  },
+  "HomePod mini 2 | tink": {
+    "last_ok": "2026-11-17T17:18:42Z",
+    "seed_url": "https://www.tink.de/p/apple-homepod-mini-2-gen",
+    "url": "https://www.tink.de/p/apple-homepod-mini-2-gen"
+  },
+  "LG StanbyME 2 Max | Geizhals": {
+    "seed_url": "https://geizhals.de/lg-stanbyme-2-max-32lx6bpga-a3927423.html",
+    "url": "https://geizhals.de/lg-stanbyme-2-max-32lx6bpga-a3927423.html"
+  },
+  "LG StanbyME 2 Max | LG.de": {
+    "seed_url": "https://www.lg.com/de/lifestyle-tvs/stanbyme/32lx6bpga/",
+    "url": "https://www.lg.com/de/lifestyle-tvs/stanbyme/32lx6bpga/"
+  },
+  "Venjakob Kalea | moebel.de": {
+    "seed_url": "https://www.moebel.de/essen/stuehle-und-hocker/esszimmerstuehle?data-sheet=319a273bc99747a4c99dedbe86b9acfc",
+    "url": "https://www.moebel.de/essen/stuehle-und-hocker/esszimmerstuehle?data-sheet=319a273bc99747a4c99dedbe86b9acfc"
+  }
+}

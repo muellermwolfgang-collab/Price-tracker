@@ -140,7 +140,8 @@ and left alone.
 
 ## Maintaining `black_week/targets.yaml`
 
-One entry per page:
+You define **products and shops**; URLs are looked after automatically (see
+*URL maintenance* below). One entry per product and shop:
 
 ```yaml
 - product: Apple Watch SE 3          # free text
@@ -148,8 +149,14 @@ One entry per page:
   type: listing                      # product = single product page, listing = category/comparison page
   match: SE 3                        # listing only: only offers whose text contains this keyword
   price_selector: .price .value      # optional CSS selector, last fallback
-  url: https://www.backmarket.de/de-de/p/apple-watch-se-series-3
+  url: https://www.backmarket.de/de-de/p/apple-watch-se-series-3   # optional starting point
   active: true                       # false = skip without deleting the entry
+
+- product: Anker Solarbank 3 Pro 2.000 W   # no URL needed:
+  shop: toom
+  site: toom.de                      # shop address, the product page is searched for
+  keywords: ["2.000 W"]              # optional: words the product page must contain
+  active: true
 ```
 
 Prices are taken from, in this order: JSON-LD (`Product` → `Offer`/`AggregateOffer`),
@@ -159,12 +166,36 @@ meta tags (`product:price:amount`, `og:price:amount`, `itemprop="price"`), the
 If a shop shows `no_price`, open the page, find the price element and add a
 `price_selector`.
 
+## URL maintenance (automatic)
+
+Each run first checks the stored URL while fetching it. A URL counts as broken if
+the page is gone (HTTP 404/410), shows no price, or shows a different product
+(product name not found in the page's product name/title). Then:
+
+1. **Search:** the shop's sitemaps (listed in its robots.txt for crawlers) are
+   searched for URLs whose path matches the product name. No search engines, no
+   site search, same robots.txt and pacing rules as the price fetch.
+2. **Verify:** the best candidates are opened; the first one with a price and a
+   matching product name (and all `keywords`) is taken.
+3. **Update:** its price goes into the results (`url_check: updated`,
+   `previous_url`), and the URL is saved in `black_week/urls.json`, which the
+   workflow commits. Later runs use it. If you change `url` in `targets.yaml`,
+   your URL wins again.
+
+Nothing found → `url_check: broken`, the reason is in `note` and in a
+"URL-Pflege" section of `latest.md`; the search is retried every run. Pages that
+are blocked or disallowed by robots.txt can't be checked (`not_checked`).
+Listing pages count as broken when gone or when no offer matching `match` is on
+the page; their replacement may be any page with matching offers.
+If a shop answers 404 even for the current URLs from its own sitemap, it is
+reported as `blocked` (that is bot protection, not a moved product).
+
 ## Results
 
 - `black_week/results/latest.json` — current run, one object per entry (`product`, `shop`,
   `url`, `status`, `http_status`, `price`, `currency`, `shipping`, `availability`,
   `source`, `offers`, `page_title`, `fetched_at` in UTC, plus `price_high`, `offer_count`,
-  `note`)
+  `note`, `url_check` = ok/updated/broken/not_checked, `previous_url`)
 - `black_week/results/latest.md` — the same as a table, time stamp in Europe/Berlin
 - `black_week/results/history.csv` — every run appended
 
