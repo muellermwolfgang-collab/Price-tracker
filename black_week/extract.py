@@ -118,6 +118,17 @@ def find_shipping(text: str) -> float | None:
     return None
 
 
+def shipping_near_price(text: str, price: float, before: int = 150, after: int = 350) -> float | None:
+    """Shipping cost from the page text, but only right around the displayed
+    price. Searching the whole page picks up banners, filters ("versandkostenfrei")
+    or footers that have nothing to do with this product."""
+    text = (text or "").replace("\xa0", " ").replace("\u202f", " ")
+    for val, start, end in find_euro_amounts(text):
+        if abs(val - price) < 0.005:
+            return find_shipping(text[max(0, start - before):end + after])
+    return None
+
+
 def offer_prices(text: str) -> list[float]:
     """Euro amounts in a text block that look like an item price
     (skips shipping, monthly rates, unit prices)."""
@@ -544,7 +555,8 @@ def extract(
     result.offers = offers
 
     if result.price is not None and result.shipping is None and not is_listing:
-        result.shipping = find_shipping(page_text if page_text is not None else visible_text(soup))
+        result.shipping = shipping_near_price(
+            page_text if page_text is not None else visible_text(soup), result.price)
     if result.price is not None and not result.currency:
         result.currency = "EUR"
     return result
