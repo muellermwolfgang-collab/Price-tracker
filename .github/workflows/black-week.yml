@@ -1,0 +1,73 @@
+name: Black Week Prices
+
+on:
+  schedule:
+    # 06:15 and 17:15 UTC = 07:15 and 18:15 Berlin (winter time, CET), so the
+    # results are in the repo before 07:40 / 18:40 Berlin time. GitHub may start
+    # scheduled runs a few minutes late; the job itself takes a few minutes.
+    - cron: "15 6 * * *"
+    - cron: "15 17 * * *"
+  workflow_dispatch: {}   # manual run from the Actions tab / GitHub app
+
+permissions:
+  contents: write         # commit black_week/results/ back to the repo
+
+concurrency:
+  group: black-week
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: black_week/requirements.txt
+
+      - name: Install Python dependencies (Playwright version pinned)
+        run: pip install -r black_week/requirements.txt
+
+      - name: Cache Playwright browser
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          # requirements.txt pins the Playwright version, so its hash changes
+          # whenever the matching Chromium build changes.
+          key: playwright-chromium-${{ runner.os }}-${{ hashFiles('black_week/requirements.txt') }}
+
+      - name: Install Playwright browser (cache miss)
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: python -m playwright install --with-deps chromium
+
+      - name: Install Playwright system libraries (cache hit)
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: python -m playwright install-deps chromium
+
+      # Errors on single URLs are recorded as a status in the results and never
+      # fail this step. It exits non-zero only if no result file could be written.
+      - name: Fetch prices
+        run: python -u black_week/run.py
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add black_week/results/
+          if git diff --cached --quiet; then
+            echo "No changes - nothing to commit."
+            exit 0
+          fi
+          git commit -m "black_week: results $(date -u +%Y-%m-%dT%H:%MZ)"
+          # other workflows commit to the same branch: rebase onto them before pushing
+          for i in 1 2 3 4; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep $((i * 5))
+          done
+          echo "push failed" >&2
+          exit 1

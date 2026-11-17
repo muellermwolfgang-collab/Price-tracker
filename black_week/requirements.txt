@@ -1,0 +1,7 @@
+# black_week only - kept separate so the existing trackers' dependencies stay untouched.
+# Playwright is pinned on purpose: the cached Chromium build must match this version.
+playwright==1.65.2
+PyYAML==6.0.3
+beautifulsoup4==4.15.0
+lxml==6.1.3
+pytest==9.2.0
