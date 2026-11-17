@@ -232,7 +232,9 @@ Locally: `python black_week/scout.py --dry-run` (search and print, change nothin
 ## Running it
 
 Automatically at 06:15 and 17:15 UTC (07:15 / 18:15 Berlin in winter) via
-`.github/workflows/black-week.yml`. Manually: Actions tab → **Black Week Prices** →
+`.github/workflows/black-week.yml`. GitHub starts scheduled runs late or drops
+them now and then, so the workflow starts again at 06:27 / 17:27 UTC; that backup
+run ends right away if the results are younger than 40 minutes. Manually: Actions tab → **Black Week Prices** →
 **Run workflow**. A failing URL never fails the job; it only fails if no result file
 could be written. Nothing is committed if nothing changed.
 

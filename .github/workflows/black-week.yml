@@ -3,10 +3,12 @@ name: Black Week Prices
 on:
   schedule:
     # 06:15 and 17:15 UTC = 07:15 and 18:15 Berlin (winter time, CET), so the
-    # results are in the repo before 07:40 / 18:40 Berlin time. GitHub may start
-    # scheduled runs a few minutes late; the job itself takes a few minutes.
-    - cron: "15 6 * * *"
-    - cron: "15 17 * * *"
+    # results are in the repo before 07:40 / 18:40 Berlin time.
+    # GitHub starts scheduled runs late or drops them now and then, so there is
+    # a backup start 12 minutes later; it ends right away (job "check") when the
+    # results on the branch are already fresh.
+    - cron: "15,27 6 * * *"
+    - cron: "15,27 17 * * *"
   workflow_dispatch: {}   # manual run from the Actions tab / GitHub app
 
 permissions:
@@ -17,7 +19,41 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      skip: ${{ steps.fresh.outputs.skip }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # scheduled runs only: skip if the last results are younger than 40 min
+      # (fetch the branch tip - the checkout is the commit at trigger time)
+      - name: Results already fresh?
+        id: fresh
+        run: |
+          git fetch -q --depth=1 origin "${GITHUB_REF_NAME}"
+          git show FETCH_HEAD:black_week/results/latest.json > /tmp/latest.json 2>/dev/null || echo '{}' > /tmp/latest.json
+          python3 -c '
+          import json, os
+          from datetime import datetime, timezone
+          skip = "false"
+          if os.environ["GITHUB_EVENT_NAME"] == "schedule":
+              try:
+                  gen = json.load(open("/tmp/latest.json"))["generated_at"]
+                  age = datetime.now(timezone.utc) - datetime.fromisoformat(gen.replace("Z", "+00:00"))
+                  if age.total_seconds() < 40 * 60:
+                      skip = "true"
+                      print(f"results are {age.total_seconds() / 60:.0f} min old - nothing to do")
+              except Exception as exc:
+                  print(f"no usable results ({exc}) - running")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
+              fh.write(f"skip={skip}\n")
+          '
+
   fetch:
+    needs: check
+    if: needs.check.outputs.skip != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
