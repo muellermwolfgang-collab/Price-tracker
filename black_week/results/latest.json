@@ -1,24 +1,26 @@
 {
-  "generated_at": "2026-11-17T12:03:53Z",
-  "generated_at_berlin": "2026-11-17T13:03:53+01:00",
+  "generated_at": "2026-11-17T17:00:58Z",
+  "generated_at_berlin": "2026-11-17T18:00:58+01:00",
   "results": [
     {
       "product": "Apple Watch SE 3",
       "shop": "Back Market",
       "url": "https://www.backmarket.de/de-de/p/apple-watch-se-series-3",
-      "status": "blocked",
-      "http_status": 403,
+      "status": "no_price",
+      "http_status": 200,
       "price": null,
       "currency": null,
       "shipping": null,
       "availability": null,
       "source": null,
       "offers": [],
-      "page_title": "Just a moment...",
-      "fetched_at": "2026-11-17T12:03:57Z",
+      "page_title": "Loading https://www.backmarket.de/testchallengepage?next=https%3A%2F%2Fwww.backmarket.de%2Fde-de%2Fp%2Fapple-watch-se-series-3",
+      "fetched_at": "2026-11-17T17:01:08Z",
       "price_high": null,
       "offer_count": null,
-      "note": "bot wall / rate limit (HTTP 403)"
+      "note": null,
+      "url_check": "ok",
+      "previous_url": null
     },
     {
       "product": "Apple Watch SE 3 40 mm Cellular",
@@ -33,10 +35,12 @@
       "source": null,
       "offers": null,
       "page_title": "Just a moment...",
-      "fetched_at": "2026-11-17T12:04:05Z",
+      "fetched_at": "2026-11-17T17:01:17Z",
       "price_high": null,
       "offer_count": null,
-      "note": "bot wall / rate limit (HTTP 403)"
+      "note": "bot wall / rate limit (HTTP 403)",
+      "url_check": "not_checked",
+      "previous_url": null
     },
     {
       "product": "Apple Watch SE 3",
@@ -51,28 +55,32 @@
       "source": null,
       "offers": [],
       "page_title": "Just a moment...",
-      "fetched_at": "2026-11-17T12:03:57Z",
+      "fetched_at": "2026-11-17T17:01:06Z",
       "price_high": null,
       "offer_count": null,
-      "note": "bot wall / rate limit (HTTP 403)"
+      "note": "bot wall / rate limit (HTTP 403)",
+      "url_check": "not_checked",
+      "previous_url": null
     },
     {
       "product": "Apple Watch SE 3",
       "shop": "rebuy",
       "url": "https://www.rebuy.de/kaufen/apple-apple-watch",
-      "status": "blocked",
-      "http_status": 429,
+      "status": "no_price",
+      "http_status": 200,
       "price": null,
       "currency": null,
       "shipping": null,
       "availability": null,
       "source": null,
       "offers": [],
-      "page_title": "Medien- und Elektronikartikel gebraucht kaufen | rebuy",
-      "fetched_at": "2026-11-17T12:03:57Z",
+      "page_title": "Gebrauchte Apple Watch kaufen - bei rebuy inkl. 3 Jahre Garantie",
+      "fetched_at": "2026-11-17T17:01:19Z",
       "price_high": null,
       "offer_count": null,
-      "note": "bot wall / rate limit (HTTP 429)"
+      "note": null,
+      "url_check": "ok",
+      "previous_url": null
     },
     {
       "product": "Apple Watch SE 3 40 mm",
@@ -87,10 +95,12 @@
       "source": "jsonld",
       "offers": null,
       "page_title": "Apple Watch SE 3 40 mm 2025 - Smart, leicht und vielseitig",
-      "fetched_at": "2026-11-17T12:03:58Z",
+      "fetched_at": "2026-11-17T17:01:06Z",
       "price_high": null,
       "offer_count": null,
-      "note": null
+      "note": null,
+      "url_check": "ok",
+      "previous_url": null
     },
     {
       "product": "Eve Thermo 5. Gen. 3er",
@@ -105,10 +115,12 @@
       "source": "jsonld",
       "offers": null,
       "page_title": "Eve Thermo Matter (5. Gen.) - Heizkörperthermostat - 3er-Set kaufen | tink",
-      "fetched_at": "2026-11-17T12:03:59Z",
+      "fetched_at": "2026-11-17T17:01:11Z",
       "price_high": null,
       "offer_count": null,
-      "note": null
+      "note": null,
+      "url_check": "ok",
+      "previous_url": null
     },
     {
       "product": "Eve Thermo 5. Gen. 3er",
@@ -118,15 +130,17 @@
       "http_status": 200,
       "price": 199.95,
       "currency": "EUR",
-      "shipping": 0.0,
+      "shipping": null,
       "availability": null,
       "source": "meta",
       "offers": null,
       "page_title": "Prüfung 🤖 – Eve Thermo 2025 (5. Generation/Matter) Heizkörperthermostat ab € 199,95 (2026) | Preisvergleich Geizhals Deutschland",
-      "fetched_at": "2026-11-17T12:03:58Z",
+      "fetched_at": "2026-11-17T17:01:11Z",
       "price_high": null,
       "offer_count": null,
-      "note": null
+      "note": null,
+      "url_check": "ok",
+      "previous_url": null
     },
     {
       "product": "HomePod mini 2",
@@ -141,15 +155,37 @@
       "source": "jsonld",
       "offers": null,
       "page_title": "Apple HomePod mini (2. Gen) kaufen | tink zusammen",
-      "fetched_at": "2026-11-17T12:04:07Z",
+      "fetched_at": "2026-11-17T17:01:18Z",
       "price_high": null,
       "offer_count": null,
-      "note": null
+      "note": null,
+      "url_check": "ok",
+      "previous_url": null
     },
     {
       "product": "HomePod mini 2",
       "shop": "billiger.de",
       "url": "https://www.billiger.de/baseproducts/120834-apple-homepod-mini-2",
+      "status": "ok",
+      "http_status": 200,
+      "price": 149.63,
+      "currency": "EUR",
+      "shipping": 155.58,
+      "availability": null,
+      "source": "jsonld",
+      "offers": null,
+      "page_title": "Apple HomePod mini 2💥Black Friday 2026 Preisvergleich",
+      "fetched_at": "2026-11-17T17:01:10Z",
+      "price_high": 215.85,
+      "offer_count": 28,
+      "note": null,
+      "url_check": "ok",
+      "previous_url": null
+    },
+    {
+      "product": "HomePod 2. Gen.",
+      "shop": "Check24",
+      "url": "https://preisvergleich.check24.de/ul/sprachassistenten/CAWGCSSWH2K4Q-apple-mqj73da-homepod-2-generation-smart-speaker-midnight.html",
       "status": "blocked",
       "http_status": 403,
       "price": null,
@@ -158,29 +194,13 @@
       "availability": null,
       "source": null,
       "offers": null,
-      "page_title": "Just a moment...",
-      "fetched_at": "2026-11-17T12:03:59Z",
+      "page_title": "403 Forbidden",
+      "fetched_at": "2026-11-17T17:01:10Z",
       "price_high": null,
       "offer_count": null,
-      "note": "bot wall / rate limit (HTTP 403)"
-    },
-    {
-      "product": "HomePod 2. Gen.",
-      "shop": "Check24",
-      "url": "https://preisvergleich.check24.de/ul/sprachassistenten/CAWGCSSWH2K4Q-apple-mqj73da-homepod-2-generation-smart-speaker-midnight.html",
-      "status": "ok",
-      "http_status": 200,
-      "price": 393.95,
-      "currency": "EUR",
-      "shipping": 0.0,
-      "availability": "InStock",
-      "source": "jsonld",
-      "offers": null,
-      "page_title": "Apple MQJ73D/A HomePod (2. Generation) - Preisvergleich",
-      "fetched_at": "2026-11-17T12:04:00Z",
-      "price_high": 405.11,
-      "offer_count": 3,
-      "note": null
+      "note": "bot wall / rate limit (HTTP 403)",
+      "url_check": "not_checked",
+      "previous_url": null
     },
     {
       "product": "LG StanbyME 2 Max",
@@ -195,10 +215,12 @@
       "source": null,
       "offers": null,
       "page_title": "Access Denied",
-      "fetched_at": "2026-11-17T12:03:57Z",
+      "fetched_at": "2026-11-17T17:01:06Z",
       "price_high": null,
       "offer_count": null,
-      "note": "bot wall / rate limit (HTTP 403)"
+      "note": "bot wall / rate limit (HTTP 403)",
+      "url_check": "not_checked",
+      "previous_url": null
     },
     {
       "product": "LG StanbyME 2 Max",
@@ -213,10 +235,12 @@
       "source": null,
       "offers": null,
       "page_title": "Sichere Verbindung wird überprüft",
-      "fetched_at": "2026-11-17T12:04:05Z",
+      "fetched_at": "2026-11-17T17:01:18Z",
       "price_high": null,
       "offer_count": null,
-      "note": "bot wall / rate limit (HTTP 403)"
+      "note": "bot wall / rate limit (HTTP 403)",
+      "url_check": "not_checked",
+      "previous_url": null
     },
     {
       "product": "Anker Solarbank 3 Pro 910 W",
@@ -231,10 +255,12 @@
       "source": "jsonld",
       "offers": null,
       "page_title": "ANKER SOLIX Solarbank 3 Pro mit 910W PV Balkonkraftwerk | MediaMarkt",
-      "fetched_at": "2026-11-17T12:04:00Z",
+      "fetched_at": "2026-11-17T17:01:09Z",
       "price_high": null,
       "offer_count": null,
-      "note": null
+      "note": null,
+      "url_check": "ok",
+      "previous_url": null
     },
     {
       "product": "Anker Solarbank 3 Pro 2.000 W",
@@ -249,10 +275,12 @@
       "source": null,
       "offers": null,
       "page_title": "toom Baumarkt - Bauen, modernisieren und renovieren",
-      "fetched_at": "2026-11-17T12:04:07Z",
+      "fetched_at": "2026-11-17T17:01:18Z",
       "price_high": null,
       "offer_count": null,
-      "note": "HTTP 404"
+      "note": "HTTP 404; no replacement found (4 sitemap file(s) searched, 10 candidate(s))",
+      "url_check": "broken",
+      "previous_url": null
     },
     {
       "product": "Venjakob Kalea",
@@ -267,10 +295,12 @@
       "source": null,
       "offers": null,
       "page_title": "Attention Required! | Cloudflare",
-      "fetched_at": "2026-11-17T12:03:57Z",
+      "fetched_at": "2026-11-17T17:01:05Z",
       "price_high": null,
       "offer_count": null,
-      "note": "bot wall / rate limit (HTTP 403)"
+      "note": "bot wall / rate limit (HTTP 403)",
+      "url_check": "not_checked",
+      "previous_url": null
     }
   ]
 }
