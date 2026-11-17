@@ -8,9 +8,6 @@ name: Black Week Scout
 #   scouted right away and prices are fetched afterwards
 
 on:
-  push:                   # TEMPORARY: live test on the feature branch, removed before the PR
-    branches: [claude/black-week-playwright-module-k3vxeq]
-    paths: [".github/workflows/black-week-scout.yml", "black_week/scout.py", "black_week/discover.py"]
   schedule:
     # 04:23 UTC = 05:23 Berlin (winter) - done before the 06:15 UTC price run
     - cron: "23 4 * * *"
