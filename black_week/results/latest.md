@@ -1,6 +1,6 @@
 # Black Week – Preise
 
-Stand: 17.11.2026 18:07 Uhr (Europe/Berlin) · ok: 7, no_price: 1, blocked: 6, error: 1
+Stand: 17.11.2026 18:12 Uhr (Europe/Berlin) · ok: 7, no_price: 1, blocked: 7
 
 | Produkt | Shop | Status | Preis | Versand | Quelle | URL |
 |---|---|---|---|---|---|---|
@@ -17,11 +17,11 @@ Stand: 17.11.2026 18:07 Uhr (Europe/Berlin) · ok: 7, no_price: 1, blocked: 6, e
 | LG StanbyME 2 Max | LG.de | blocked | – | – | – | [Link](https://www.lg.com/de/lifestyle-tvs/stanbyme/32lx6bpga/) |
 | LG StanbyME 2 Max | Geizhals | blocked | – | – | – | [Link](https://geizhals.de/lg-stanbyme-2-max-32lx6bpga-a3927423.html) |
 | Anker Solarbank 3 Pro 910 W | MediaMarkt | ok | 1.132,00 € | 0,00 € | jsonld | [Link](https://www.mediamarkt.de/de/product/_anker-solix-solarbank-3-pro-mit-900w-pv-balkonkraftwerk-162854333.html) |
-| Anker Solarbank 3 Pro 2.000 W | toom | error | – | – | – | [Link](https://toom.de/p/solarmodul-set-4-x-500-w-mit-solarbank-3-e2700-pro-und-smart-meter/10520584) |
+| Anker Solarbank 3 Pro 2.000 W | toom | blocked | – | – | – | [Link](https://toom.de/p/solarmodul-set-4-x-500-w-mit-solarbank-3-e2700-pro-und-smart-meter/10520584) |
 | Venjakob Kalea | moebel.de | blocked | – | – | – | [Link](https://www.moebel.de/essen/stuehle-und-hocker/esszimmerstuehle?data-sheet=319a273bc99747a4c99dedbe86b9acfc) |
 
 ## URL-Pflege
 
-- Keine passende URL gefunden: Anker Solarbank 3 Pro 2.000 W / toom (HTTP 404; no replacement found (4 sitemap file(s) searched, 10 candidate(s)))
+- Keine passende URL gefunden: Apple Watch SE 3 / rebuy (no offers matching 'SE 3' on page; no replacement found (20 sitemap file(s) searched, 20 candidate(s)))
 
 Status: ok = Preis gefunden · no_price = Seite geladen, kein Preis · blocked = Bot-Schutz/Rate-Limit · robots = durch robots.txt verboten · timeout = Zeitüberschreitung · error = sonstiger Fehler
