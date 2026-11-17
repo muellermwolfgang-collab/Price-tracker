@@ -206,3 +206,10 @@ def test_shipping_only_near_price():
     assert ex.shipping_near_price(near, 99.0) == 4.99
     assert ex.shipping_near_price("Preis 99,00 €\nVersandkostenfrei", 99.0) == 0.0
     assert ex.shipping_near_price("kein passender Preis", 99.0) is None
+
+
+def test_challenge_redirect_is_blocked():
+    url = "https://www.backmarket.de/testchallengepage?next=https%3A%2F%2Fwww.backmarket.de%2Fde-de%2Fp%2Fx"
+    assert ex.detect_block(200, "Loading " + url, "", final_url=url)
+    assert ex.detect_block(200, "Shop", "", final_url=url)
+    assert not ex.detect_block(200, "Shop", "", has_price=True, final_url="https://s.de/p/apple-watch")

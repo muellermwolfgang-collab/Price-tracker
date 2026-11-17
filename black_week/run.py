@@ -206,6 +206,18 @@ def check_url(target: dict, result: dict) -> tuple[str, str]:
     return "ok", ""
 
 
+def diagnose_no_price(target: dict, text: str | None, blocks: list[str] | None, moved: str) -> str:
+    """Short hint why no price was found - shown in `note` and the log."""
+    text = text or ""
+    parts = [f"{len(ex.find_euro_amounts(text))} euro amount(s) in page text"]
+    if target["match"]:
+        rx = ex._match_regex(target["match"])
+        parts.append(f"'{target['match']}' found {len(rx.findall(text))}x in page text")
+        if blocks is not None:
+            parts.append(f"{len(blocks)} tile(s) with keyword and price")
+    return ("no price found: " + ", ".join(parts) + moved)[:300]
+
+
 # --------------------------------------------------------------------------
 # Browser side
 # --------------------------------------------------------------------------
@@ -379,11 +391,13 @@ class Fetcher:
                 html, page_type=target["type"], match=target["match"],
                 price_selector=target["price_selector"], listing_blocks=blocks, page_text=text,
             )
-            if ex.detect_block(http_status, title, text, has_price=data.price is not None):
-                result.update(status="blocked", note=f"bot wall / rate limit (HTTP {http_status})")
+            final_url = page.url
+            moved = f", redirected to {final_url}" if final_url.rstrip("/") != target["url"].rstrip("/") else ""
+            if ex.detect_block(http_status, title, text, has_price=data.price is not None, final_url=final_url):
+                result.update(status="blocked", note=f"bot wall / rate limit (HTTP {http_status}){moved}"[:300])
                 return result, False
             if http_status is not None and http_status >= 400:
-                result.update(status="error", note=f"HTTP {http_status}")
+                result.update(status="error", note=f"HTTP {http_status}{moved}"[:300])
                 return result, False
 
             result.update(
@@ -397,6 +411,8 @@ class Fetcher:
                 result["offers"] = data.offers
                 if data.offer_count is None and data.offers:
                     result["offer_count"] = len(data.offers)
+            if data.price is None:
+                result["note"] = diagnose_no_price(target, text, blocks, moved)
             return result, False
         except PWTimeout as exc:
             result.update(status="timeout", note=str(exc).splitlines()[0][:300])
@@ -453,7 +469,8 @@ class Fetcher:
             cand = dict(target, url=url)
             res = await self.fetch_paced(cand)
             ok = res["status"] == "ok" and discover.page_matches(target, res.get("_name"), res.get("page_title"))
-            self.log(f"  candidate {url} -> {res['status']}{' (match)' if ok else ''}")
+            detail = "match" if ok else (res.get("note") or f"title: {res.get('page_title')}")
+            self.log(f"  candidate {url} -> {res['status']} ({detail})")
             if ok:
                 res.update(url_check="updated", previous_url=target["url"],
                            note=f"new URL found ({reason} before)")
