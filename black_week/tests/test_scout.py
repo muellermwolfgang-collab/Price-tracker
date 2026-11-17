@@ -1,6 +1,7 @@
 """Tests for the scout (shop search per product)."""
 
 import asyncio
+import json
 import shutil
 
 import pytest
@@ -113,3 +114,48 @@ def test_scout_end_to_end_local(tmp_path, monkeypatch):
     assert by["Eve Thermo 5. Gen. 3er"]["status"] == "listed"
     md = scout.render_report(report, run.datetime.now(run.timezone.utc))
     assert "➕ neu hinzugefügt" in md and "Anker Solarbank 3 Pro bei Local" in md
+
+
+@pytest.mark.parametrize("product, name", [
+    # the four wrong finds of the first live scout run
+    ("Apple Watch SE 3", "caseonline RIB Ersatzarmband Apple Watch SE 3 40mm weiß"),
+    ("Apple Watch SE 3", "caseonline RSF Ersatzarmband Apple Watch SE 3 40mm rosa"),
+    ("HomePod mini 2", "upscreen entspiegelt matte Schutzfolie für Apple HomePod mini 2"),
+    ("HomePod 2. Gen.", "Apple HomePod mini (2. Gen)"),
+    ("Apple Watch SE 3", "Panzerglas Displayschutz kompatibel mit Apple Watch SE 3"),
+])
+def test_accessories_and_other_models_rejected(product, name):
+    t = {"product": product, "keywords": []}
+    assert not d.page_matches_strict(t, name, None)
+    assert not d.page_matches(t, name, None)
+
+
+@pytest.mark.parametrize("product, name", [
+    ("Apple Watch SE 3", "Apple Watch SE 3 (2025) GPS 40 mm Aluminium"),
+    ("HomePod mini 2", "Apple HomePod mini (2. Generation) Mitternacht"),
+    ("HomePod 2. Gen.", "Apple HomePod (2. Generation) weiß"),
+    ("Anker Solarbank 3 Pro", "ANKER SOLIX Solarbank 3 E2700 Pro mit 910W PV"),
+    ("Eve Thermo 5. Gen. 3er", "Eve Thermo (5. Gen.) Matter Heizkörperthermostat 3er-Set kabellos"),
+])
+def test_real_products_accepted(product, name):
+    assert d.page_matches_strict({"product": product, "keywords": []}, name, None)
+
+
+def test_accessory_product_itself_is_fine():
+    t = {"product": "Apple Sport Loop Armband 41 mm", "keywords": []}
+    assert d.page_matches_strict(t, "Apple Sport Loop Armband 41 mm Blau", None)
+
+
+def test_price_plausibility(tmp_path):
+    latest = tmp_path / "latest.json"
+    latest.write_text(json.dumps({"results": [
+        {"product": "HomePod mini 2", "status": "ok", "price": 168.95},
+        {"product": "HomePod mini 2", "status": "ok", "price": 149.63},
+        {"product": "Apple Watch SE 3 40 mm", "status": "ok", "price": 209.0},
+        {"product": "LG StanbyME 2 Max", "status": "blocked", "price": None},
+    ]}))
+    known = scout.known_prices(latest)
+    assert not scout.plausible("HomePod mini 2", 8.49, known)[0]          # Schutzfolie
+    assert scout.plausible("HomePod mini 2", 139.0, known)[0]
+    assert not scout.plausible("Apple Watch SE 3", 23.90, known)[0]       # Ersatzarmband
+    assert scout.plausible("LG StanbyME 2 Max", 999.0, known)[0]          # nothing known yet

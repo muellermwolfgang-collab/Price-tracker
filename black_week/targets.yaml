@@ -114,32 +114,3 @@
   type: product
   url: https://www.moebel.de/essen/stuehle-und-hocker/esszimmerstuehle?data-sheet=319a273bc99747a4c99dedbe86b9acfc
   active: true
-
-# found by scout 2026-11-17
-- product: HomePod 2. Gen.
-  shop: tink
-  url: https://www.tink.de/p/apple-homepod-mini-2-gen
-  site: https://www.tink.de
-  active: true
-  added_by: scout
-
-- product: Apple Watch SE 3
-  shop: Saturn
-  url: https://www.saturn.de/de/product/_caseonline-rib-ersatzarmband-apple-watch-se-3-40mm-weiss-161936894.html
-  site: https://www.saturn.de
-  active: true
-  added_by: scout
-
-- product: Apple Watch SE 3
-  shop: MediaMarkt
-  url: https://www.mediamarkt.de/de/product/_caseonline-rsf-ersatzarmband-apple-watch-se-3-40mm-rosa-161936679.html
-  site: https://www.mediamarkt.de
-  active: true
-  added_by: scout
-
-- product: HomePod mini 2
-  shop: MediaMarkt
-  url: https://www.mediamarkt.de/de/product/_upscreen-entspiegelt-matte-schutzfolie-fur-apple-homepod-mini-2-186787533.html
-  site: https://www.mediamarkt.de
-  active: true
-  added_by: scout

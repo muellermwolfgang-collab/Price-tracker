@@ -20,7 +20,7 @@ FIXTURES = Path(__file__).parent / "fixtures"
 
 def test_targets_yaml_is_valid():
     targets = run.load_targets(run.TARGETS_PATH)
-    assert len(targets) == 15
+    assert len(targets) >= 15                  # the scout appends entries over time
     assert all(t["url"].startswith("https://") for t in targets)
     listings = [t for t in targets if t["type"] == "listing"]
     assert len(listings) == 3 and all(t["match"] == "SE 3" for t in listings)

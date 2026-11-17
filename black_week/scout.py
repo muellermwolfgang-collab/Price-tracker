@@ -160,6 +160,43 @@ def resolve_shops(spec: str | None, catalog: list[dict], path: Path = SHOPS_PATH
 
 
 # --------------------------------------------------------------------------
+# Price plausibility
+# --------------------------------------------------------------------------
+
+PLAUSIBLE_RANGE = (0.4, 2.5)      # new offer vs. median of the prices already known
+
+
+def known_prices(results_path: Path) -> list[tuple[set[str], float]]:
+    """(product tokens, price) of every ok result of the last price run."""
+    try:
+        data = json.loads(results_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+    out = []
+    for r in data.get("results", []):
+        if r.get("status") == "ok" and isinstance(r.get("price"), (int, float)):
+            out.append((set(discover.tokens(r.get("product"))), float(r["price"])))
+    return out
+
+
+def plausible(product: str, price: float | None, known) -> tuple[bool, str | None]:
+    """A new offer far below/above what other shops charge for the same
+    product is an accessory, a bundle or a different model."""
+    if price is None:
+        return False, "no price"
+    want = set(discover.tokens(product))
+    prices = sorted(p for toks, p in known if want <= toks)
+    if not prices:
+        return True, None
+    mid = len(prices) // 2
+    median = prices[mid] if len(prices) % 2 else (prices[mid - 1] + prices[mid]) / 2
+    lo, hi = PLAUSIBLE_RANGE[0] * median, PLAUSIBLE_RANGE[1] * median
+    if lo <= price <= hi:
+        return True, None
+    return False, f"price {price:.2f} outside {lo:.0f}-{hi:.0f} (other shops: median {median:.2f})"
+
+
+# --------------------------------------------------------------------------
 # Search
 # --------------------------------------------------------------------------
 
@@ -169,7 +206,8 @@ def _scout_target(product: dict, shop: dict) -> dict:
             "keywords": product["keywords"]}
 
 
-async def scout_shop(fetcher, shop: dict, products: list[dict], report: list[dict], log=print) -> None:
+async def scout_shop(fetcher, shop: dict, products: list[dict], report: list[dict], log=print,
+                     known=()) -> None:
     """All missing products for one shop: one pass over its sitemaps, then
     the best candidates are opened one by one (paced)."""
     targets = [_scout_target(p, shop) for p in products]
@@ -195,7 +233,10 @@ async def scout_shop(fetcher, shop: dict, products: list[dict], report: list[dic
                 entry.update(status="blocked", note=shop_blocked)
                 break
             ok = res["status"] == "ok" and discover.page_matches_strict(t, res.get("_name"), res.get("page_title"))
-            log(f"  {shop['shop']}: {url} -> {res['status']}{' (match)' if ok else ''}")
+            why = None if ok else "name does not match"
+            if ok:
+                ok, why = plausible(t["product"], res["price"], known)
+            log(f"  {shop['shop']}: {url} -> {res['status']} ({'match' if ok else why})")
             if ok:
                 entry.update(status="added", url=url, price=res["price"], page_title=res.get("page_title"), note=None)
                 break
@@ -204,7 +245,7 @@ async def scout_shop(fetcher, shop: dict, products: list[dict], report: list[dic
             + (f" -> {entry['url']}" if entry.get("url") else ""))
 
 
-async def scout(products: list[dict], shops: list[dict], coverage, log=print) -> list[dict]:
+async def scout(products: list[dict], shops: list[dict], coverage, log=print, known=()) -> list[dict]:
     report: list[dict] = []
     jobs = []
     for shop in shops:
@@ -217,7 +258,7 @@ async def scout(products: list[dict], shops: list[dict], coverage, log=print) ->
     if not jobs:
         return report
     async with run.open_fetcher(log) as fetcher:
-        await run.run_bounded([scout_shop(fetcher, shop, missing, report, log) for shop, missing in jobs],
+        await run.run_bounded([scout_shop(fetcher, shop, missing, report, log, known) for shop, missing in jobs],
                               SCOUT_BUDGET_S, log)
     done = {(r["product"], r["shop"]) for r in report}
     for shop, missing in jobs:
@@ -307,7 +348,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"scout: {len(products)} product(s) x {len(shops)} shop(s)")
     started = time.monotonic()
     try:
-        report = asyncio.run(scout(products, shops, coverage))
+        report = asyncio.run(scout(products, shops, coverage, known=known_prices(args.out_dir / "latest.json")))
     except Exception as exc:
         print(f"scout failed: {type(exc).__name__}: {exc}", file=sys.stderr)
         return 1

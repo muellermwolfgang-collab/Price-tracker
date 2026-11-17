@@ -102,8 +102,53 @@ def name_score(target: dict, name: str | None, title: str | None) -> float:
     return match_score(wanted_tokens(target), f"{name or ''} {title or ''}")
 
 
+# Accessories that carry the product's name in their own name
+# ("Ersatzarmband Apple Watch SE 3", "Schutzfolie für HomePod mini 2").
+# Stems match inside compounds ("ersatzarmband"); words only as a whole word,
+# because they also occur inside unrelated words ("kabellos", "Schalter").
+ACCESSORY_STEMS = (
+    "armband", "armbaend", "folie", "panzerglas", "displayschutz", "schutzglas", "huelle",
+    "cover", "halterung", "ladekabel", "ladegeraet", "adapter", "staender", "bumper", "strap",
+    "sleeve", "aufkleber", "zubehoer", "ersatzteil", "fernbedienung", "netzteil",
+    "schutztasche", "tragetasche",
+)
+ACCESSORY_WORDS = {"case", "band", "loop", "skin", "stand", "mount", "glass", "ersatz", "kompatibel",
+                   "kabel", "tasche", "halter"}
+# Words that turn a product into a different model ("HomePod mini" is not "HomePod")
+MODEL_MODIFIERS = {"mini", "max", "pro", "plus", "ultra", "lite", "air", "neo", "xl", "xs", "se"}
+
+
+def _accessory_words(text: str | None) -> set[str]:
+    found = set()
+    for w in tokens(text):
+        if w in ACCESSORY_WORDS or any(stem in w for stem in ACCESSORY_STEMS):
+            found.add(w)
+    return found
+
+
+def is_accessory(target: dict, text: str | None) -> bool:
+    """Text describes an accessory for the product rather than the product
+    (unless the product itself is such an accessory, e.g. "Sport Loop")."""
+    own = _accessory_words(target["product"] + " " + " ".join(target.get("keywords") or []))
+    return bool(_accessory_words(text) - own)
+
+
+def other_model(target: dict, text: str | None) -> bool:
+    """Text names a model modifier the product does not have."""
+    own = set(wanted_tokens(target))
+    return bool((set(tokens(text)) & MODEL_MODIFIERS) - own)
+
+
+def wrong_item(target: dict, name: str | None, title: str | None) -> bool:
+    # the product name is the most reliable; titles often carry shop boilerplate
+    text = name or title
+    return is_accessory(target, text) or other_model(target, text)
+
+
 def page_matches(target: dict, name: str | None, title: str | None) -> bool:
     text = f"{name or ''} {title or ''}"
+    if wrong_item(target, name, title):
+        return False
     return name_score(target, name, title) >= ACCEPT_MIN_NAME_SCORE and keywords_ok(
         target.get("keywords") or [], text)
 
@@ -116,6 +161,8 @@ def page_matches_strict(target: dict, name: str | None, title: str | None) -> bo
     word (letters only, 4+ characters - brand and model names) must be on the
     page. "Mini-Kühlschrank 2" must never pass as "HomePod mini 2"."""
     text = f"{name or ''} {title or ''}"
+    if wrong_item(target, name, title):
+        return False
     if name_score(target, name, title) < SCOUT_MIN_NAME_SCORE:
         return False
     distinctive = [w for w in wanted_tokens(target) if w.isalpha() and len(w) >= 4]
@@ -188,6 +235,8 @@ def score_urls(urls, target: dict, top: int = 5, exclude: set[str] | None = None
         if s < CANDIDATE_MIN_URL_SCORE:
             continue
         if required and match_score(required, path) < 1.0:
+            continue
+        if is_accessory(target, path) or other_model(target, path):
             continue
         # shorter paths win ties (fewer accessories / bundles)
         item = (s, -len(path), u)
