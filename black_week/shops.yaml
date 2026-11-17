@@ -1,0 +1,33 @@
+# Shops the scout searches for every product in products.yaml.
+#
+# Fields:
+#   shop    name shown in the results
+#   site    shop address; with a path (lg.com/de) only that part is searched
+#   active  false = skip this shop
+#
+# Shops behind bot protection (Cloudflare & co.) are tried, reported as
+# blocked and otherwise left alone.
+
+# already in targets.yaml
+- {shop: Back Market, site: www.backmarket.de, active: true}
+- {shop: Clevertronic, site: www.clevertronic.de, active: true}
+- {shop: rebuy, site: www.rebuy.de, active: true}
+- {shop: refurbed, site: www.refurbed.de, active: true}
+- {shop: tink, site: www.tink.de, active: true}
+- {shop: Geizhals, site: geizhals.de, active: true}
+- {shop: billiger.de, site: www.billiger.de, active: true}
+- {shop: Check24, site: preisvergleich.check24.de, active: true}
+- {shop: LG.de, site: www.lg.com/de, active: true}
+- {shop: MediaMarkt, site: www.mediamarkt.de, active: true}
+- {shop: toom, site: toom.de, active: true}
+- {shop: moebel.de, site: www.moebel.de, active: true}
+
+# further shops
+- {shop: Saturn, site: www.saturn.de, active: true}
+- {shop: OTTO, site: www.otto.de, active: true}
+- {shop: Cyberport, site: www.cyberport.de, active: true}
+- {shop: notebooksbilliger.de, site: www.notebooksbilliger.de, active: true}
+- {shop: Galaxus, site: www.galaxus.de, active: true}
+- {shop: idealo, site: www.idealo.de, active: true}
+- {shop: OBI, site: www.obi.de, active: true}
+- {shop: HORNBACH, site: www.hornbach.de, active: true}

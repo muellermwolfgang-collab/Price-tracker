@@ -1,0 +1,109 @@
+name: Black Week Scout
+
+# Finds shops for the products in black_week/products.yaml and adds verified
+# offers to black_week/targets.yaml (see readme.md, section "black_week").
+#
+# - daily: every product x every shop in black_week/shops.yaml
+# - manual / from a Claude chat: fill in "product" to add a new product; it is
+#   scouted right away and prices are fetched afterwards
+
+on:
+  push:                   # TEMPORARY: live test on the feature branch, removed before the PR
+    branches: [claude/black-week-playwright-module-k3vxeq]
+    paths: [".github/workflows/black-week-scout.yml", "black_week/scout.py", "black_week/discover.py"]
+  schedule:
+    # 04:23 UTC = 05:23 Berlin (winter) - done before the 06:15 UTC price run
+    - cron: "23 4 * * *"
+  workflow_dispatch:
+    inputs:
+      product:
+        description: "New product to add, e.g. 'Dyson V15 Detect' (empty = check all products)"
+        required: false
+        default: ""
+      keywords:
+        description: "Optional: words the product page must contain, comma-separated (e.g. '2.000 W')"
+        required: false
+        default: ""
+      shops:
+        description: "Optional: only these shops, comma-separated names or domains (empty = all)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write         # commit targets.yaml, products.yaml, shops.yaml and results
+
+concurrency:
+  group: black-week       # never at the same time as the price run
+  cancel-in-progress: false
+
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: black_week/requirements.txt
+
+      - name: Install Python dependencies (Playwright version pinned)
+        run: pip install -r black_week/requirements.txt
+
+      - name: Cache Playwright browser
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-${{ hashFiles('black_week/requirements.txt') }}
+
+      - name: Install Playwright browser (cache miss)
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: python -m playwright install --with-deps chromium
+
+      - name: Install Playwright system libraries (cache hit)
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: python -m playwright install-deps chromium
+
+      # inputs go through env variables, never straight into the shell script
+      - name: Scout shops
+        env:
+          PRODUCT: ${{ inputs.product }}
+          KEYWORDS: ${{ inputs.keywords }}
+          SHOPS: ${{ inputs.shops }}
+        run: |
+          if [ -n "$PRODUCT" ]; then
+            python -u black_week/scout.py --add "$PRODUCT" --keywords "$KEYWORDS" --shops "$SHOPS"
+          else
+            python -u black_week/scout.py --shops "$SHOPS"
+          fi
+
+      - name: Fetch prices right away (new product only)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.product != '' }}
+        run: python -u black_week/run.py
+
+      - name: Commit changes
+        env:
+          PRODUCT: ${{ inputs.product }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add black_week/targets.yaml black_week/products.yaml black_week/shops.yaml black_week/results/
+          if [ -f black_week/urls.json ]; then git add black_week/urls.json; fi
+          if git diff --cached --quiet; then
+            echo "No changes - nothing to commit."
+            exit 0
+          fi
+          if [ -n "$PRODUCT" ]; then
+            git commit -m "black_week: add product ${PRODUCT:0:60}"
+          else
+            git commit -m "black_week: scout $(date -u +%Y-%m-%dT%H:%MZ)"
+          fi
+          for i in 1 2 3 4; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep $((i * 5))
+          done
+          echo "push failed" >&2
+          exit 1

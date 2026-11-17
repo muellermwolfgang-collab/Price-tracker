@@ -108,6 +108,22 @@ def page_matches(target: dict, name: str | None, title: str | None) -> bool:
         target.get("keywords") or [], text)
 
 
+SCOUT_MIN_NAME_SCORE = 0.85      # stricter: adding a new shop, not repairing a known one
+
+
+def page_matches_strict(target: dict, name: str | None, title: str | None) -> bool:
+    """For new shops (scout): 85 % of the product words plus every distinctive
+    word (letters only, 4+ characters - brand and model names) must be on the
+    page. "Mini-Kühlschrank 2" must never pass as "HomePod mini 2"."""
+    text = f"{name or ''} {title or ''}"
+    if name_score(target, name, title) < SCOUT_MIN_NAME_SCORE:
+        return False
+    distinctive = [w for w in wanted_tokens(target) if w.isalpha() and len(w) >= 4]
+    if distinctive and match_score(distinctive, text) < 1.0:
+        return False
+    return keywords_ok(target.get("keywords") or [], text)
+
+
 # --------------------------------------------------------------------------
 # Sitemaps
 # --------------------------------------------------------------------------
@@ -139,17 +155,19 @@ def _sitemap_name(u: str) -> str:
     return urlsplit(u).path.lower().replace("sitemap", " ")
 
 
-def rank_sitemaps(urls: list[str], target: dict | None = None) -> list[str]:
-    """Sitemaps whose name matches the product first (e.g. ".../apple.xml"),
+def rank_sitemaps(urls: list[str], target: dict | list[dict] | None = None) -> list[str]:
+    """Sitemaps whose name matches the product(s) first (e.g. ".../apple.xml"),
     then product sitemaps; obviously irrelevant ones (images, blog, stores,
     ...) dropped."""
     def good(u: str) -> bool:
         return bool(_GOOD_SITEMAP.search(_sitemap_name(u)))
 
-    wanted = [w for w in wanted_tokens(target) if not w.isdigit()] if target else []
+    targets = target if isinstance(target, list) else ([target] if target else [])
+    wanted = [[w for w in wanted_tokens(t) if not w.isdigit()] for t in targets]
 
     def key(u: str):
-        name_hit = match_score(wanted, _sitemap_name(u)) if wanted else 0.0
+        name = _sitemap_name(u)
+        name_hit = max((match_score(w, name) for w in wanted if w), default=0.0)
         return (-name_hit, 0 if good(u) else 1, u)
 
     kept = [u for u in urls if good(u) or not _BAD_SITEMAP.search(_sitemap_name(u))]
@@ -192,41 +210,72 @@ MAX_CANDIDATES = 3
 async def collect_candidates(fetcher, origin: str, target: dict, exclude: set[str]) -> tuple[list[str], str]:
     """Walk the shop's sitemaps and return up to MAX_CANDIDATES product URLs
     (best first) plus a short note on what was searched."""
-    rules = await fetcher.robots_for(origin + "/")
-    queue = list(rules.sitemaps) or [origin + "/sitemap.xml"]
-    queue = rank_sitemaps(queue, target) or queue
+    found, note = await collect_candidates_multi(fetcher, origin, [target], [exclude])
+    return found[0], note
+
+
+def in_scope(url: str, site: str | None) -> bool:
+    """Same shop (www. ignored) and, if the site has a path such as
+    lg.com/de, below that path - so the German shop, not lg.com/uk."""
+    if not site:
+        return True
+    a, b = urlsplit(url), urlsplit(site)
+    host = lambda h: (h or "").lower().removeprefix("www.")  # noqa: E731
+    if host(a.hostname) != host(b.hostname):
+        return False
+    base = b.path.rstrip("/")
+    return not base or a.path == base or a.path.startswith(base + "/")
+
+
+async def collect_candidates_multi(fetcher, origin: str, targets: list[dict], excludes: list[set[str]],
+                                   cache: bool = True, prefix: str | None = None) -> tuple[list[list[str]], str]:
+    """Like collect_candidates, for several products at once: each sitemap
+    file is downloaded once and scored for every product (used by the
+    scout). With cache=False parsed sitemaps are not kept in memory."""
+    parts = urlsplit(origin)
+    root = f"{parts.scheme}://{parts.netloc}"
+    rules = await fetcher.robots_for(root + "/")
+    queue = list(rules.sitemaps) or [root + "/sitemap.xml"]
+    queue = rank_sitemaps(queue, targets) or queue
     seen: set[str] = set()
-    pool: dict[str, float] = {}
+    pools: list[dict[str, float]] = [{} for _ in targets]
     files = 0
     total = 0
-    cache = fetcher.__dict__.setdefault("sitemap_cache", {})   # per run: url -> parsed sitemap
+    store = fetcher.__dict__.setdefault("sitemap_cache", {}) if cache else {}
     while queue and files < MAX_SITEMAP_FILES and total < MAX_SITEMAP_BYTES:
         url = queue.pop(0)
         if url in seen:
             continue
         seen.add(url)
         files += 1
-        if url not in cache:
+        if url in store:
+            parsed = store[url]
+        else:
             body = await fetcher.get_bytes(url)
             parsed = None
             if body is not None:
+                total += len(body)
                 try:
                     parsed = parse_sitemap(body)
                 except Exception:
                     parsed = None
-                total += len(body)
-            cache[url] = parsed
-        if cache[url] is None:
+            if cache:
+                store[url] = parsed
+        if parsed is None:
             continue
-        is_index, locs = cache[url]
+        is_index, locs = parsed
         if is_index:
-            queue = rank_sitemaps([u for u in locs if u not in seen] + queue, target)
+            queue = rank_sitemaps([u for u in locs if u not in seen] + queue, targets)
             continue
-        for s, u in score_urls(locs, target, top=10, exclude=exclude):
-            pool[u] = max(pool.get(u, 0.0), s)
-        # enough perfect hits -> stop early, save requests
-        if sum(1 for s in pool.values() if s >= 0.999) >= MAX_CANDIDATES:
+        if prefix:
+            locs = [u for u in locs if in_scope(u, prefix)]
+        for target, exclude, pool in zip(targets, excludes, pools):
+            for sc, u in score_urls(locs, target, top=10, exclude=exclude):
+                pool[u] = max(pool.get(u, 0.0), sc)
+        # enough perfect hits for every product -> stop early, save requests
+        if all(sum(1 for sc in pool.values() if sc >= 0.999) >= MAX_CANDIDATES for pool in pools):
             break
-    ranked = score_urls(pool.keys(), target, top=MAX_CANDIDATES)
-    note = f"{files} sitemap file(s) searched, {len(pool)} candidate(s)"
-    return [u for _, u in ranked], note
+    found = [[u for _, u in score_urls(pool.keys(), target, top=MAX_CANDIDATES)]
+             for target, pool in zip(targets, pools)]
+    note = f"{files} sitemap file(s) searched, {sum(len(p) for p in pools)} candidate(s)"
+    return found, note

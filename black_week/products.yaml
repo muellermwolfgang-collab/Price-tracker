@@ -1,0 +1,34 @@
+# Products to watch (see readme.md, section "black_week").
+#
+# The scout (workflow "Black Week Scout", daily) searches every shop in
+# shops.yaml for each product and adds verified offers to targets.yaml.
+#
+# Fields:
+#   product    name as a shop would write it - brand and model words matter
+#   keywords   optional: words the shop page must contain, e.g. ["2.000 W"]
+#   active     false = no more searching (existing targets stay)
+#
+# Adding a product: ask Claude in a chat with GitHub access ("Black Week:
+# füge <Produkt> hinzu"), start the workflow "Black Week Scout" with the
+# field "product" in the GitHub app, or add an entry here.
+
+- product: Apple Watch SE 3
+  active: true
+
+- product: Eve Thermo 5. Gen. 3er
+  active: true
+
+- product: HomePod mini 2
+  active: true
+
+- product: HomePod 2. Gen.
+  active: true
+
+- product: LG StanbyME 2 Max
+  active: true
+
+- product: Anker Solarbank 3 Pro
+  active: true
+
+- product: Venjakob Kalea
+  active: true
