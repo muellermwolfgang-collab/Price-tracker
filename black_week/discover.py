@@ -75,6 +75,16 @@ def keywords_ok(keywords: list[str], text: str | None) -> bool:
     return all(all(_token_found(w, hay) for w in tokens(k)) for k in keywords)
 
 
+def required_tokens(target: dict) -> list[str]:
+    """Words a candidate URL must contain in full: the listing keyword
+    (`match`, e.g. "SE 3") and the `keywords` - otherwise "Apple Watch SE 3"
+    would accept any Apple Watch wristband (2 of 4 words)."""
+    toks = tokens(target.get("match"))
+    for k in target.get("keywords") or []:
+        toks += tokens(k)
+    return list(dict.fromkeys(toks))
+
+
 def wanted_tokens(target: dict) -> list[str]:
     toks = tokens(target["product"])
     for k in target.get("keywords") or []:
@@ -129,19 +139,27 @@ def _sitemap_name(u: str) -> str:
     return urlsplit(u).path.lower().replace("sitemap", " ")
 
 
-def rank_sitemaps(urls: list[str]) -> list[str]:
-    """Product sitemaps first, obviously irrelevant ones (images, blog,
-    stores, ...) dropped."""
+def rank_sitemaps(urls: list[str], target: dict | None = None) -> list[str]:
+    """Sitemaps whose name matches the product first (e.g. ".../apple.xml"),
+    then product sitemaps; obviously irrelevant ones (images, blog, stores,
+    ...) dropped."""
     def good(u: str) -> bool:
         return bool(_GOOD_SITEMAP.search(_sitemap_name(u)))
 
+    wanted = [w for w in wanted_tokens(target) if not w.isdigit()] if target else []
+
+    def key(u: str):
+        name_hit = match_score(wanted, _sitemap_name(u)) if wanted else 0.0
+        return (-name_hit, 0 if good(u) else 1, u)
+
     kept = [u for u in urls if good(u) or not _BAD_SITEMAP.search(_sitemap_name(u))]
-    return sorted(dict.fromkeys(kept), key=lambda u: (0 if good(u) else 1, u))
+    return sorted(dict.fromkeys(kept), key=key)
 
 
 def score_urls(urls, target: dict, top: int = 5, exclude: set[str] | None = None) -> list[tuple[float, str]]:
     """Best `top` URLs by how well their path matches the product name."""
     wanted = wanted_tokens(target)
+    required = required_tokens(target)
     exclude = exclude or set()
     best: list[tuple[float, int, str]] = []
     for u in urls:
@@ -150,6 +168,8 @@ def score_urls(urls, target: dict, top: int = 5, exclude: set[str] | None = None
         path = urlsplit(u).path
         s = match_score(wanted, path)
         if s < CANDIDATE_MIN_URL_SCORE:
+            continue
+        if required and match_score(required, path) < 1.0:
             continue
         # shorter paths win ties (fewer accessories / bundles)
         item = (s, -len(path), u)
@@ -174,7 +194,7 @@ async def collect_candidates(fetcher, origin: str, target: dict, exclude: set[st
     (best first) plus a short note on what was searched."""
     rules = await fetcher.robots_for(origin + "/")
     queue = list(rules.sitemaps) or [origin + "/sitemap.xml"]
-    queue = rank_sitemaps(queue) or queue
+    queue = rank_sitemaps(queue, target) or queue
     seen: set[str] = set()
     pool: dict[str, float] = {}
     files = 0
@@ -200,7 +220,7 @@ async def collect_candidates(fetcher, origin: str, target: dict, exclude: set[st
             continue
         is_index, locs = cache[url]
         if is_index:
-            queue = rank_sitemaps([u for u in locs if u not in seen] + queue)
+            queue = rank_sitemaps([u for u in locs if u not in seen] + queue, target)
             continue
         for s, u in score_urls(locs, target, top=10, exclude=exclude):
             pool[u] = max(pool.get(u, 0.0), s)

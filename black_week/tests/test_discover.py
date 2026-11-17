@@ -127,3 +127,18 @@ def test_target_without_url_needs_site(tmp_path):
     p.write_text("- {product: A, shop: S}\n")
     with pytest.raises(ValueError):
         run.load_targets(p)
+
+
+def test_listing_keyword_required_in_candidate_url():
+    t = target("Apple Watch SE 3", type="listing", match="SE 3")
+    urls = ["https://www.rebuy.de/i,15585824/armbaender/apple-watch-42-mm-sport-loop-ultramarin",
+            "https://www.rebuy.de/i,1/smartwatches/apple-watch-se-3-40-mm-aluminium",
+            "https://www.rebuy.de/i,2/smartwatches/apple-watch-se-2-40-mm"]
+    assert [u for _, u in d.score_urls(urls, t)] == [urls[1]]
+
+
+def test_sitemap_named_after_product_comes_first():
+    t = target("Apple Watch SE 3", type="listing", match="SE 3")
+    urls = ["https://s.de/sitemap-products-1.xml", "https://s.de/sitemap-apple.xml",
+            "https://s.de/sitemap-products-2.xml"]
+    assert d.rank_sitemaps(urls, t)[0] == "https://s.de/sitemap-apple.xml"
