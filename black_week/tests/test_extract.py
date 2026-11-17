@@ -196,3 +196,13 @@ def test_no_price_page():
     r = ex.extract(html)
     assert r.price is None and r.source is None
     assert not ex.detect_block(200, "Esszimmerstühle | moebel.de", ex.visible_text(html))
+
+
+def test_shipping_only_near_price():
+    page = ("Filter: versandkostenfrei\n" + "x " * 400 +
+            "\nHomePod mini 2\n99,00 €\ninkl. MwSt.\n" + "y " * 400 + "\nKostenloser Versand")
+    assert ex.shipping_near_price(page, 99.0) is None
+    near = "HomePod mini 2\n99,00 €\nzzgl. 4,99 € Versand"
+    assert ex.shipping_near_price(near, 99.0) == 4.99
+    assert ex.shipping_near_price("Preis 99,00 €\nVersandkostenfrei", 99.0) == 0.0
+    assert ex.shipping_near_price("kein passender Preis", 99.0) is None
