@@ -1,6 +1,6 @@
 # Black Week – Preise
 
-Stand: 17.11.2026 18:12 Uhr (Europe/Berlin) · ok: 7, no_price: 1, blocked: 7
+Stand: 17.11.2026 18:18 Uhr (Europe/Berlin) · ok: 7, no_price: 1, blocked: 7
 
 | Produkt | Shop | Status | Preis | Versand | Quelle | URL |
 |---|---|---|---|---|---|---|
@@ -22,6 +22,6 @@ Stand: 17.11.2026 18:12 Uhr (Europe/Berlin) · ok: 7, no_price: 1, blocked: 7
 
 ## URL-Pflege
 
-- Keine passende URL gefunden: Apple Watch SE 3 / rebuy (no offers matching 'SE 3' on page; no replacement found (20 sitemap file(s) searched, 20 candidate(s)))
+- Keine passende URL gefunden: Apple Watch SE 3 / rebuy (no offers matching 'SE 3' on page; no replacement found (20 sitemap file(s) searched, 0 candidate(s)))
 
 Status: ok = Preis gefunden · no_price = Seite geladen, kein Preis · blocked = Bot-Schutz/Rate-Limit · robots = durch robots.txt verboten · timeout = Zeitüberschreitung · error = sonstiger Fehler
