@@ -185,7 +185,10 @@ the page is gone (HTTP 404/410), shows no price, or shows a different product
 Nothing found → `url_check: broken`, the reason is in `note` and in a
 "URL-Pflege" section of `latest.md`; the search is retried every run. Pages that
 are blocked or disallowed by robots.txt can't be checked (`not_checked`).
-Listing pages are only checked for 404/410, not searched.
+Listing pages count as broken when gone or when no offer matching `match` is on
+the page; their replacement may be any page with matching offers.
+If a shop answers 404 even for the current URLs from its own sitemap, it is
+reported as `blocked` (that is bot protection, not a moved product).
 
 ## Results
 

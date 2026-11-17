@@ -92,7 +92,8 @@ def test_check_url(res, verdict):
 
 def test_check_url_listing_not_judged_by_name():
     t = target("Apple Watch SE 3", type="listing", match="SE 3")
-    assert run.check_url(t, _res("no_price", title="Apple Watch kaufen"))[0] == "ok"
+    assert run.check_url(t, _res("ok", title="Smartwatches kaufen"))[0] == "ok"
+    assert run.check_url(t, _res("no_price", title="Apple Watch kaufen"))[0] == "broken"
     assert run.check_url(t, _res("error", 404))[0] == "broken"
 
 

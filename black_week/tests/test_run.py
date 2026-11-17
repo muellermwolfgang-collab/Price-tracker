@@ -109,6 +109,12 @@ SOLARBANK_PAGE = """<!doctype html><html lang="de"><head><meta charset="utf-8">
  "offers":{"@type":"Offer","price":"1499.00","priceCurrency":"EUR","availability":"https://schema.org/InStock"}}</script>
 </head><body><h1>Solarbank 3 Pro Set</h1><p>1.499,00 €</p></body></html>"""
 
+WATCH_PAGE = """<!doctype html><html lang="de"><head><meta charset="utf-8">
+<title>Apple Watch SE 3 40 mm (2025) gebraucht kaufen</title>
+<script type="application/ld+json">{"@type":"Product","name":"Apple Watch SE 3 40 mm (2025)",
+ "offers":{"@type":"AggregateOffer","lowPrice":"179.00","highPrice":"229.00","offerCount":4,"priceCurrency":"EUR"}}</script>
+</head><body><h1>Apple Watch SE 3</h1></body></html>"""
+
 DECOY_PAGE = SOLARBANK_PAGE.replace("Solarbank 3 Pro", "Solarbank 2 Plus").replace("2.000 W", "800 W")
 
 
@@ -120,6 +126,7 @@ def _site(tmp_path):
     (site / "p").mkdir()
     (site / "p" / "anker-solix-solarbank-3-pro-2000w-set.html").write_text(SOLARBANK_PAGE, encoding="utf-8")
     (site / "p" / "anker-solarbank-2-plus-800w.html").write_text(DECOY_PAGE, encoding="utf-8")
+    (site / "p" / "apple-watch-se-3-40mm-2025.html").write_text(WATCH_PAGE, encoding="utf-8")
     return site
 
 
@@ -139,7 +146,9 @@ def _write_sitemaps(site, base):
         f"<sitemap><loc>{base}/sitemap-images.xml</loc></sitemap>"
         f"<sitemap><loc>{base}/sitemap-products-1.xml.gz</loc></sitemap></sitemapindex>")
     (site / "sitemap-images.xml").write_text("<urlset></urlset>")
-    urls = ["/p/anker-solarbank-2-plus-800w.html", "/p/anker-solix-solarbank-3-pro-2000w-set.html", "/jsonld_offer.html"]
+    urls = ["/p/anker-solarbank-2-plus-800w.html", "/p/anker-solix-solarbank-3-pro-2000w-set.html",
+            "/jsonld_offer.html", "/p/apple-watch-se-3-40mm-2025.html",
+            "/p/gardena-gartenschlauch-20-m.html"]            # listed, but 404
     xml = '<?xml version="1.0"?><urlset>' + "".join(f"<url><loc>{base}{u}</loc></url>" for u in urls) + "</urlset>"
     (site / "sitemap-products-1.xml.gz").write_bytes(gzip.compress(xml.encode()))
 
@@ -173,6 +182,8 @@ def test_end_to_end_local(tmp_path, monkeypatch):
 - {{product: Slow Product, shop: A, url: '{base}/slow'}}
 - {{product: Anker Solarbank 3 Pro 2.000 W, shop: A, url: '{base}/p/old-solarbank'}}
 - {{product: Anker Solarbank 3 Pro 2.000 W, shop: B, site: '{base}'}}
+- {{product: Apple Watch SE 3, shop: C, type: listing, match: SE 3, url: '{base}/no_price.html'}}
+- {{product: Gardena Gartenschlauch 20 m, shop: A, url: '{base}/p/gardena-schlauch-alt.html'}}
 """
     tfile = tmp_path / "targets.yaml"
     tfile.write_text(yaml_text)
@@ -212,6 +223,14 @@ def test_end_to_end_local(tmp_path, monkeypatch):
     assert "/sitemap-images.xml" not in requested
     assert requested.count("/sitemap-products-1.xml.gz") == 1      # cached within a run
     assert all(r["fetched_at"].endswith("Z") for r in results)
+
+    # outdated listing (keyword not on page) -> replaced by a matching page
+    lst = g("Apple Watch SE 3", "C")
+    assert lst["url_check"] == "updated" and lst["url"].endswith("/p/apple-watch-se-3-40mm-2025.html")
+    assert lst["price"] == 179.0 and lst["status"] == "ok"
+    # shop answers 404 even for URLs from its own sitemap -> reported as blocked
+    hose = g("Gardena Gartenschlauch 20 m")
+    assert hose["status"] == "blocked" and "own sitemap" in hose["note"], hose
 
     # final update: state file keeps the new URL for the next run
     state = run.update_url_state({}, targets, results)

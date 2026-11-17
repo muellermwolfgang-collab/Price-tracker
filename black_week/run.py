@@ -196,10 +196,11 @@ def check_url(target: dict, result: dict) -> tuple[str, str]:
         return "broken", f"HTTP {http}"
     if status not in ("ok", "no_price"):
         return "not_checked", status
+    if status == "no_price":
+        return "broken", "no price on page" if target["type"] == "product" else \
+            f"no offers matching '{target['match']}' on page"
     if target["type"] == "listing":
         return "ok", ""
-    if status == "no_price":
-        return "broken", "no price on page"
     score = discover.name_score(target, result.get("_name"), result.get("page_title"))
     if score < discover.MISMATCH_MAX_NAME_SCORE:
         return "broken", "page shows a different product"
@@ -360,7 +361,7 @@ class Fetcher:
             result["http_status"] = http_status
             match_src = ex._match_regex(target["match"]).pattern if target["match"] else None
 
-            if http_status not in ex.BLOCK_STATUS:
+            if http_status is None or http_status < 400:      # no point waiting on error pages
                 try:
                     await page.wait_for_function(
                         WAIT_FOR_PRICE_JS, arg=[target["price_selector"], match_src],
@@ -455,9 +456,6 @@ class Fetcher:
         result["url_check"] = verdict
         if verdict != "broken":
             return result
-        if target["type"] != "product":
-            result["note"] = f"URL looks broken ({reason}) - automatic search only covers product pages"
-            return result
 
         self.log(f"[search  ] {target['shop']}: {target['product']} - {reason}, searching sitemaps")
         exclude = {u for u in (target["url"], target["seed_url"]) if u}
@@ -465,9 +463,11 @@ class Fetcher:
             candidates, how = await discover.collect_candidates(self, target["site"], target, exclude)
         except Exception as exc:
             candidates, how = [], f"search failed: {type(exc).__name__}"
+        tried = []
         for url in candidates:
             cand = dict(target, url=url)
             res = await self.fetch_paced(cand)
+            tried.append(res)
             ok = res["status"] == "ok" and discover.page_matches(target, res.get("_name"), res.get("page_title"))
             detail = "match" if ok else (res.get("note") or f"title: {res.get('page_title')}")
             self.log(f"  candidate {url} -> {res['status']} ({detail})")
@@ -475,6 +475,12 @@ class Fetcher:
                 res.update(url_check="updated", previous_url=target["url"],
                            note=f"new URL found ({reason} before)")
                 return res
+        if result["http_status"] == 404 and tried and all(r["http_status"] == 404 for r in tried):
+            # the shop lists these pages in its own sitemap but answers 404 to us
+            result.update(status="blocked", url_check="not_checked",
+                          note="shop answers HTTP 404 even for current URLs from its own sitemap "
+                               "(likely bot protection) - URL kept")
+            return result
         result["note"] = f"{reason}; no replacement found ({how})"
         return result
 
