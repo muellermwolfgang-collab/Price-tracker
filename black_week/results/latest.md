@@ -1,6 +1,6 @@
 # Black Week – Preise
 
-Stand: 17.11.2026 22:03 Uhr (Europe/Berlin) · ok: 8, no_price: 1, blocked: 7
+Stand: 18.11.2026 16:43 Uhr (Europe/Berlin) · ok: 7, no_price: 1, blocked: 8
 
 | Produkt | Shop | Status | Preis | Versand | Quelle | URL |
 |---|---|---|---|---|---|---|
@@ -12,7 +12,7 @@ Stand: 17.11.2026 22:03 Uhr (Europe/Berlin) · ok: 8, no_price: 1, blocked: 7
 | Eve Thermo 5. Gen. 3er | tink | ok | 199,95 € | 0,00 € | jsonld | [Link](https://www.tink.de/p/eve-thermo-matter-5-gen-heizkoerperthermostat-3er-set-n) |
 | Eve Thermo 5. Gen. 3er | Geizhals | ok | 199,95 € | – | meta | [Link](https://geizhals.de/eve-thermo-2025-5-generation-matter-heizkoerperthermostat-10ecd1751-3x-a3722719.html) |
 | HomePod mini 2 | tink | ok | 168,95 € | 0,00 € | jsonld | [Link](https://www.tink.de/p/apple-homepod-mini-2-gen) |
-| HomePod mini 2 | billiger.de | ok | ab 149,63 € | – | jsonld | [Link](https://www.billiger.de/baseproducts/120834-apple-homepod-mini-2) |
+| HomePod mini 2 | billiger.de | blocked | – | – | – | [Link](https://www.billiger.de/baseproducts/120834-apple-homepod-mini-2) |
 | HomePod 2. Gen. | Check24 | ok | ab 393,95 € | – | jsonld | [Link](https://preisvergleich.check24.de/ul/sprachassistenten/CAWGCSSWH2K4Q-apple-mqj73da-homepod-2-generation-smart-speaker-midnight.html) |
 | LG StanbyME 2 Max | LG.de | blocked | – | – | – | [Link](https://www.lg.com/de/lifestyle-tvs/stanbyme/32lx6bpga/) |
 | LG StanbyME 2 Max | Geizhals | blocked | – | – | – | [Link](https://geizhals.de/lg-stanbyme-2-max-32lx6bpga-a3927423.html) |
