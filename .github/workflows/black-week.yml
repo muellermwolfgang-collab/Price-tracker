@@ -57,7 +57,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
+      # the branch tip at job start, not the commit at trigger time: runs wait
+      # for each other (concurrency group) and must see the previous run's commit
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
 
       - uses: actions/setup-python@v5
         with:
@@ -105,6 +109,7 @@ jobs:
           # other workflows commit to the same branch: rebase onto them before pushing
           for i in 1 2 3 4; do
             git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            git rebase --abort 2>/dev/null || true      # a failed rebase must not block the next try
             sleep $((i * 5))
           done
           echo "push failed" >&2
