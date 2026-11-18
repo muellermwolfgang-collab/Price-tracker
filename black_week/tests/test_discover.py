@@ -142,3 +142,23 @@ def test_sitemap_named_after_product_comes_first():
     urls = ["https://s.de/sitemap-products-1.xml", "https://s.de/sitemap-apple.xml",
             "https://s.de/sitemap-products-2.xml"]
     assert d.rank_sitemaps(urls, t)[0] == "https://s.de/sitemap-apple.xml"
+
+
+def test_model_suffix_kept_and_units_merged():
+    assert "3s" in d.tokens("Logitech MX Master 3S")
+    assert "3s" not in d.tokens("Logitech MX Master 3")
+    assert d.tokens("mit 910W PV") == ["910", "pv"]                  # unit: still matches "910 W"
+    assert "4k" in d.tokens("LG 4K TV")
+
+
+@pytest.mark.parametrize("product, name, ok", [
+    ("Logitech MX Master 3S", "Logitech MX Master 3S Performance Wireless Maus", True),
+    ("Logitech MX Master 3S", "Logitech MX Master 3 Advanced Maus", False),
+    ("Logitech MX Master 4", "Logitech MX Master 4 Graphite", True),
+    ("Logitech MX Master 4", "Logitech MX Master 3S Graphite", False),
+    ("Anker Solarbank 3 Pro 910 W", "ANKER SOLIX Solarbank 3 Pro mit 910W PV", True),
+])
+def test_model_numbers_must_match(product, name, ok):
+    t = target(product)
+    assert d.page_matches(t, name, None) is ok
+    assert d.page_matches_strict(t, name, None) is ok
