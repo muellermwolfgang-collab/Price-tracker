@@ -32,3 +32,7 @@
 
 - product: Venjakob Kalea
   active: true
+
+# added 2026-11-18
+- product: Logitech MX Master 3S
+  active: true
