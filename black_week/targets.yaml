@@ -122,3 +122,18 @@
   site: https://www.tink.de
   active: true
   added_by: scout
+
+# found by scout 2026-11-18
+- product: Logitech MX Master 3S
+  shop: Saturn
+  url: https://www.saturn.de/de/product/_logitech-b2b-mx-master-3s-for-business-grafit-2982350.html
+  site: https://www.saturn.de
+  active: true
+  added_by: scout
+
+- product: Logitech MX Master 3S
+  shop: MediaMarkt
+  url: https://www.mediamarkt.de/de/product/_logitech-910-006582-mx-master-3s-for-business-graphite-maus-einfarbig-grau-145974316.html
+  site: https://www.mediamarkt.de
+  active: true
+  added_by: scout
