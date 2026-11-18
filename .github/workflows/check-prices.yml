@@ -26,12 +26,20 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r requirements.txt
 
+      - name: Get installed Playwright version
+        id: playwright-version
+        run: echo "version=$(pip show playwright | grep Version | cut -d' ' -f2)" >> "$GITHUB_OUTPUT"
+
       - name: Cache Playwright browser
         id: playwright-cache
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: playwright-chromium-${{ runner.os }}
+          # The Playwright version is part of the key: requirements.txt doesn't
+          # pin it, and each release needs its own browser build. Without the
+          # version, a stale cached browser was restored after an update and
+          # every run failed with "Executable doesn't exist".
+          key: playwright-chromium-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
 
       - name: Install Playwright browser (only on cache miss)
         if: steps.playwright-cache.outputs.cache-hit != 'true'
