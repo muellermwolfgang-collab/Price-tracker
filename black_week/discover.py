@@ -34,16 +34,26 @@ STOPWORDS = {
 }
 
 
+# A number followed by one of these letters is a unit ("910W", "12 V", "5 l"),
+# so it matches the bare number. Any other single letter is part of a model
+# name ("MX Master 3S", "4K") and is kept as its own word "3s" - otherwise
+# "MX Master 3S" would be indistinguishable from "MX Master 3".
+_UNIT_LETTERS = set("wvalmgx")
+_MODEL_SUFFIX = re.compile(r"(?<![a-z0-9])(\d+)\s?([a-z])(?![a-z0-9])")
+
+
 def tokens(text: str | None) -> list[str]:
     """Normalised words: lower case, umlauts spelled out, "2.000" -> "2000",
     letters and digits split ("910W" -> "910", "w"), stop words and single
-    letters dropped."""
+    letters dropped; model suffixes kept as one word ("3S" -> "3s", "3")."""
     if not text:
         return []
     t = unquote(str(text)).lower().translate(_UMLAUTS)
     t = re.sub(r"(?<=\d)[.,](?=\d{3}\b)", "", t)          # thousands separator
+    suffixed = {m.group(1) + m.group(2) for m in _MODEL_SUFFIX.finditer(t)
+                if m.group(2) not in _UNIT_LETTERS}
     t = re.sub(r"(?<=[a-z])(?=\d)|(?<=\d)(?=[a-z])", " ", t)
-    out = []
+    out = sorted(suffixed)
     for w in re.split(r"[^a-z0-9]+", t):
         if not w or w in STOPWORDS or (len(w) == 1 and w.isalpha()):
             continue
@@ -139,10 +149,20 @@ def other_model(target: dict, text: str | None) -> bool:
     return bool((set(tokens(text)) & MODEL_MODIFIERS) - own)
 
 
+def model_numbers_missing(target: dict, text: str | None) -> bool:
+    """Numbers and model suffixes ("3s", "4", "2000") of the product name
+    must all be there: "MX Master 3" is not "MX Master 3S", "MX Master 3S"
+    is not "MX Master 4"."""
+    needed = [w for w in wanted_tokens(target) if any(c.isdigit() for c in w)]
+    hay = set(tokens(text))
+    return any(w not in hay for w in needed)
+
+
 def wrong_item(target: dict, name: str | None, title: str | None) -> bool:
     # the product name is the most reliable; titles often carry shop boilerplate
     text = name or title
-    return is_accessory(target, text) or other_model(target, text)
+    return (is_accessory(target, text) or other_model(target, text)
+            or model_numbers_missing(target, f"{name or ''} {title or ''}"))
 
 
 def page_matches(target: dict, name: str | None, title: str | None) -> bool:
