@@ -1,10 +1,10 @@
 # Black Week – Shop-Suche
 
-Stand: 19.11.2026 14:32 Uhr (Europe/Berlin)
+Stand: 20.11.2026 14:12 Uhr (Europe/Berlin)
 
 ## Neu hinzugefügt
 
-- Apple Watch SE 3 bei Saturn: 261,70 € – [Link](https://www.saturn.de/de/product/_apple-watch-se-3nd-generation-smartwatch-aluminium-fluor-elastomer-ml-schwarz-169925648.html)
+- Apple Watch SE 3 bei MediaMarkt: 379,90 € – [Link](https://www.mediamarkt.de/de/product/_apple-smartwatch-watch-se-3-beige-44-mm-o-44-mm-smartwatches-aluminium-fluor-elastomer-sm-keine-angabe-169925617.html)
 
 ## Übersicht
 
@@ -20,14 +20,14 @@ Stand: 19.11.2026 14:32 Uhr (Europe/Berlin)
 | Apple Watch SE 3 | HORNBACH | – nicht gefunden |
 | Apple Watch SE 3 | idealo | – nicht gefunden |
 | Apple Watch SE 3 | LG.de | – nicht gefunden |
-| Apple Watch SE 3 | MediaMarkt | – nicht gefunden |
+| Apple Watch SE 3 | MediaMarkt | ➕ neu hinzugefügt |
 | Apple Watch SE 3 | moebel.de | – nicht gefunden |
 | Apple Watch SE 3 | notebooksbilliger.de | – nicht gefunden |
 | Apple Watch SE 3 | OBI | – nicht gefunden |
 | Apple Watch SE 3 | OTTO | – nicht gefunden |
 | Apple Watch SE 3 | rebuy | ✔ schon in targets.yaml |
 | Apple Watch SE 3 | refurbed | ✔ schon in targets.yaml |
-| Apple Watch SE 3 | Saturn | ➕ neu hinzugefügt |
+| Apple Watch SE 3 | Saturn | ✔ schon in targets.yaml |
 | Apple Watch SE 3 | tink | – nicht gefunden |
 | Apple Watch SE 3 | toom | – nicht gefunden |
 | Eve Thermo 5. Gen. 3er | Back Market | ⛔ blockiert |
@@ -47,7 +47,7 @@ Stand: 19.11.2026 14:32 Uhr (Europe/Berlin)
 | Eve Thermo 5. Gen. 3er | OTTO | – nicht gefunden |
 | Eve Thermo 5. Gen. 3er | rebuy | – nicht gefunden |
 | Eve Thermo 5. Gen. 3er | refurbed | – nicht gefunden |
-| Eve Thermo 5. Gen. 3er | Saturn | ⛔ blockiert |
+| Eve Thermo 5. Gen. 3er | Saturn | – nicht gefunden |
 | Eve Thermo 5. Gen. 3er | tink | ✔ schon in targets.yaml |
 | Eve Thermo 5. Gen. 3er | toom | – nicht gefunden |
 | HomePod mini 2 | Back Market | ⛔ blockiert |

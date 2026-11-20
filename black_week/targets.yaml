@@ -145,3 +145,11 @@
   site: https://www.saturn.de
   active: true
   added_by: scout
+
+# found by scout 2026-11-20
+- product: Apple Watch SE 3
+  shop: MediaMarkt
+  url: https://www.mediamarkt.de/de/product/_apple-smartwatch-watch-se-3-beige-44-mm-o-44-mm-smartwatches-aluminium-fluor-elastomer-sm-keine-angabe-169925617.html
+  site: https://www.mediamarkt.de
+  active: true
+  added_by: scout
