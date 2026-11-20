@@ -1,6 +1,6 @@
 # Black Week – Preise
 
-Stand: 20.11.2026 00:34 Uhr (Europe/Berlin) · ok: 11, no_price: 1, blocked: 7
+Stand: 20.11.2026 16:30 Uhr (Europe/Berlin) · ok: 13, no_price: 1, blocked: 6
 
 | Produkt | Shop | Status | Preis | Versand | Quelle | URL |
 |---|---|---|---|---|---|---|
@@ -8,7 +8,7 @@ Stand: 20.11.2026 00:34 Uhr (Europe/Berlin) · ok: 11, no_price: 1, blocked: 7
 | Apple Watch SE 3 40 mm Cellular | Back Market | blocked | – | – | – | [Link](https://www.backmarket.de/de-de/p/apple-watch-2025-gps-cellular-40-mm-aluminium-polarstern-sportarmband-wei/79f98011-e24f-49a7-b174-9128e5d2e8d7) |
 | Apple Watch SE 3 | Clevertronic | blocked | – | – | – | [Link](https://www.clevertronic.de/kaufen/smartwatch-kaufen/apple/se-3) |
 | Apple Watch SE 3 | rebuy | no_price | – | – | – | [Link](https://www.rebuy.de/kaufen/apple-apple-watch) |
-| Apple Watch SE 3 40 mm | refurbed | ok | 204,99 € | 0,00 € | jsonld | [Link](https://www.refurbed.de/p/apple-watch-se-3-40mm-2025/) |
+| Apple Watch SE 3 40 mm | refurbed | ok | 214,99 € | 0,00 € | jsonld | [Link](https://www.refurbed.de/p/apple-watch-se-3-40mm-2025/) |
 | Eve Thermo 5. Gen. 3er | tink | ok | 169,95 € | 0,00 € | jsonld | [Link](https://www.tink.de/p/eve-thermo-matter-5-gen-heizkoerperthermostat-3er-set-n) |
 | Eve Thermo 5. Gen. 3er | Geizhals | ok | 169,95 € | – | meta | [Link](https://geizhals.de/eve-thermo-2025-5-generation-matter-heizkoerperthermostat-10ecd1751-3x-a3722719.html) |
 | HomePod mini 2 | tink | ok | 168,95 € | 0,00 € | jsonld | [Link](https://www.tink.de/p/apple-homepod-mini-2-gen) |
@@ -22,7 +22,8 @@ Stand: 20.11.2026 00:34 Uhr (Europe/Berlin) · ok: 11, no_price: 1, blocked: 7
 | HomePod 2. Gen. | tink | ok | 398,95 € | 0,00 € | jsonld | [Link](https://www.tink.de/p/apple-homepod-2nd-generation) |
 | Logitech MX Master 3S | Saturn | ok | 89,87 € | 0,00 € | jsonld | [Link](https://www.saturn.de/de/product/_logitech-b2b-mx-master-3s-for-business-grafit-2982350.html) |
 | Logitech MX Master 3S | MediaMarkt | ok | 89,87 € | 0,00 € | jsonld | [Link](https://www.mediamarkt.de/de/product/_logitech-910-006582-mx-master-3s-for-business-graphite-maus-einfarbig-grau-145974316.html) |
-| Apple Watch SE 3 | Saturn | blocked | – | – | – | [Link](https://www.saturn.de/de/product/_apple-watch-se-3nd-generation-smartwatch-aluminium-fluor-elastomer-ml-schwarz-169925648.html) |
+| Apple Watch SE 3 | Saturn | ok | 261,70 € | 0,00 € | jsonld | [Link](https://www.saturn.de/de/product/_apple-watch-se-3nd-generation-smartwatch-aluminium-fluor-elastomer-ml-schwarz-169925648.html) |
+| Apple Watch SE 3 | MediaMarkt | ok | 379,90 € | 0,00 € | jsonld | [Link](https://www.mediamarkt.de/de/product/_apple-smartwatch-watch-se-3-beige-44-mm-o-44-mm-smartwatches-aluminium-fluor-elastomer-sm-keine-angabe-169925617.html) |
 
 ## URL-Pflege
 
