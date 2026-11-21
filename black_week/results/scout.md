@@ -1,10 +1,6 @@
 # Black Week – Shop-Suche
 
-Stand: 20.11.2026 14:12 Uhr (Europe/Berlin)
-
-## Neu hinzugefügt
-
-- Apple Watch SE 3 bei MediaMarkt: 379,90 € – [Link](https://www.mediamarkt.de/de/product/_apple-smartwatch-watch-se-3-beige-44-mm-o-44-mm-smartwatches-aluminium-fluor-elastomer-sm-keine-angabe-169925617.html)
+Stand: 21.11.2026 13:50 Uhr (Europe/Berlin)
 
 ## Übersicht
 
@@ -20,7 +16,7 @@ Stand: 20.11.2026 14:12 Uhr (Europe/Berlin)
 | Apple Watch SE 3 | HORNBACH | – nicht gefunden |
 | Apple Watch SE 3 | idealo | – nicht gefunden |
 | Apple Watch SE 3 | LG.de | – nicht gefunden |
-| Apple Watch SE 3 | MediaMarkt | ➕ neu hinzugefügt |
+| Apple Watch SE 3 | MediaMarkt | ✔ schon in targets.yaml |
 | Apple Watch SE 3 | moebel.de | – nicht gefunden |
 | Apple Watch SE 3 | notebooksbilliger.de | – nicht gefunden |
 | Apple Watch SE 3 | OBI | – nicht gefunden |
