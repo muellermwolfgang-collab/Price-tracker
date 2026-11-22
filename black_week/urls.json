@@ -1,11 +1,11 @@
 {
   "Anker Solarbank 3 Pro 2.000 W | toom": {
-    "last_ok": "2026-11-21T22:10:38Z",
+    "last_ok": "2026-11-22T14:38:53Z",
     "seed_url": "https://toom.de/p/solarmodul-set-4-x-500-w-mit-solarbank-3-e2700-pro-und-smart-meter/10520584",
     "url": "https://toom.de/p/solarmodul-set-4-x-500-w-mit-solarbank-3-e2700-pro-und-smart-meter/10520584"
   },
   "Anker Solarbank 3 Pro 910 W | MediaMarkt": {
-    "last_ok": "2026-11-21T22:10:42Z",
+    "last_ok": "2026-11-22T14:38:53Z",
     "seed_url": "https://www.mediamarkt.de/de/product/_anker-solix-solarbank-3-pro-mit-900w-pv-balkonkraftwerk-162854333.html",
     "url": "https://www.mediamarkt.de/de/product/_anker-solix-solarbank-3-pro-mit-900w-pv-balkonkraftwerk-162854333.html"
   },
@@ -14,12 +14,12 @@
     "url": "https://www.backmarket.de/de-de/p/apple-watch-2025-gps-cellular-40-mm-aluminium-polarstern-sportarmband-wei/79f98011-e24f-49a7-b174-9128e5d2e8d7"
   },
   "Apple Watch SE 3 40 mm | refurbed": {
-    "last_ok": "2026-11-21T22:10:39Z",
+    "last_ok": "2026-11-22T14:38:53Z",
     "seed_url": "https://www.refurbed.de/p/apple-watch-se-3-40mm-2025/",
     "url": "https://www.refurbed.de/p/apple-watch-se-3-40mm-2025/"
   },
   "Apple Watch SE 3 | Back Market": {
-    "last_ok": "2026-11-21T22:10:40Z",
+    "last_ok": "2026-11-22T14:38:55Z",
     "previous_urls": [
       "https://www.backmarket.de/de-de/p/apple-watch-se-series-3"
     ],
@@ -32,12 +32,12 @@
     "url": "https://www.clevertronic.de/kaufen/smartwatch-kaufen/apple/se-3"
   },
   "Apple Watch SE 3 | MediaMarkt": {
-    "last_ok": "2026-11-21T22:10:57Z",
+    "last_ok": "2026-11-22T14:39:12Z",
     "seed_url": "https://www.mediamarkt.de/de/product/_apple-smartwatch-watch-se-3-beige-44-mm-o-44-mm-smartwatches-aluminium-fluor-elastomer-sm-keine-angabe-169925617.html",
     "url": "https://www.mediamarkt.de/de/product/_apple-smartwatch-watch-se-3-beige-44-mm-o-44-mm-smartwatches-aluminium-fluor-elastomer-sm-keine-angabe-169925617.html"
   },
   "Apple Watch SE 3 | Saturn": {
-    "last_ok": "2026-11-21T22:10:55Z",
+    "last_ok": "2026-11-22T14:39:05Z",
     "seed_url": "https://www.saturn.de/de/product/_apple-watch-se-3nd-generation-smartwatch-aluminium-fluor-elastomer-ml-schwarz-169925648.html",
     "url": "https://www.saturn.de/de/product/_apple-watch-se-3nd-generation-smartwatch-aluminium-fluor-elastomer-ml-schwarz-169925648.html"
   },
@@ -48,32 +48,37 @@
     "url": "https://www.rebuy.de/kaufen/apple-apple-watch"
   },
   "Eve Thermo 5. Gen. 3er | Geizhals": {
-    "last_ok": "2026-11-21T22:10:40Z",
+    "last_ok": "2026-11-22T14:38:51Z",
     "seed_url": "https://geizhals.de/eve-thermo-2025-5-generation-matter-heizkoerperthermostat-10ecd1751-3x-a3722719.html",
     "url": "https://geizhals.de/eve-thermo-2025-5-generation-matter-heizkoerperthermostat-10ecd1751-3x-a3722719.html"
   },
   "Eve Thermo 5. Gen. 3er | tink": {
-    "last_ok": "2026-11-21T22:10:41Z",
+    "last_ok": "2026-11-22T14:38:51Z",
     "seed_url": "https://www.tink.de/p/eve-thermo-matter-5-gen-heizkoerperthermostat-3er-set-n",
     "url": "https://www.tink.de/p/eve-thermo-matter-5-gen-heizkoerperthermostat-3er-set-n"
   },
   "HomePod 2. Gen. | Check24": {
-    "last_ok": "2026-11-21T14:42:57Z",
+    "last_ok": "2026-11-22T14:38:50Z",
     "seed_url": "https://preisvergleich.check24.de/ul/sprachassistenten/CAWGCSSWH2K4Q-apple-mqj73da-homepod-2-generation-smart-speaker-midnight.html",
     "url": "https://preisvergleich.check24.de/ul/sprachassistenten/CAWGCSSWH2K4Q-apple-mqj73da-homepod-2-generation-smart-speaker-midnight.html"
   },
   "HomePod 2. Gen. | tink": {
-    "last_ok": "2026-11-21T22:10:57Z",
+    "last_ok": "2026-11-22T14:39:09Z",
     "seed_url": "https://www.tink.de/p/apple-homepod-2nd-generation",
     "url": "https://www.tink.de/p/apple-homepod-2nd-generation"
   },
+  "HomePod mini 2 | MediaMarkt": {
+    "last_ok": "2026-11-22T14:39:19Z",
+    "seed_url": "https://www.mediamarkt.de/de/product/_apple-mgkr4zda-homepod-mini-2-lautsprecher-pink-188598845.html",
+    "url": "https://www.mediamarkt.de/de/product/_apple-mgkr4zda-homepod-mini-2-lautsprecher-pink-188598845.html"
+  },
   "HomePod mini 2 | billiger.de": {
-    "last_ok": "2026-11-21T14:42:56Z",
+    "last_ok": "2026-11-22T14:38:50Z",
     "seed_url": "https://www.billiger.de/baseproducts/120834-apple-homepod-mini-2",
     "url": "https://www.billiger.de/baseproducts/120834-apple-homepod-mini-2"
   },
   "HomePod mini 2 | tink": {
-    "last_ok": "2026-11-21T22:10:48Z",
+    "last_ok": "2026-11-22T14:38:59Z",
     "seed_url": "https://www.tink.de/p/apple-homepod-mini-2-gen",
     "url": "https://www.tink.de/p/apple-homepod-mini-2-gen"
   },
@@ -86,12 +91,12 @@
     "url": "https://www.lg.com/de/lifestyle-tvs/stanbyme/32lx6bpga/"
   },
   "Logitech MX Master 3S | MediaMarkt": {
-    "last_ok": "2026-11-21T22:10:49Z",
+    "last_ok": "2026-11-22T14:39:02Z",
     "seed_url": "https://www.mediamarkt.de/de/product/_logitech-910-006582-mx-master-3s-for-business-graphite-maus-einfarbig-grau-145974316.html",
     "url": "https://www.mediamarkt.de/de/product/_logitech-910-006582-mx-master-3s-for-business-graphite-maus-einfarbig-grau-145974316.html"
   },
   "Logitech MX Master 3S | Saturn": {
-    "last_ok": "2026-11-21T22:10:43Z",
+    "last_ok": "2026-11-22T14:38:57Z",
     "seed_url": "https://www.saturn.de/de/product/_logitech-b2b-mx-master-3s-for-business-grafit-2982350.html",
     "url": "https://www.saturn.de/de/product/_logitech-b2b-mx-master-3s-for-business-grafit-2982350.html"
   },
