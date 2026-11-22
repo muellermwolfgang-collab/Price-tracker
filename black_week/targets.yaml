@@ -153,3 +153,11 @@
   site: https://www.mediamarkt.de
   active: true
   added_by: scout
+
+# found by scout 2026-11-22
+- product: HomePod mini 2
+  shop: MediaMarkt
+  url: https://www.mediamarkt.de/de/product/_apple-mgkr4zda-homepod-mini-2-lautsprecher-pink-188598845.html
+  site: https://www.mediamarkt.de
+  active: true
+  added_by: scout

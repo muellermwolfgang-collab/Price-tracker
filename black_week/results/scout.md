@@ -1,6 +1,10 @@
 # Black Week – Shop-Suche
 
-Stand: 21.11.2026 13:50 Uhr (Europe/Berlin)
+Stand: 22.11.2026 13:43 Uhr (Europe/Berlin)
+
+## Neu hinzugefügt
+
+- HomePod mini 2 bei MediaMarkt: 169,00 € – [Link](https://www.mediamarkt.de/de/product/_apple-mgkr4zda-homepod-mini-2-lautsprecher-pink-188598845.html)
 
 ## Übersicht
 
@@ -56,14 +60,14 @@ Stand: 21.11.2026 13:50 Uhr (Europe/Berlin)
 | HomePod mini 2 | HORNBACH | – nicht gefunden |
 | HomePod mini 2 | idealo | – nicht gefunden |
 | HomePod mini 2 | LG.de | – nicht gefunden |
-| HomePod mini 2 | MediaMarkt | – nicht gefunden |
+| HomePod mini 2 | MediaMarkt | ➕ neu hinzugefügt |
 | HomePod mini 2 | moebel.de | – nicht gefunden |
 | HomePod mini 2 | notebooksbilliger.de | – nicht gefunden |
 | HomePod mini 2 | OBI | – nicht gefunden |
 | HomePod mini 2 | OTTO | – nicht gefunden |
 | HomePod mini 2 | rebuy | – nicht gefunden |
 | HomePod mini 2 | refurbed | – nicht gefunden |
-| HomePod mini 2 | Saturn | ⛔ blockiert |
+| HomePod mini 2 | Saturn | – nicht gefunden |
 | HomePod mini 2 | tink | ✔ schon in targets.yaml |
 | HomePod mini 2 | toom | – nicht gefunden |
 | HomePod 2. Gen. | Back Market | ⛔ blockiert |
@@ -83,7 +87,7 @@ Stand: 21.11.2026 13:50 Uhr (Europe/Berlin)
 | HomePod 2. Gen. | OTTO | – nicht gefunden |
 | HomePod 2. Gen. | rebuy | – nicht gefunden |
 | HomePod 2. Gen. | refurbed | – nicht gefunden |
-| HomePod 2. Gen. | Saturn | ⛔ blockiert |
+| HomePod 2. Gen. | Saturn | – nicht gefunden |
 | HomePod 2. Gen. | tink | ✔ schon in targets.yaml |
 | HomePod 2. Gen. | toom | – nicht gefunden |
 | LG StanbyME 2 Max | Back Market | ⛔ blockiert |
