@@ -1,10 +1,11 @@
 # Black Week – Shop-Suche
 
-Stand: 22.11.2026 13:43 Uhr (Europe/Berlin)
+Stand: 23.11.2026 15:57 Uhr (Europe/Berlin)
 
 ## Neu hinzugefügt
 
-- HomePod mini 2 bei MediaMarkt: 169,00 € – [Link](https://www.mediamarkt.de/de/product/_apple-mgkr4zda-homepod-mini-2-lautsprecher-pink-188598845.html)
+- HomePod mini 2 bei Saturn: 169,00 € – [Link](https://www.saturn.de/de/product/_apple-mgkr4zda-homepod-mini-2-lautsprecher-pink-188598845.html)
+- Anker Solarbank 3 Pro bei Saturn: 1.132,00 € – [Link](https://www.saturn.de/de/product/_anker-solix-solarbank-3-pro-mit-900w-pv-balkonkraftwerk-162854333.html)
 
 ## Übersicht
 
@@ -60,14 +61,14 @@ Stand: 22.11.2026 13:43 Uhr (Europe/Berlin)
 | HomePod mini 2 | HORNBACH | – nicht gefunden |
 | HomePod mini 2 | idealo | – nicht gefunden |
 | HomePod mini 2 | LG.de | – nicht gefunden |
-| HomePod mini 2 | MediaMarkt | ➕ neu hinzugefügt |
+| HomePod mini 2 | MediaMarkt | ✔ schon in targets.yaml |
 | HomePod mini 2 | moebel.de | – nicht gefunden |
 | HomePod mini 2 | notebooksbilliger.de | – nicht gefunden |
 | HomePod mini 2 | OBI | – nicht gefunden |
 | HomePod mini 2 | OTTO | – nicht gefunden |
 | HomePod mini 2 | rebuy | – nicht gefunden |
 | HomePod mini 2 | refurbed | – nicht gefunden |
-| HomePod mini 2 | Saturn | – nicht gefunden |
+| HomePod mini 2 | Saturn | ➕ neu hinzugefügt |
 | HomePod mini 2 | tink | ✔ schon in targets.yaml |
 | HomePod mini 2 | toom | – nicht gefunden |
 | HomePod 2. Gen. | Back Market | ⛔ blockiert |
@@ -107,7 +108,7 @@ Stand: 22.11.2026 13:43 Uhr (Europe/Berlin)
 | LG StanbyME 2 Max | OTTO | – nicht gefunden |
 | LG StanbyME 2 Max | rebuy | – nicht gefunden |
 | LG StanbyME 2 Max | refurbed | – nicht gefunden |
-| LG StanbyME 2 Max | Saturn | ⛔ blockiert |
+| LG StanbyME 2 Max | Saturn | – nicht gefunden |
 | LG StanbyME 2 Max | tink | – nicht gefunden |
 | LG StanbyME 2 Max | toom | – nicht gefunden |
 | Anker Solarbank 3 Pro | Back Market | ⛔ blockiert |
@@ -127,7 +128,7 @@ Stand: 22.11.2026 13:43 Uhr (Europe/Berlin)
 | Anker Solarbank 3 Pro | OTTO | – nicht gefunden |
 | Anker Solarbank 3 Pro | rebuy | – nicht gefunden |
 | Anker Solarbank 3 Pro | refurbed | – nicht gefunden |
-| Anker Solarbank 3 Pro | Saturn | ⛔ blockiert |
+| Anker Solarbank 3 Pro | Saturn | ➕ neu hinzugefügt |
 | Anker Solarbank 3 Pro | tink | – nicht gefunden |
 | Anker Solarbank 3 Pro | toom | ✔ schon in targets.yaml |
 | Logitech MX Master 3S | Back Market | ⛔ blockiert |
@@ -167,6 +168,6 @@ Stand: 22.11.2026 13:43 Uhr (Europe/Berlin)
 | Venjakob Kalea | OTTO | – nicht gefunden |
 | Venjakob Kalea | rebuy | – nicht gefunden |
 | Venjakob Kalea | refurbed | – nicht gefunden |
-| Venjakob Kalea | Saturn | ⛔ blockiert |
+| Venjakob Kalea | Saturn | – nicht gefunden |
 | Venjakob Kalea | tink | – nicht gefunden |
 | Venjakob Kalea | toom | – nicht gefunden |
