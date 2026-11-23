@@ -1,14 +1,14 @@
 # Black Week – Preise
 
-Stand: 22.11.2026 23:27 Uhr (Europe/Berlin) · ok: 14, no_price: 1, blocked: 6
+Stand: 23.11.2026 19:17 Uhr (Europe/Berlin) · ok: 16, blocked: 7
 
 | Produkt | Shop | Status | Preis | Versand | Quelle | URL |
 |---|---|---|---|---|---|---|
 | Apple Watch SE 3 | Back Market | ok | ab 217,00 €<br>8 Angebote | – | listing | [Link](https://www.backmarket.de/de-de/c/apple-watch/apple-watch-se-3-review) |
 | Apple Watch SE 3 40 mm Cellular | Back Market | blocked | – | – | – | [Link](https://www.backmarket.de/de-de/p/apple-watch-2025-gps-cellular-40-mm-aluminium-polarstern-sportarmband-wei/79f98011-e24f-49a7-b174-9128e5d2e8d7) |
 | Apple Watch SE 3 | Clevertronic | blocked | – | – | – | [Link](https://www.clevertronic.de/kaufen/smartwatch-kaufen/apple/se-3) |
-| Apple Watch SE 3 | rebuy | no_price | – | – | – | [Link](https://www.rebuy.de/kaufen/apple-apple-watch) |
-| Apple Watch SE 3 40 mm | refurbed | ok | 212,49 € | 0,00 € | jsonld | [Link](https://www.refurbed.de/p/apple-watch-se-3-40mm-2025/) |
+| Apple Watch SE 3 | rebuy | blocked | – | – | – | [Link](https://www.rebuy.de/kaufen/apple-apple-watch) |
+| Apple Watch SE 3 40 mm | refurbed | ok | 214,00 € | 0,00 € | jsonld | [Link](https://www.refurbed.de/p/apple-watch-se-3-40mm-2025/) |
 | Eve Thermo 5. Gen. 3er | tink | ok | 169,95 € | 0,00 € | jsonld | [Link](https://www.tink.de/p/eve-thermo-matter-5-gen-heizkoerperthermostat-3er-set-n) |
 | Eve Thermo 5. Gen. 3er | Geizhals | ok | 169,95 € | – | meta | [Link](https://geizhals.de/eve-thermo-2025-5-generation-matter-heizkoerperthermostat-10ecd1751-3x-a3722719.html) |
 | HomePod mini 2 | tink | ok | 168,95 € | 0,00 € | jsonld | [Link](https://www.tink.de/p/apple-homepod-mini-2-gen) |
@@ -20,14 +20,12 @@ Stand: 22.11.2026 23:27 Uhr (Europe/Berlin) · ok: 14, no_price: 1, blocked: 6
 | Anker Solarbank 3 Pro 2.000 W | toom | ok | 1.284,87 € | – | meta | [Link](https://toom.de/p/solarmodul-set-4-x-500-w-mit-solarbank-3-e2700-pro-und-smart-meter/10520584) |
 | Venjakob Kalea | moebel.de | blocked | – | – | – | [Link](https://www.moebel.de/essen/stuehle-und-hocker/esszimmerstuehle?data-sheet=319a273bc99747a4c99dedbe86b9acfc) |
 | HomePod 2. Gen. | tink | ok | 398,95 € | 0,00 € | jsonld | [Link](https://www.tink.de/p/apple-homepod-2nd-generation) |
-| Logitech MX Master 3S | Saturn | ok | 89,87 € | 0,00 € | jsonld | [Link](https://www.saturn.de/de/product/_logitech-b2b-mx-master-3s-for-business-grafit-2982350.html) |
-| Logitech MX Master 3S | MediaMarkt | ok | 89,87 € | 0,00 € | jsonld | [Link](https://www.mediamarkt.de/de/product/_logitech-910-006582-mx-master-3s-for-business-graphite-maus-einfarbig-grau-145974316.html) |
-| Apple Watch SE 3 | Saturn | ok | 261,40 € | 0,00 € | jsonld | [Link](https://www.saturn.de/de/product/_apple-watch-se-3nd-generation-smartwatch-aluminium-fluor-elastomer-ml-schwarz-169925648.html) |
-| Apple Watch SE 3 | MediaMarkt | ok | 379,50 € | 0,00 € | jsonld | [Link](https://www.mediamarkt.de/de/product/_apple-smartwatch-watch-se-3-beige-44-mm-o-44-mm-smartwatches-aluminium-fluor-elastomer-sm-keine-angabe-169925617.html) |
+| Logitech MX Master 3S | Saturn | ok | 91,62 € | 0,00 € | jsonld | [Link](https://www.saturn.de/de/product/_logitech-b2b-mx-master-3s-for-business-grafit-2982350.html) |
+| Logitech MX Master 3S | MediaMarkt | ok | 91,62 € | 0,00 € | jsonld | [Link](https://www.mediamarkt.de/de/product/_logitech-910-006582-mx-master-3s-for-business-graphite-maus-einfarbig-grau-145974316.html) |
+| Apple Watch SE 3 | Saturn | ok | 259,00 € | 0,00 € | jsonld | [Link](https://www.saturn.de/de/product/_apple-watch-se-3nd-generation-smartwatch-aluminium-fluor-elastomer-ml-schwarz-169925648.html) |
+| Apple Watch SE 3 | MediaMarkt | ok | 376,00 € | 0,00 € | jsonld | [Link](https://www.mediamarkt.de/de/product/_apple-smartwatch-watch-se-3-beige-44-mm-o-44-mm-smartwatches-aluminium-fluor-elastomer-sm-keine-angabe-169925617.html) |
 | HomePod mini 2 | MediaMarkt | ok | 169,00 € | 0,00 € | jsonld | [Link](https://www.mediamarkt.de/de/product/_apple-mgkr4zda-homepod-mini-2-lautsprecher-pink-188598845.html) |
-
-## URL-Pflege
-
-- Keine passende URL gefunden: Apple Watch SE 3 / rebuy (no offers matching 'SE 3' on page; no replacement found (20 sitemap file(s) searched, 0 candidate(s)))
+| HomePod mini 2 | Saturn | ok | 169,00 € | 0,00 € | jsonld | [Link](https://www.saturn.de/de/product/_apple-mgkr4zda-homepod-mini-2-lautsprecher-pink-188598845.html) |
+| Anker Solarbank 3 Pro | Saturn | ok | 1.132,00 € | 0,00 € | jsonld | [Link](https://www.saturn.de/de/product/_anker-solix-solarbank-3-pro-mit-900w-pv-balkonkraftwerk-162854333.html) |
 
 Status: ok = Preis gefunden · no_price = Seite geladen, kein Preis · blocked = Bot-Schutz/Rate-Limit · robots = durch robots.txt verboten · timeout = Zeitüberschreitung · error = sonstiger Fehler
