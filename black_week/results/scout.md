@@ -1,11 +1,6 @@
 # Black Week – Shop-Suche
 
-Stand: 23.11.2026 15:57 Uhr (Europe/Berlin)
-
-## Neu hinzugefügt
-
-- HomePod mini 2 bei Saturn: 169,00 € – [Link](https://www.saturn.de/de/product/_apple-mgkr4zda-homepod-mini-2-lautsprecher-pink-188598845.html)
-- Anker Solarbank 3 Pro bei Saturn: 1.132,00 € – [Link](https://www.saturn.de/de/product/_anker-solix-solarbank-3-pro-mit-900w-pv-balkonkraftwerk-162854333.html)
+Stand: 24.11.2026 16:00 Uhr (Europe/Berlin)
 
 ## Übersicht
 
@@ -68,7 +63,7 @@ Stand: 23.11.2026 15:57 Uhr (Europe/Berlin)
 | HomePod mini 2 | OTTO | – nicht gefunden |
 | HomePod mini 2 | rebuy | – nicht gefunden |
 | HomePod mini 2 | refurbed | – nicht gefunden |
-| HomePod mini 2 | Saturn | ➕ neu hinzugefügt |
+| HomePod mini 2 | Saturn | ✔ schon in targets.yaml |
 | HomePod mini 2 | tink | ✔ schon in targets.yaml |
 | HomePod mini 2 | toom | – nicht gefunden |
 | HomePod 2. Gen. | Back Market | ⛔ blockiert |
@@ -128,7 +123,7 @@ Stand: 23.11.2026 15:57 Uhr (Europe/Berlin)
 | Anker Solarbank 3 Pro | OTTO | – nicht gefunden |
 | Anker Solarbank 3 Pro | rebuy | – nicht gefunden |
 | Anker Solarbank 3 Pro | refurbed | – nicht gefunden |
-| Anker Solarbank 3 Pro | Saturn | ➕ neu hinzugefügt |
+| Anker Solarbank 3 Pro | Saturn | ✔ schon in targets.yaml |
 | Anker Solarbank 3 Pro | tink | – nicht gefunden |
 | Anker Solarbank 3 Pro | toom | ✔ schon in targets.yaml |
 | Logitech MX Master 3S | Back Market | ⛔ blockiert |
