@@ -1,6 +1,6 @@
 # Black Week – Preise
 
-Stand: 25.11.2026 02:24 Uhr (Europe/Berlin) · ok: 16, no_price: 1, blocked: 6
+Stand: 25.11.2026 08:27 Uhr (Europe/Berlin) · ok: 19, no_price: 1, blocked: 5
 
 | Produkt | Shop | Status | Preis | Versand | Quelle | URL |
 |---|---|---|---|---|---|---|
@@ -12,7 +12,7 @@ Stand: 25.11.2026 02:24 Uhr (Europe/Berlin) · ok: 16, no_price: 1, blocked: 6
 | Eve Thermo 5. Gen. 3er | tink | ok | 169,95 € | 0,00 € | jsonld | [Link](https://www.tink.de/p/eve-thermo-matter-5-gen-heizkoerperthermostat-3er-set-n) |
 | Eve Thermo 5. Gen. 3er | Geizhals | ok | 169,95 € | – | meta | [Link](https://geizhals.de/eve-thermo-2025-5-generation-matter-heizkoerperthermostat-10ecd1751-3x-a3722719.html) |
 | HomePod mini 2 | tink | ok | 168,95 € | 0,00 € | jsonld | [Link](https://www.tink.de/p/apple-homepod-mini-2-gen) |
-| HomePod mini 2 | billiger.de | blocked | – | – | – | [Link](https://www.billiger.de/baseproducts/120834-apple-homepod-mini-2) |
+| HomePod mini 2 | billiger.de | ok | ab 154,00 € | – | jsonld | [Link](https://www.billiger.de/baseproducts/120834-apple-homepod-mini-2) |
 | HomePod 2. Gen. | Check24 | ok | ab 393,95 € | – | jsonld | [Link](https://preisvergleich.check24.de/ul/sprachassistenten/CAWGCSSWH2K4Q-apple-mqj73da-homepod-2-generation-smart-speaker-midnight.html) |
 | LG StanbyME 2 Max | LG.de | blocked | – | – | – | [Link](https://www.lg.com/de/lifestyle-tvs/stanbyme/32lx6bpga/) |
 | LG StanbyME 2 Max | Geizhals | blocked | – | – | – | [Link](https://geizhals.de/lg-stanbyme-2-max-32lx6bpga-a3927423.html) |
@@ -27,6 +27,8 @@ Stand: 25.11.2026 02:24 Uhr (Europe/Berlin) · ok: 16, no_price: 1, blocked: 6
 | HomePod mini 2 | MediaMarkt | ok | 169,00 € | 0,00 € | jsonld | [Link](https://www.mediamarkt.de/de/product/_apple-mgkr4zda-homepod-mini-2-lautsprecher-pink-188598845.html) |
 | HomePod mini 2 | Saturn | ok | 169,00 € | 0,00 € | jsonld | [Link](https://www.saturn.de/de/product/_apple-mgkr4zda-homepod-mini-2-lautsprecher-pink-188598845.html) |
 | Anker Solarbank 3 Pro | Saturn | ok | 1.132,00 € | 0,00 € | jsonld | [Link](https://www.saturn.de/de/product/_anker-solix-solarbank-3-pro-mit-900w-pv-balkonkraftwerk-162854333.html) |
+| Logitech MX Master 4 | Alternate | ok | 108,90 € | 7,99 € | jsonld | [Link](https://www.alternate.de/Logitech/MX-Master-4-Maus/html/product/100162079) |
+| Logitech MX Master 4 | Saturn | ok | 94,00 € | 0,00 € | jsonld | [Link](https://www.saturn.de/de/product/_logitech-mx-master-4-fmac-space-black-maus-space-black-162759336.html) |
 
 ## URL-Pflege
 

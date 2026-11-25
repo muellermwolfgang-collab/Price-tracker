@@ -176,3 +176,18 @@
   site: https://www.saturn.de
   active: true
   added_by: scout
+
+# found by scout 2026-11-25
+- product: Logitech MX Master 4
+  shop: Alternate
+  url: https://www.alternate.de/Logitech/MX-Master-4-Maus/html/product/100162079
+  site: https://www.alternate.de
+  active: true
+  added_by: scout
+
+- product: Logitech MX Master 4
+  shop: Saturn
+  url: https://www.saturn.de/de/product/_logitech-mx-master-4-fmac-space-black-maus-space-black-162759336.html
+  site: https://www.saturn.de
+  active: true
+  added_by: scout
