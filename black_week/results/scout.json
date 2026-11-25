@@ -1,215 +1,212 @@
 {
-  "generated_at": "2026-11-25T07:23:00Z",
+  "generated_at": "2026-11-25T07:35:12Z",
   "results": [
     {
-      "product": "Logitech MX Master 4",
-      "shop": "Clevertronic",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+      "product": "Logitech MX Master 3S",
+      "shop": "MediaMarkt",
+      "status": "listed",
+      "note": null
     },
     {
-      "product": "Logitech MX Master 4",
-      "shop": "moebel.de",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+      "product": "Logitech MX Master 3S",
+      "shop": "Saturn",
+      "status": "listed",
+      "note": null
     },
     {
-      "product": "Logitech MX Master 4",
-      "shop": "HORNBACH",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "idealo",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
+      "product": "Logitech MX Master 3S",
       "shop": "Geizhals",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
-      "product": "Logitech MX Master 4",
-      "shop": "Check24",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "EURONICS",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "billiger.de",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "computeruniverse",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "tink",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "Conrad",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
+      "product": "Logitech MX Master 3S",
       "shop": "Cyberport",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
-      "product": "Logitech MX Master 4",
-      "shop": "asgoodasnew",
+      "product": "Logitech MX Master 3S",
+      "shop": "Check24",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
-      "product": "Logitech MX Master 4",
-      "shop": "Höffner",
+      "product": "Logitech MX Master 3S",
+      "shop": "HORNBACH",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
-      "product": "Logitech MX Master 4",
-      "shop": "OBI",
+      "product": "Logitech MX Master 3S",
+      "shop": "computeruniverse",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
-      "product": "Logitech MX Master 4",
+      "product": "Logitech MX Master 3S",
       "shop": "BAUHAUS",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
-      "product": "Logitech MX Master 4",
-      "shop": "XXXLutz",
+      "product": "Logitech MX Master 3S",
+      "shop": "EURONICS",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
-      "product": "Logitech MX Master 4",
+      "product": "Logitech MX Master 3S",
+      "shop": "Clevertronic",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "Conrad",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
       "shop": "Kaufland",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
-      "product": "Logitech MX Master 4",
+      "product": "Logitech MX Master 3S",
+      "shop": "billiger.de",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "tink",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "moebel.de",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "Höffner",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "idealo",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "asgoodasnew",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "OBI",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
       "shop": "home24",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
-      "product": "Logitech MX Master 4",
+      "product": "Logitech MX Master 3S",
+      "shop": "XXXLutz",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
       "shop": "toom",
       "status": "not_found",
-      "note": "4 sitemap file(s) searched, 2 candidate(s)"
+      "note": "4 sitemap file(s) searched, 0 candidate(s)"
     },
     {
-      "product": "Logitech MX Master 4",
+      "product": "Logitech MX Master 3S",
       "shop": "Globus Baumarkt",
       "status": "not_found",
-      "note": "5 sitemap file(s) searched, 1 candidate(s)"
+      "note": "5 sitemap file(s) searched, 0 candidate(s)"
     },
     {
-      "product": "Logitech MX Master 4",
+      "product": "Logitech MX Master 3S",
       "shop": "Mindfactory",
       "status": "not_found",
       "note": "2 sitemap file(s) searched, 10 candidate(s)"
     },
     {
-      "product": "Logitech MX Master 4",
+      "product": "Logitech MX Master 3S",
       "shop": "notebooksbilliger.de",
       "status": "not_found",
       "note": "2 sitemap file(s) searched, 10 candidate(s)"
     },
     {
-      "product": "Logitech MX Master 4",
+      "product": "Logitech MX Master 3S",
       "shop": "Back Market",
       "status": "blocked",
-      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.backmarket.de/testchallengepage?next=https%3A%2F%2Fwww.backmarket.de%2Fde-de%2Fp%2Flogitech-mx-master-3s-maus-wireless%2F136063e1-c9b9-4f25-abba-90300d34750a"
+      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.backmarket.de/testchallengepage?next=https%3A%2F%2Fwww.backmarket.de%2Fde-de%2Fp%2Flogitech-mx-master-3s-maus-wireless%2F136063e1-c9b9-4f25-abba-90300d34750a&__cf_chl_rt_tk=LYRys1pzb94Awm5zvesO2C4sLRdQax3cKihppr1y7Fc-1795592208-1.0.1.1-HsU2"
     },
     {
-      "product": "Logitech MX Master 4",
+      "product": "Logitech MX Master 3S",
+      "shop": "Alternate",
+      "status": "added",
+      "note": null,
+      "url": "https://www.alternate.de/Logitech/MX-Master-3S-Maus/html/product/1843035",
+      "price": 192.9,
+      "page_title": "Logitech MX Master 3S, Maus graphit, 7 Tasten, Logi Bolt, Bluetooth, kompatibel mit PC/Mac/iPad/Android"
+    },
+    {
+      "product": "Logitech MX Master 3S",
       "shop": "expert",
       "status": "not_found",
-      "note": "11 sitemap file(s) searched, 11 candidate(s)"
+      "note": "11 sitemap file(s) searched, 10 candidate(s)"
     },
     {
-      "product": "Logitech MX Master 4",
+      "product": "Logitech MX Master 3S",
+      "shop": "OTTO",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
       "shop": "LG.de",
       "status": "not_found",
       "note": "20 sitemap file(s) searched, 0 candidate(s)"
     },
     {
-      "product": "Logitech MX Master 4",
+      "product": "Logitech MX Master 3S",
       "shop": "rebuy",
       "status": "not_found",
       "note": "20 sitemap file(s) searched, 0 candidate(s)"
     },
     {
-      "product": "Logitech MX Master 4",
-      "shop": "Alternate",
-      "status": "added",
-      "note": null,
-      "url": "https://www.alternate.de/Logitech/MX-Master-4-Maus/html/product/100162079",
-      "price": 108.9,
-      "page_title": "Logitech MX Master 4, Maus hellgrau, Logi Bolt, Bluetooth, für Windows/macOS/Linux/ChromeOS/iPadOS/Android"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "Saturn",
-      "status": "added",
-      "note": null,
-      "url": "https://www.saturn.de/de/product/_logitech-mx-master-4-fmac-space-black-maus-space-black-162759336.html",
-      "price": 94.0,
-      "page_title": "LOGITECH MX Master 4 for Mac Maus, Space Black | SATURN"
-    },
-    {
-      "product": "Logitech MX Master 4",
+      "product": "Logitech MX Master 3S",
       "shop": "hagebau",
       "status": "not_found",
       "note": "20 sitemap file(s) searched, 0 candidate(s)"
     },
     {
-      "product": "Logitech MX Master 4",
-      "shop": "OTTO",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 5 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "MediaMarkt",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 23 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
+      "product": "Logitech MX Master 3S",
       "shop": "Galaxus",
       "status": "not_found",
-      "note": "20 sitemap file(s) searched, 37 candidate(s)"
+      "note": "20 sitemap file(s) searched, 0 candidate(s)"
     },
     {
-      "product": "Logitech MX Master 4",
+      "product": "Logitech MX Master 3S",
       "shop": "refurbed",
       "status": "not_found",
-      "note": "20 sitemap file(s) searched, 10 candidate(s)"
+      "note": "20 sitemap file(s) searched, 5 candidate(s)"
     }
   ]
 }

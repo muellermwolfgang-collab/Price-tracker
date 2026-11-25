@@ -191,3 +191,11 @@
   site: https://www.saturn.de
   active: true
   added_by: scout
+
+# found by scout 2026-11-25
+- product: Logitech MX Master 3S
+  shop: Alternate
+  url: https://www.alternate.de/Logitech/MX-Master-3S-Maus/html/product/1843035
+  site: https://www.alternate.de
+  active: true
+  added_by: scout
