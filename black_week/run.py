@@ -633,8 +633,18 @@ def write_results(results: list[dict], run_at: datetime, out_dir: Path) -> None:
         "generated_at_berlin": run_at.astimezone(BERLIN).replace(microsecond=0).isoformat(),
         "results": [{k: r.get(k) for k in FIELDS} for r in results],
     }
-    _atomic_write(out_dir / "latest.json", json.dumps(payload, indent=2, ensure_ascii=False) + "\n")
-    _atomic_write(out_dir / "latest.md", render_markdown(results, run_at))
+    json_text = json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
+    md_text = render_markdown(results, run_at)
+    _atomic_write(out_dir / "latest.json", json_text)
+    _atomic_write(out_dir / "latest.md", md_text)
+
+    # The same content under a URL that changes every day (Berlin date): web
+    # fetchers that cache latest.md for days cannot serve a stale copy of it.
+    daily = out_dir / "daily"
+    daily.mkdir(exist_ok=True)
+    day = run_at.astimezone(BERLIN).strftime("%Y-%m-%d")
+    _atomic_write(daily / f"{day}.json", json_text)
+    _atomic_write(daily / f"{day}.md", md_text)
 
     history = out_dir / "history.csv"
     new_file = not history.exists() or history.stat().st_size == 0

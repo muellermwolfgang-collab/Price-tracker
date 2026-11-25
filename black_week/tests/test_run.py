@@ -65,8 +65,16 @@ def test_write_results(tmp_path):
     assert "1.299,00 €" in md and "4,99 €" in md
     assert "Shop \\| Pipe" in md
 
+    # daily copy under the Berlin date (06:15 UTC on 28.11. = 07:15 Berlin)
+    assert (tmp_path / "daily" / "2026-11-28.md").read_text(encoding="utf-8") == md
+    daily = json.loads((tmp_path / "daily" / "2026-11-28.json").read_text(encoding="utf-8"))
+    assert daily["generated_at"] == "2026-11-28T06:15:00Z"
+    late = datetime(2026, 11, 28, 23, 30, tzinfo=timezone.utc)      # 00:30 Berlin, next day
+    run.write_results(results, late, tmp_path)
+    assert (tmp_path / "daily" / "2026-11-29.md").exists()
+
     rows = list(csv.DictReader((tmp_path / "history.csv").open(encoding="utf-8")))
-    assert len(rows) == 4                       # appended, header written once
+    assert len(rows) == 6                       # appended, header written once
     assert rows[0]["price"] == "1299.0"
 
 
