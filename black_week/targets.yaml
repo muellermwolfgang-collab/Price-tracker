@@ -137,3 +137,42 @@
   site: https://www.mediamarkt.de
   active: true
   added_by: scout
+
+# found by scout 2026-11-19
+- product: Apple Watch SE 3
+  shop: Saturn
+  url: https://www.saturn.de/de/product/_apple-watch-se-3nd-generation-smartwatch-aluminium-fluor-elastomer-ml-schwarz-169925648.html
+  site: https://www.saturn.de
+  active: true
+  added_by: scout
+
+# found by scout 2026-11-20
+- product: Apple Watch SE 3
+  shop: MediaMarkt
+  url: https://www.mediamarkt.de/de/product/_apple-smartwatch-watch-se-3-beige-44-mm-o-44-mm-smartwatches-aluminium-fluor-elastomer-sm-keine-angabe-169925617.html
+  site: https://www.mediamarkt.de
+  active: true
+  added_by: scout
+
+# found by scout 2026-11-22
+- product: HomePod mini 2
+  shop: MediaMarkt
+  url: https://www.mediamarkt.de/de/product/_apple-mgkr4zda-homepod-mini-2-lautsprecher-pink-188598845.html
+  site: https://www.mediamarkt.de
+  active: true
+  added_by: scout
+
+# found by scout 2026-11-23
+- product: HomePod mini 2
+  shop: Saturn
+  url: https://www.saturn.de/de/product/_apple-mgkr4zda-homepod-mini-2-lautsprecher-pink-188598845.html
+  site: https://www.saturn.de
+  active: true
+  added_by: scout
+
+- product: Anker Solarbank 3 Pro
+  shop: Saturn
+  url: https://www.saturn.de/de/product/_anker-solix-solarbank-3-pro-mit-900w-pv-balkonkraftwerk-162854333.html
+  site: https://www.saturn.de
+  active: true
+  added_by: scout
