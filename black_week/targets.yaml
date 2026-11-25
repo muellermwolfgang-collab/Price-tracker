@@ -199,3 +199,25 @@
   site: https://www.alternate.de
   active: true
   added_by: scout
+
+# found by scout 2026-11-25
+- product: Apple Watch SE 3
+  shop: Alternate
+  url: https://www.alternate.de/Apple/Watch-SE-3-Smartwatch/html/product/100222171
+  site: https://www.alternate.de
+  active: true
+  added_by: scout
+
+- product: HomePod mini 2
+  shop: Alternate
+  url: https://www.alternate.de/Apple/HomePod-Mini-2-Lautsprecher/html/product/100227742
+  site: https://www.alternate.de
+  active: true
+  added_by: scout
+
+- product: Anker Solarbank 3 Pro
+  shop: Alternate
+  url: https://www.alternate.de/Anker/SOLIX-Solarbank-3-E2700-Pro-0-MWST-Powerstation/html/product/100216949
+  site: https://www.alternate.de
+  active: true
+  added_by: scout
