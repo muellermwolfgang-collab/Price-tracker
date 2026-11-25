@@ -228,6 +228,11 @@ Locally: `python black_week/scout.py --dry-run` (search and print, change nothin
   `note`, `url_check` = ok/updated/broken/not_checked, `previous_url`)
 - `black_week/results/latest.md` — the same as a table, time stamp in Europe/Berlin
 - `black_week/results/history.csv` — every run appended
+- `black_week/results/daily/YYYY-MM-DD.md` / `.json` — the same as `latest.*`, under the
+  date of the run (Europe/Berlin; a later run that day overwrites it). Some web fetchers
+  (e.g. in Claude chats) cache `latest.md` for days; a URL that changes daily avoids that.
+  Fetch today's file, and if there is none yet (404), yesterday's:
+  `https://raw.githubusercontent.com/muellermwolfgang-collab/Price-tracker/main/black_week/results/daily/<date>.md`
 
 ## Running it
 

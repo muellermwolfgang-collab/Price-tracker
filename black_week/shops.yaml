@@ -31,3 +31,19 @@
 - {shop: idealo, site: www.idealo.de, active: true}
 - {shop: OBI, site: www.obi.de, active: true}
 - {shop: HORNBACH, site: www.hornbach.de, active: true}
+
+# added 2026-11-18 (electronics, DIY, furniture)
+- {shop: Conrad, site: www.conrad.de, active: true}
+- {shop: Alternate, site: www.alternate.de, active: true}
+- {shop: expert, site: www.expert.de, active: true}
+- {shop: EURONICS, site: www.euronics.de, active: true}
+- {shop: Kaufland, site: www.kaufland.de, active: true}
+- {shop: Mindfactory, site: www.mindfactory.de, active: true}
+- {shop: computeruniverse, site: www.computeruniverse.net, active: true}
+- {shop: asgoodasnew, site: asgoodasnew.de, active: true}
+- {shop: BAUHAUS, site: www.bauhaus.info, active: true}
+- {shop: hagebau, site: www.hagebau.de, active: true}
+- {shop: Globus Baumarkt, site: www.globus-baumarkt.de, active: true}
+- {shop: home24, site: www.home24.de, active: true}
+- {shop: XXXLutz, site: www.xxxlutz.de, active: true}
+- {shop: Höffner, site: www.hoeffner.de, active: true}
