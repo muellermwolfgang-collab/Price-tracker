@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T14:39:04Z",
+  "generated_at": "2026-11-26T14:02:09Z",
   "results": [
     {
       "product": "Apple Watch SE 3",
@@ -140,6 +140,24 @@
       "note": null
     },
     {
+      "product": "Apple Watch SE 3",
+      "shop": "Alternate",
+      "status": "listed",
+      "note": null
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "Alternate",
+      "status": "listed",
+      "note": null
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "Alternate",
+      "status": "listed",
+      "note": null
+    },
+    {
       "product": "Logitech MX Master 3S",
       "shop": "Alternate",
       "status": "listed",
@@ -152,528 +170,6 @@
       "note": null
     },
     {
-      "product": "Apple Watch SE 3",
-      "shop": "moebel.de",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "moebel.de",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod mini 2",
-      "shop": "moebel.de",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod 2. Gen.",
-      "shop": "moebel.de",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "LG StanbyME 2 Max",
-      "shop": "moebel.de",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "moebel.de",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 3S",
-      "shop": "moebel.de",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "moebel.de",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Apple Watch SE 3",
-      "shop": "idealo",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "idealo",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod mini 2",
-      "shop": "idealo",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod 2. Gen.",
-      "shop": "idealo",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "LG StanbyME 2 Max",
-      "shop": "idealo",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "idealo",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Venjakob Kalea",
-      "shop": "idealo",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 3S",
-      "shop": "idealo",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "idealo",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Apple Watch SE 3",
-      "shop": "Conrad",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "Conrad",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod mini 2",
-      "shop": "Conrad",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod 2. Gen.",
-      "shop": "Conrad",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "LG StanbyME 2 Max",
-      "shop": "Conrad",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "Conrad",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Venjakob Kalea",
-      "shop": "Conrad",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 3S",
-      "shop": "Conrad",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "Conrad",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "rebuy",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod mini 2",
-      "shop": "rebuy",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod 2. Gen.",
-      "shop": "rebuy",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "LG StanbyME 2 Max",
-      "shop": "rebuy",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "rebuy",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Venjakob Kalea",
-      "shop": "rebuy",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 3S",
-      "shop": "rebuy",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "rebuy",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Apple Watch SE 3",
-      "shop": "Höffner",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "Höffner",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod mini 2",
-      "shop": "Höffner",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod 2. Gen.",
-      "shop": "Höffner",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "LG StanbyME 2 Max",
-      "shop": "Höffner",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "Höffner",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Venjakob Kalea",
-      "shop": "Höffner",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 3S",
-      "shop": "Höffner",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "Höffner",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Apple Watch SE 3",
-      "shop": "HORNBACH",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "HORNBACH",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod mini 2",
-      "shop": "HORNBACH",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod 2. Gen.",
-      "shop": "HORNBACH",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "LG StanbyME 2 Max",
-      "shop": "HORNBACH",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "HORNBACH",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Venjakob Kalea",
-      "shop": "HORNBACH",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 3S",
-      "shop": "HORNBACH",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "HORNBACH",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Apple Watch SE 3",
-      "shop": "billiger.de",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "billiger.de",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod 2. Gen.",
-      "shop": "billiger.de",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "LG StanbyME 2 Max",
-      "shop": "billiger.de",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "billiger.de",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Venjakob Kalea",
-      "shop": "billiger.de",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 3S",
-      "shop": "billiger.de",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "billiger.de",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Apple Watch SE 3",
-      "shop": "XXXLutz",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "XXXLutz",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod mini 2",
-      "shop": "XXXLutz",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod 2. Gen.",
-      "shop": "XXXLutz",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "LG StanbyME 2 Max",
-      "shop": "XXXLutz",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "XXXLutz",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Venjakob Kalea",
-      "shop": "XXXLutz",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 3S",
-      "shop": "XXXLutz",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "XXXLutz",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Apple Watch SE 3",
-      "shop": "Kaufland",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "Kaufland",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod mini 2",
-      "shop": "Kaufland",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod 2. Gen.",
-      "shop": "Kaufland",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "LG StanbyME 2 Max",
-      "shop": "Kaufland",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "Kaufland",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Venjakob Kalea",
-      "shop": "Kaufland",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 3S",
-      "shop": "Kaufland",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "Kaufland",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Apple Watch SE 3",
-      "shop": "BAUHAUS",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "BAUHAUS",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod mini 2",
-      "shop": "BAUHAUS",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod 2. Gen.",
-      "shop": "BAUHAUS",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "LG StanbyME 2 Max",
-      "shop": "BAUHAUS",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "BAUHAUS",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Venjakob Kalea",
-      "shop": "BAUHAUS",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 3S",
-      "shop": "BAUHAUS",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "BAUHAUS",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
       "product": "Eve Thermo 5. Gen. 3er",
       "shop": "Clevertronic",
       "status": "not_found",
@@ -723,163 +219,49 @@
     },
     {
       "product": "Apple Watch SE 3",
-      "shop": "EURONICS",
+      "shop": "billiger.de",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
       "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "EURONICS",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod mini 2",
-      "shop": "EURONICS",
+      "shop": "billiger.de",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
       "product": "HomePod 2. Gen.",
-      "shop": "EURONICS",
+      "shop": "billiger.de",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
       "product": "LG StanbyME 2 Max",
-      "shop": "EURONICS",
+      "shop": "billiger.de",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
       "product": "Anker Solarbank 3 Pro",
-      "shop": "EURONICS",
+      "shop": "billiger.de",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
       "product": "Venjakob Kalea",
-      "shop": "EURONICS",
+      "shop": "billiger.de",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
       "product": "Logitech MX Master 3S",
-      "shop": "EURONICS",
+      "shop": "billiger.de",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
       "product": "Logitech MX Master 4",
-      "shop": "EURONICS",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Apple Watch SE 3",
-      "shop": "asgoodasnew",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "asgoodasnew",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod mini 2",
-      "shop": "asgoodasnew",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod 2. Gen.",
-      "shop": "asgoodasnew",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "LG StanbyME 2 Max",
-      "shop": "asgoodasnew",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "asgoodasnew",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Venjakob Kalea",
-      "shop": "asgoodasnew",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 3S",
-      "shop": "asgoodasnew",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "asgoodasnew",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Apple Watch SE 3",
-      "shop": "home24",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "home24",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod mini 2",
-      "shop": "home24",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod 2. Gen.",
-      "shop": "home24",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "LG StanbyME 2 Max",
-      "shop": "home24",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "home24",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Venjakob Kalea",
-      "shop": "home24",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 3S",
-      "shop": "home24",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "home24",
+      "shop": "billiger.de",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
@@ -981,6 +363,324 @@
     },
     {
       "product": "Apple Watch SE 3",
+      "shop": "moebel.de",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
+      "shop": "moebel.de",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "moebel.de",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod 2. Gen.",
+      "shop": "moebel.de",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "LG StanbyME 2 Max",
+      "shop": "moebel.de",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "moebel.de",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "moebel.de",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 4",
+      "shop": "moebel.de",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Apple Watch SE 3",
+      "shop": "idealo",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
+      "shop": "idealo",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "idealo",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod 2. Gen.",
+      "shop": "idealo",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "LG StanbyME 2 Max",
+      "shop": "idealo",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "idealo",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Venjakob Kalea",
+      "shop": "idealo",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "idealo",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 4",
+      "shop": "idealo",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Apple Watch SE 3",
+      "shop": "computeruniverse",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
+      "shop": "computeruniverse",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "computeruniverse",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod 2. Gen.",
+      "shop": "computeruniverse",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "LG StanbyME 2 Max",
+      "shop": "computeruniverse",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "computeruniverse",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Venjakob Kalea",
+      "shop": "computeruniverse",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "computeruniverse",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 4",
+      "shop": "computeruniverse",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Apple Watch SE 3",
+      "shop": "Conrad",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
+      "shop": "Conrad",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "Conrad",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod 2. Gen.",
+      "shop": "Conrad",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "LG StanbyME 2 Max",
+      "shop": "Conrad",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "Conrad",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Venjakob Kalea",
+      "shop": "Conrad",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "Conrad",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 4",
+      "shop": "Conrad",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Apple Watch SE 3",
+      "shop": "Kaufland",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
+      "shop": "Kaufland",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "Kaufland",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod 2. Gen.",
+      "shop": "Kaufland",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "LG StanbyME 2 Max",
+      "shop": "Kaufland",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "Kaufland",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Venjakob Kalea",
+      "shop": "Kaufland",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "Kaufland",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 4",
+      "shop": "Kaufland",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Apple Watch SE 3",
+      "shop": "EURONICS",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
+      "shop": "EURONICS",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "EURONICS",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod 2. Gen.",
+      "shop": "EURONICS",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "LG StanbyME 2 Max",
+      "shop": "EURONICS",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "EURONICS",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Venjakob Kalea",
+      "shop": "EURONICS",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "EURONICS",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 4",
+      "shop": "EURONICS",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Apple Watch SE 3",
       "shop": "Check24",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
@@ -1024,6 +724,114 @@
     {
       "product": "Logitech MX Master 4",
       "shop": "Check24",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Apple Watch SE 3",
+      "shop": "HORNBACH",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
+      "shop": "HORNBACH",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "HORNBACH",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod 2. Gen.",
+      "shop": "HORNBACH",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "LG StanbyME 2 Max",
+      "shop": "HORNBACH",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "HORNBACH",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Venjakob Kalea",
+      "shop": "HORNBACH",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "HORNBACH",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 4",
+      "shop": "HORNBACH",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Apple Watch SE 3",
+      "shop": "Höffner",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
+      "shop": "Höffner",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "Höffner",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod 2. Gen.",
+      "shop": "Höffner",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "LG StanbyME 2 Max",
+      "shop": "Höffner",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "Höffner",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Venjakob Kalea",
+      "shop": "Höffner",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "Höffner",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 4",
+      "shop": "Höffner",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
@@ -1083,69 +891,231 @@
     },
     {
       "product": "Apple Watch SE 3",
-      "shop": "computeruniverse",
+      "shop": "BAUHAUS",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
       "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "computeruniverse",
+      "shop": "BAUHAUS",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
       "product": "HomePod mini 2",
-      "shop": "computeruniverse",
+      "shop": "BAUHAUS",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
       "product": "HomePod 2. Gen.",
-      "shop": "computeruniverse",
+      "shop": "BAUHAUS",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
       "product": "LG StanbyME 2 Max",
-      "shop": "computeruniverse",
+      "shop": "BAUHAUS",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
       "product": "Anker Solarbank 3 Pro",
-      "shop": "computeruniverse",
+      "shop": "BAUHAUS",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
       "product": "Venjakob Kalea",
-      "shop": "computeruniverse",
+      "shop": "BAUHAUS",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
       "product": "Logitech MX Master 3S",
-      "shop": "computeruniverse",
+      "shop": "BAUHAUS",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
       "product": "Logitech MX Master 4",
-      "shop": "computeruniverse",
+      "shop": "BAUHAUS",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
       "product": "Apple Watch SE 3",
-      "shop": "tink",
+      "shop": "home24",
       "status": "not_found",
-      "note": "1 sitemap file(s) searched, 24 candidate(s)"
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
+      "shop": "home24",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "home24",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod 2. Gen.",
+      "shop": "home24",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "LG StanbyME 2 Max",
+      "shop": "home24",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "home24",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Venjakob Kalea",
+      "shop": "home24",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "home24",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 4",
+      "shop": "home24",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Apple Watch SE 3",
+      "shop": "asgoodasnew",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
+      "shop": "asgoodasnew",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "asgoodasnew",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod 2. Gen.",
+      "shop": "asgoodasnew",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "LG StanbyME 2 Max",
+      "shop": "asgoodasnew",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "asgoodasnew",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Venjakob Kalea",
+      "shop": "asgoodasnew",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "asgoodasnew",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 4",
+      "shop": "asgoodasnew",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Apple Watch SE 3",
+      "shop": "XXXLutz",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
+      "shop": "XXXLutz",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "XXXLutz",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod 2. Gen.",
+      "shop": "XXXLutz",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "LG StanbyME 2 Max",
+      "shop": "XXXLutz",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "XXXLutz",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Venjakob Kalea",
+      "shop": "XXXLutz",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "XXXLutz",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 4",
+      "shop": "XXXLutz",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 0 candidate(s)"
     },
     {
       "product": "Apple Watch SE 3",
       "shop": "toom",
       "status": "not_found",
       "note": "4 sitemap file(s) searched, 72 candidate(s)"
+    },
+    {
+      "product": "Apple Watch SE 3",
+      "shop": "tink",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 24 candidate(s)"
     },
     {
       "product": "Apple Watch SE 3",
@@ -1157,7 +1127,7 @@
       "product": "Apple Watch SE 3",
       "shop": "Globus Baumarkt",
       "status": "not_found",
-      "note": "5 sitemap file(s) searched, 108 candidate(s)"
+      "note": "5 sitemap file(s) searched, 107 candidate(s)"
     },
     {
       "product": "Eve Thermo 5. Gen. 3er",
@@ -1167,96 +1137,6 @@
     },
     {
       "product": "LG StanbyME 2 Max",
-      "shop": "tink",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 24 candidate(s)"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "Back Market",
-      "status": "blocked",
-      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.backmarket.de/testchallengepage?next=https%3A%2F%2Fwww.backmarket.de%2Fde-de%2Fp%2Fmagsafe-ladegerat-lightning-airpods-3-generation-2021%2F7ebfb614-3d81-4bc6-83f5-884e7ced9885&__cf_chl_rt_tk=CqLXhMrPvdMpxFLbYbOLm1XiK8a0I.N58vX46_EPXGI-17956"
-    },
-    {
-      "product": "HomePod mini 2",
-      "shop": "Back Market",
-      "status": "blocked",
-      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.backmarket.de/testchallengepage?next=https%3A%2F%2Fwww.backmarket.de%2Fde-de%2Fp%2Fmagsafe-ladegerat-lightning-airpods-3-generation-2021%2F7ebfb614-3d81-4bc6-83f5-884e7ced9885&__cf_chl_rt_tk=CqLXhMrPvdMpxFLbYbOLm1XiK8a0I.N58vX46_EPXGI-17956"
-    },
-    {
-      "product": "HomePod 2. Gen.",
-      "shop": "Back Market",
-      "status": "blocked",
-      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.backmarket.de/testchallengepage?next=https%3A%2F%2Fwww.backmarket.de%2Fde-de%2Fp%2Fmagsafe-ladegerat-lightning-airpods-3-generation-2021%2F7ebfb614-3d81-4bc6-83f5-884e7ced9885&__cf_chl_rt_tk=CqLXhMrPvdMpxFLbYbOLm1XiK8a0I.N58vX46_EPXGI-17956"
-    },
-    {
-      "product": "LG StanbyME 2 Max",
-      "shop": "Back Market",
-      "status": "blocked",
-      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.backmarket.de/testchallengepage?next=https%3A%2F%2Fwww.backmarket.de%2Fde-de%2Fp%2Fmagsafe-ladegerat-lightning-airpods-3-generation-2021%2F7ebfb614-3d81-4bc6-83f5-884e7ced9885&__cf_chl_rt_tk=CqLXhMrPvdMpxFLbYbOLm1XiK8a0I.N58vX46_EPXGI-17956"
-    },
-    {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "Back Market",
-      "status": "blocked",
-      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.backmarket.de/testchallengepage?next=https%3A%2F%2Fwww.backmarket.de%2Fde-de%2Fp%2Fmagsafe-ladegerat-lightning-airpods-3-generation-2021%2F7ebfb614-3d81-4bc6-83f5-884e7ced9885&__cf_chl_rt_tk=CqLXhMrPvdMpxFLbYbOLm1XiK8a0I.N58vX46_EPXGI-17956"
-    },
-    {
-      "product": "Venjakob Kalea",
-      "shop": "Back Market",
-      "status": "blocked",
-      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.backmarket.de/testchallengepage?next=https%3A%2F%2Fwww.backmarket.de%2Fde-de%2Fp%2Fmagsafe-ladegerat-lightning-airpods-3-generation-2021%2F7ebfb614-3d81-4bc6-83f5-884e7ced9885&__cf_chl_rt_tk=CqLXhMrPvdMpxFLbYbOLm1XiK8a0I.N58vX46_EPXGI-17956"
-    },
-    {
-      "product": "Logitech MX Master 3S",
-      "shop": "Back Market",
-      "status": "blocked",
-      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.backmarket.de/testchallengepage?next=https%3A%2F%2Fwww.backmarket.de%2Fde-de%2Fp%2Fmagsafe-ladegerat-lightning-airpods-3-generation-2021%2F7ebfb614-3d81-4bc6-83f5-884e7ced9885&__cf_chl_rt_tk=CqLXhMrPvdMpxFLbYbOLm1XiK8a0I.N58vX46_EPXGI-17956"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "Back Market",
-      "status": "blocked",
-      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.backmarket.de/testchallengepage?next=https%3A%2F%2Fwww.backmarket.de%2Fde-de%2Fp%2Fmagsafe-ladegerat-lightning-airpods-3-generation-2021%2F7ebfb614-3d81-4bc6-83f5-884e7ced9885&__cf_chl_rt_tk=CqLXhMrPvdMpxFLbYbOLm1XiK8a0I.N58vX46_EPXGI-17956"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "notebooksbilliger.de",
-      "status": "not_found",
-      "note": "3 sitemap file(s) searched, 80 candidate(s)"
-    },
-    {
-      "product": "HomePod mini 2",
-      "shop": "toom",
-      "status": "not_found",
-      "note": "4 sitemap file(s) searched, 72 candidate(s)"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "Globus Baumarkt",
-      "status": "not_found",
-      "note": "5 sitemap file(s) searched, 108 candidate(s)"
-    },
-    {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "tink",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 24 candidate(s)"
-    },
-    {
-      "product": "Venjakob Kalea",
-      "shop": "tink",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 24 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 3S",
-      "shop": "tink",
-      "status": "not_found",
-      "note": "1 sitemap file(s) searched, 24 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
       "shop": "tink",
       "status": "not_found",
       "note": "1 sitemap file(s) searched, 24 candidate(s)"
@@ -1265,13 +1145,175 @@
       "product": "Apple Watch SE 3",
       "shop": "Mindfactory",
       "status": "not_found",
-      "note": "9 sitemap file(s) searched, 499 candidate(s)"
+      "note": "9 sitemap file(s) searched, 500 candidate(s)"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
+      "shop": "Back Market",
+      "status": "blocked",
+      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.backmarket.de/testchallengepage?next=https%3A%2F%2Fwww.backmarket.de%2Fde-de%2Fp%2Fmultifunktions-kuchenmaschine-vorwerk-thermomix-tm5-wei%2F89670b3a-cc18-4b1a-8e3d-0217b2fc8fd8&__cf_chl_rt_tk=Rps8641XttwuFLvyUJvtgSUWNZ_6PKyx.dLn_TR2cWE-179"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "Back Market",
+      "status": "blocked",
+      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.backmarket.de/testchallengepage?next=https%3A%2F%2Fwww.backmarket.de%2Fde-de%2Fp%2Fmultifunktions-kuchenmaschine-vorwerk-thermomix-tm5-wei%2F89670b3a-cc18-4b1a-8e3d-0217b2fc8fd8&__cf_chl_rt_tk=Rps8641XttwuFLvyUJvtgSUWNZ_6PKyx.dLn_TR2cWE-179"
+    },
+    {
+      "product": "HomePod 2. Gen.",
+      "shop": "Back Market",
+      "status": "blocked",
+      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.backmarket.de/testchallengepage?next=https%3A%2F%2Fwww.backmarket.de%2Fde-de%2Fp%2Fmultifunktions-kuchenmaschine-vorwerk-thermomix-tm5-wei%2F89670b3a-cc18-4b1a-8e3d-0217b2fc8fd8&__cf_chl_rt_tk=Rps8641XttwuFLvyUJvtgSUWNZ_6PKyx.dLn_TR2cWE-179"
+    },
+    {
+      "product": "LG StanbyME 2 Max",
+      "shop": "Back Market",
+      "status": "blocked",
+      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.backmarket.de/testchallengepage?next=https%3A%2F%2Fwww.backmarket.de%2Fde-de%2Fp%2Fmultifunktions-kuchenmaschine-vorwerk-thermomix-tm5-wei%2F89670b3a-cc18-4b1a-8e3d-0217b2fc8fd8&__cf_chl_rt_tk=Rps8641XttwuFLvyUJvtgSUWNZ_6PKyx.dLn_TR2cWE-179"
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "Back Market",
+      "status": "blocked",
+      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.backmarket.de/testchallengepage?next=https%3A%2F%2Fwww.backmarket.de%2Fde-de%2Fp%2Fmultifunktions-kuchenmaschine-vorwerk-thermomix-tm5-wei%2F89670b3a-cc18-4b1a-8e3d-0217b2fc8fd8&__cf_chl_rt_tk=Rps8641XttwuFLvyUJvtgSUWNZ_6PKyx.dLn_TR2cWE-179"
+    },
+    {
+      "product": "Venjakob Kalea",
+      "shop": "Back Market",
+      "status": "blocked",
+      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.backmarket.de/testchallengepage?next=https%3A%2F%2Fwww.backmarket.de%2Fde-de%2Fp%2Fmultifunktions-kuchenmaschine-vorwerk-thermomix-tm5-wei%2F89670b3a-cc18-4b1a-8e3d-0217b2fc8fd8&__cf_chl_rt_tk=Rps8641XttwuFLvyUJvtgSUWNZ_6PKyx.dLn_TR2cWE-179"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "Back Market",
+      "status": "blocked",
+      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.backmarket.de/testchallengepage?next=https%3A%2F%2Fwww.backmarket.de%2Fde-de%2Fp%2Fmultifunktions-kuchenmaschine-vorwerk-thermomix-tm5-wei%2F89670b3a-cc18-4b1a-8e3d-0217b2fc8fd8&__cf_chl_rt_tk=Rps8641XttwuFLvyUJvtgSUWNZ_6PKyx.dLn_TR2cWE-179"
+    },
+    {
+      "product": "Logitech MX Master 4",
+      "shop": "Back Market",
+      "status": "blocked",
+      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.backmarket.de/testchallengepage?next=https%3A%2F%2Fwww.backmarket.de%2Fde-de%2Fp%2Fmultifunktions-kuchenmaschine-vorwerk-thermomix-tm5-wei%2F89670b3a-cc18-4b1a-8e3d-0217b2fc8fd8&__cf_chl_rt_tk=Rps8641XttwuFLvyUJvtgSUWNZ_6PKyx.dLn_TR2cWE-179"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
+      "shop": "notebooksbilliger.de",
+      "status": "not_found",
+      "note": "3 sitemap file(s) searched, 80 candidate(s)"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
+      "shop": "Globus Baumarkt",
+      "status": "not_found",
+      "note": "5 sitemap file(s) searched, 107 candidate(s)"
+    },
+    {
+      "product": "Apple Watch SE 3",
+      "shop": "expert",
+      "status": "not_found",
+      "note": "11 sitemap file(s) searched, 286 candidate(s)"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
+      "shop": "rebuy",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 72 candidate(s)"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "toom",
+      "status": "not_found",
+      "note": "4 sitemap file(s) searched, 72 candidate(s)"
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "tink",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 24 candidate(s)"
+    },
+    {
+      "product": "Venjakob Kalea",
+      "shop": "tink",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 24 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "tink",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 24 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 4",
+      "shop": "tink",
+      "status": "not_found",
+      "note": "1 sitemap file(s) searched, 24 candidate(s)"
+    },
+    {
+      "product": "Apple Watch SE 3",
+      "shop": "LG.de",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
+      "shop": "LG.de",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "LG.de",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "HomePod 2. Gen.",
+      "shop": "LG.de",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "LG.de",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Venjakob Kalea",
+      "shop": "LG.de",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "LG.de",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 4",
+      "shop": "LG.de",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 0 candidate(s)"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
+      "shop": "Mindfactory",
+      "status": "not_found",
+      "note": "9 sitemap file(s) searched, 500 candidate(s)"
     },
     {
       "product": "HomePod mini 2",
       "shop": "notebooksbilliger.de",
       "status": "not_found",
       "note": "3 sitemap file(s) searched, 80 candidate(s)"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "rebuy",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 72 candidate(s)"
     },
     {
       "product": "HomePod 2. Gen.",
@@ -1281,6 +1323,60 @@
     },
     {
       "product": "Apple Watch SE 3",
+      "shop": "OTTO",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 178 candidate(s)"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
+      "shop": "Saturn",
+      "status": "blocked",
+      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.saturn.de/de/product/_genius-19143-g5-3-tlg-2148089.html?__cf_chl_rt_tk=3V77G4zmUJv8vdGbwTMf.pP6knHObbv2QjqUTeT0aOo-1795702189-1.0.1.1-a40MJAk0MBsZb_B0rnlKyoHo5wXtP8Uwgu6o3FYHhHA"
+    },
+    {
+      "product": "HomePod 2. Gen.",
+      "shop": "Saturn",
+      "status": "blocked",
+      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.saturn.de/de/product/_genius-19143-g5-3-tlg-2148089.html?__cf_chl_rt_tk=3V77G4zmUJv8vdGbwTMf.pP6knHObbv2QjqUTeT0aOo-1795702189-1.0.1.1-a40MJAk0MBsZb_B0rnlKyoHo5wXtP8Uwgu6o3FYHhHA"
+    },
+    {
+      "product": "LG StanbyME 2 Max",
+      "shop": "Saturn",
+      "status": "blocked",
+      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.saturn.de/de/product/_genius-19143-g5-3-tlg-2148089.html?__cf_chl_rt_tk=3V77G4zmUJv8vdGbwTMf.pP6knHObbv2QjqUTeT0aOo-1795702189-1.0.1.1-a40MJAk0MBsZb_B0rnlKyoHo5wXtP8Uwgu6o3FYHhHA"
+    },
+    {
+      "product": "Venjakob Kalea",
+      "shop": "Saturn",
+      "status": "blocked",
+      "note": "bot wall / rate limit (HTTP 403), redirected to https://www.saturn.de/de/product/_genius-19143-g5-3-tlg-2148089.html?__cf_chl_rt_tk=3V77G4zmUJv8vdGbwTMf.pP6knHObbv2QjqUTeT0aOo-1795702189-1.0.1.1-a40MJAk0MBsZb_B0rnlKyoHo5wXtP8Uwgu6o3FYHhHA"
+    },
+    {
+      "product": "Apple Watch SE 3",
+      "shop": "Galaxus",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 323 candidate(s)"
+    },
+    {
+      "product": "Apple Watch SE 3",
+      "shop": "hagebau",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 149 candidate(s)"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "Globus Baumarkt",
+      "status": "not_found",
+      "note": "5 sitemap file(s) searched, 107 candidate(s)"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
+      "shop": "MediaMarkt",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 211 candidate(s)"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
       "shop": "expert",
       "status": "not_found",
       "note": "11 sitemap file(s) searched, 286 candidate(s)"
@@ -1292,253 +1388,202 @@
       "note": "3 sitemap file(s) searched, 80 candidate(s)"
     },
     {
-      "product": "HomePod mini 2",
-      "shop": "Globus Baumarkt",
-      "status": "not_found",
-      "note": "5 sitemap file(s) searched, 108 candidate(s)"
-    },
-    {
-      "product": "Apple Watch SE 3",
-      "shop": "LG.de",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "LG.de",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod mini 2",
-      "shop": "LG.de",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "HomePod 2. Gen.",
-      "shop": "LG.de",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "LG.de",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Venjakob Kalea",
-      "shop": "LG.de",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 3S",
-      "shop": "LG.de",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "LG.de",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 0 candidate(s)"
-    },
-    {
-      "product": "LG StanbyME 2 Max",
-      "shop": "toom",
-      "status": "not_found",
-      "note": "4 sitemap file(s) searched, 72 candidate(s)"
-    },
-    {
-      "product": "Venjakob Kalea",
-      "shop": "toom",
-      "status": "not_found",
-      "note": "4 sitemap file(s) searched, 72 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 3S",
-      "shop": "toom",
-      "status": "not_found",
-      "note": "4 sitemap file(s) searched, 72 candidate(s)"
-    },
-    {
-      "product": "LG StanbyME 2 Max",
-      "shop": "notebooksbilliger.de",
-      "status": "not_found",
-      "note": "3 sitemap file(s) searched, 80 candidate(s)"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "Mindfactory",
-      "status": "not_found",
-      "note": "9 sitemap file(s) searched, 499 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "toom",
-      "status": "not_found",
-      "note": "4 sitemap file(s) searched, 72 candidate(s)"
-    },
-    {
-      "product": "Apple Watch SE 3",
-      "shop": "OTTO",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 182 candidate(s)"
-    },
-    {
-      "product": "HomePod 2. Gen.",
-      "shop": "Globus Baumarkt",
-      "status": "not_found",
-      "note": "5 sitemap file(s) searched, 108 candidate(s)"
-    },
-    {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "notebooksbilliger.de",
-      "status": "not_found",
-      "note": "3 sitemap file(s) searched, 80 candidate(s)"
-    },
-    {
-      "product": "Venjakob Kalea",
-      "shop": "notebooksbilliger.de",
-      "status": "not_found",
-      "note": "3 sitemap file(s) searched, 80 candidate(s)"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "Saturn",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 154 candidate(s)"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "expert",
-      "status": "not_found",
-      "note": "11 sitemap file(s) searched, 286 candidate(s)"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "MediaMarkt",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 176 candidate(s)"
-    },
-    {
       "product": "Eve Thermo 5. Gen. 3er",
       "shop": "OTTO",
       "status": "not_found",
-      "note": "20 sitemap file(s) searched, 182 candidate(s)"
+      "note": "20 sitemap file(s) searched, 178 candidate(s)"
     },
     {
-      "product": "Apple Watch SE 3",
-      "shop": "hagebau",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 149 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 3S",
-      "shop": "notebooksbilliger.de",
-      "status": "not_found",
-      "note": "3 sitemap file(s) searched, 80 candidate(s)"
-    },
-    {
-      "product": "LG StanbyME 2 Max",
-      "shop": "Globus Baumarkt",
-      "status": "not_found",
-      "note": "5 sitemap file(s) searched, 108 candidate(s)"
-    },
-    {
-      "product": "HomePod 2. Gen.",
-      "shop": "MediaMarkt",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 176 candidate(s)"
-    },
-    {
-      "product": "HomePod 2. Gen.",
-      "shop": "Saturn",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 154 candidate(s)"
-    },
-    {
-      "product": "HomePod mini 2",
-      "shop": "Mindfactory",
-      "status": "not_found",
-      "note": "9 sitemap file(s) searched, 499 candidate(s)"
-    },
-    {
-      "product": "Apple Watch SE 3",
+      "product": "Eve Thermo 5. Gen. 3er",
       "shop": "Alternate",
-      "status": "added",
-      "note": null,
-      "url": "https://www.alternate.de/Apple/Watch-SE-3-Smartwatch/html/product/100222171",
-      "price": 341.0,
-      "page_title": "Apple Watch SE 3, Smartwatch schwarz, 44 mm, Sportarmband Navyblau M/L, Cellular"
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 49 candidate(s)"
     },
     {
-      "product": "Apple Watch SE 3",
+      "product": "Eve Thermo 5. Gen. 3er",
       "shop": "Galaxus",
       "status": "not_found",
-      "note": "20 sitemap file(s) searched, 316 candidate(s)"
-    },
-    {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "hagebau",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 149 candidate(s)"
-    },
-    {
-      "product": "HomePod mini 2",
-      "shop": "OTTO",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 182 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "notebooksbilliger.de",
-      "status": "not_found",
-      "note": "3 sitemap file(s) searched, 80 candidate(s)"
+      "note": "20 sitemap file(s) searched, 323 candidate(s)"
     },
     {
       "product": "LG StanbyME 2 Max",
-      "shop": "MediaMarkt",
+      "shop": "toom",
       "status": "not_found",
-      "note": "20 sitemap file(s) searched, 176 candidate(s)"
+      "note": "4 sitemap file(s) searched, 72 candidate(s)"
     },
     {
       "product": "Venjakob Kalea",
-      "shop": "MediaMarkt",
+      "shop": "toom",
       "status": "not_found",
-      "note": "20 sitemap file(s) searched, 176 candidate(s)"
+      "note": "4 sitemap file(s) searched, 72 candidate(s)"
     },
     {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "Globus Baumarkt",
+      "product": "Logitech MX Master 3S",
+      "shop": "toom",
       "status": "not_found",
-      "note": "5 sitemap file(s) searched, 108 candidate(s)"
+      "note": "4 sitemap file(s) searched, 72 candidate(s)"
     },
     {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "Alternate",
+      "product": "HomePod 2. Gen.",
+      "shop": "rebuy",
       "status": "not_found",
-      "note": "20 sitemap file(s) searched, 117 candidate(s)"
+      "note": "20 sitemap file(s) searched, 72 candidate(s)"
     },
     {
       "product": "LG StanbyME 2 Max",
-      "shop": "Saturn",
+      "shop": "rebuy",
       "status": "not_found",
-      "note": "20 sitemap file(s) searched, 154 candidate(s)"
-    },
-    {
-      "product": "Venjakob Kalea",
-      "shop": "Saturn",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 154 candidate(s)"
+      "note": "20 sitemap file(s) searched, 72 candidate(s)"
     },
     {
       "product": "Eve Thermo 5. Gen. 3er",
       "shop": "refurbed",
       "status": "not_found",
       "note": "20 sitemap file(s) searched, 33 candidate(s)"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "Mindfactory",
+      "status": "not_found",
+      "note": "9 sitemap file(s) searched, 500 candidate(s)"
+    },
+    {
+      "product": "Eve Thermo 5. Gen. 3er",
+      "shop": "hagebau",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 149 candidate(s)"
+    },
+    {
+      "product": "HomePod 2. Gen.",
+      "shop": "Globus Baumarkt",
+      "status": "not_found",
+      "note": "5 sitemap file(s) searched, 107 candidate(s)"
+    },
+    {
+      "product": "HomePod 2. Gen.",
+      "shop": "MediaMarkt",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 211 candidate(s)"
+    },
+    {
+      "product": "LG StanbyME 2 Max",
+      "shop": "notebooksbilliger.de",
+      "status": "not_found",
+      "note": "3 sitemap file(s) searched, 80 candidate(s)"
+    },
+    {
+      "product": "HomePod 2. Gen.",
+      "shop": "Alternate",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 49 candidate(s)"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "Galaxus",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 323 candidate(s)"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "OTTO",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 178 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 4",
+      "shop": "toom",
+      "status": "not_found",
+      "note": "4 sitemap file(s) searched, 72 candidate(s)"
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "rebuy",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 72 candidate(s)"
+    },
+    {
+      "product": "Venjakob Kalea",
+      "shop": "rebuy",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 72 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "rebuy",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 72 candidate(s)"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "refurbed",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 33 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 4",
+      "shop": "rebuy",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 72 candidate(s)"
+    },
+    {
+      "product": "HomePod mini 2",
+      "shop": "hagebau",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 149 candidate(s)"
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "notebooksbilliger.de",
+      "status": "not_found",
+      "note": "3 sitemap file(s) searched, 80 candidate(s)"
+    },
+    {
+      "product": "Venjakob Kalea",
+      "shop": "notebooksbilliger.de",
+      "status": "not_found",
+      "note": "3 sitemap file(s) searched, 80 candidate(s)"
+    },
+    {
+      "product": "LG StanbyME 2 Max",
+      "shop": "Globus Baumarkt",
+      "status": "not_found",
+      "note": "5 sitemap file(s) searched, 107 candidate(s)"
+    },
+    {
+      "product": "HomePod 2. Gen.",
+      "shop": "Galaxus",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 323 candidate(s)"
+    },
+    {
+      "product": "LG StanbyME 2 Max",
+      "shop": "Alternate",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 49 candidate(s)"
+    },
+    {
+      "product": "Venjakob Kalea",
+      "shop": "Alternate",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 49 candidate(s)"
+    },
+    {
+      "product": "HomePod 2. Gen.",
+      "shop": "OTTO",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 178 candidate(s)"
+    },
+    {
+      "product": "LG StanbyME 2 Max",
+      "shop": "MediaMarkt",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 211 candidate(s)"
+    },
+    {
+      "product": "Venjakob Kalea",
+      "shop": "MediaMarkt",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 211 candidate(s)"
     },
     {
       "product": "HomePod mini 2",
@@ -1547,121 +1592,136 @@
       "note": "11 sitemap file(s) searched, 286 candidate(s)"
     },
     {
-      "product": "Eve Thermo 5. Gen. 3er",
-      "shop": "Galaxus",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 316 candidate(s)"
-    },
-    {
-      "product": "HomePod mini 2",
-      "shop": "hagebau",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 149 candidate(s)"
-    },
-    {
-      "product": "HomePod mini 2",
-      "shop": "Alternate",
-      "status": "added",
-      "note": null,
-      "url": "https://www.alternate.de/Apple/HomePod-Mini-2-Lautsprecher/html/product/100227742",
-      "price": 169.0,
-      "page_title": "Apple HomePod Mini 2, Lautsprecher grün, WLAN, Bluetooth, Siri, Sound Leuchten"
-    },
-    {
       "product": "HomePod 2. Gen.",
-      "shop": "OTTO",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 182 candidate(s)"
-    },
-    {
-      "product": "Venjakob Kalea",
-      "shop": "Globus Baumarkt",
-      "status": "not_found",
-      "note": "5 sitemap file(s) searched, 108 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 3S",
-      "shop": "Globus Baumarkt",
-      "status": "not_found",
-      "note": "5 sitemap file(s) searched, 108 candidate(s)"
-    },
-    {
-      "product": "HomePod mini 2",
       "shop": "refurbed",
       "status": "not_found",
       "note": "20 sitemap file(s) searched, 33 candidate(s)"
     },
     {
-      "product": "HomePod mini 2",
-      "shop": "Galaxus",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 316 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "MediaMarkt",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 176 candidate(s)"
-    },
-    {
-      "product": "HomePod 2. Gen.",
-      "shop": "Mindfactory",
-      "status": "not_found",
-      "note": "9 sitemap file(s) searched, 499 candidate(s)"
-    },
-    {
-      "product": "LG StanbyME 2 Max",
-      "shop": "OTTO",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 182 candidate(s)"
-    },
-    {
       "product": "HomePod 2. Gen.",
       "shop": "hagebau",
       "status": "not_found",
       "note": "20 sitemap file(s) searched, 149 candidate(s)"
     },
     {
-      "product": "Logitech MX Master 4",
-      "shop": "Globus Baumarkt",
+      "product": "Logitech MX Master 3S",
+      "shop": "notebooksbilliger.de",
       "status": "not_found",
-      "note": "5 sitemap file(s) searched, 108 candidate(s)"
+      "note": "3 sitemap file(s) searched, 80 candidate(s)"
     },
     {
       "product": "HomePod 2. Gen.",
-      "shop": "Alternate",
+      "shop": "Mindfactory",
       "status": "not_found",
-      "note": "20 sitemap file(s) searched, 117 candidate(s)"
+      "note": "9 sitemap file(s) searched, 500 candidate(s)"
     },
     {
-      "product": "HomePod 2. Gen.",
+      "product": "LG StanbyME 2 Max",
+      "shop": "refurbed",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 33 candidate(s)"
+    },
+    {
+      "product": "LG StanbyME 2 Max",
       "shop": "Galaxus",
       "status": "not_found",
-      "note": "20 sitemap file(s) searched, 316 candidate(s)"
+      "note": "20 sitemap file(s) searched, 323 candidate(s)"
     },
     {
-      "product": "HomePod 2. Gen.",
+      "product": "LG StanbyME 2 Max",
+      "shop": "OTTO",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 178 candidate(s)"
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "Globus Baumarkt",
+      "status": "not_found",
+      "note": "5 sitemap file(s) searched, 107 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 4",
+      "shop": "MediaMarkt",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 211 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 4",
+      "shop": "notebooksbilliger.de",
+      "status": "not_found",
+      "note": "3 sitemap file(s) searched, 80 candidate(s)"
+    },
+    {
+      "product": "LG StanbyME 2 Max",
+      "shop": "hagebau",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 149 candidate(s)"
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "OTTO",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 178 candidate(s)"
+    },
+    {
+      "product": "Venjakob Kalea",
+      "shop": "OTTO",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 178 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "OTTO",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 178 candidate(s)"
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "refurbed",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 33 candidate(s)"
+    },
+    {
+      "product": "Venjakob Kalea",
       "shop": "refurbed",
       "status": "not_found",
       "note": "20 sitemap file(s) searched, 33 candidate(s)"
     },
     {
       "product": "Anker Solarbank 3 Pro",
-      "shop": "OTTO",
+      "shop": "Galaxus",
       "status": "not_found",
-      "note": "20 sitemap file(s) searched, 182 candidate(s)"
+      "note": "20 sitemap file(s) searched, 323 candidate(s)"
     },
     {
       "product": "Venjakob Kalea",
-      "shop": "OTTO",
+      "shop": "Galaxus",
       "status": "not_found",
-      "note": "20 sitemap file(s) searched, 182 candidate(s)"
+      "note": "20 sitemap file(s) searched, 323 candidate(s)"
     },
     {
       "product": "Logitech MX Master 3S",
-      "shop": "OTTO",
+      "shop": "Galaxus",
       "status": "not_found",
-      "note": "20 sitemap file(s) searched, 182 candidate(s)"
+      "note": "20 sitemap file(s) searched, 323 candidate(s)"
+    },
+    {
+      "product": "Venjakob Kalea",
+      "shop": "Globus Baumarkt",
+      "status": "not_found",
+      "note": "5 sitemap file(s) searched, 107 candidate(s)"
+    },
+    {
+      "product": "Logitech MX Master 3S",
+      "shop": "Globus Baumarkt",
+      "status": "not_found",
+      "note": "5 sitemap file(s) searched, 107 candidate(s)"
+    },
+    {
+      "product": "Anker Solarbank 3 Pro",
+      "shop": "hagebau",
+      "status": "not_found",
+      "note": "20 sitemap file(s) searched, 149 candidate(s)"
     },
     {
       "product": "HomePod 2. Gen.",
@@ -1670,88 +1730,31 @@
       "note": "11 sitemap file(s) searched, 286 candidate(s)"
     },
     {
-      "product": "LG StanbyME 2 Max",
-      "shop": "hagebau",
+      "product": "Logitech MX Master 4",
+      "shop": "OTTO",
       "status": "not_found",
-      "note": "20 sitemap file(s) searched, 149 candidate(s)"
+      "note": "20 sitemap file(s) searched, 178 candidate(s)"
     },
     {
-      "product": "LG StanbyME 2 Max",
-      "shop": "Alternate",
+      "product": "Logitech MX Master 4",
+      "shop": "Globus Baumarkt",
       "status": "not_found",
-      "note": "20 sitemap file(s) searched, 117 candidate(s)"
+      "note": "5 sitemap file(s) searched, 107 candidate(s)"
     },
     {
-      "product": "LG StanbyME 2 Max",
-      "shop": "refurbed",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 33 candidate(s)"
-    },
-    {
-      "product": "LG StanbyME 2 Max",
+      "product": "Logitech MX Master 4",
       "shop": "Galaxus",
       "status": "not_found",
-      "note": "20 sitemap file(s) searched, 316 candidate(s)"
-    },
-    {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "Alternate",
-      "status": "added",
-      "note": null,
-      "url": "https://www.alternate.de/Anker/SOLIX-Solarbank-3-E2700-Pro-0-MWST-Powerstation/html/product/100216949",
-      "price": 797.0,
-      "page_title": "Anker SOLIX Solarbank 3 E2700 Pro, 0% MWST, Powerstation grau, 1.200 Watt, 2.688 Wh Outlet"
-    },
-    {
-      "product": "Venjakob Kalea",
-      "shop": "Alternate",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 117 candidate(s)"
+      "note": "20 sitemap file(s) searched, 323 candidate(s)"
     },
     {
       "product": "LG StanbyME 2 Max",
       "shop": "Mindfactory",
       "status": "not_found",
-      "note": "9 sitemap file(s) searched, 499 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "OTTO",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 182 candidate(s)"
-    },
-    {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "hagebau",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 149 candidate(s)"
-    },
-    {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "Galaxus",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 316 candidate(s)"
-    },
-    {
-      "product": "Venjakob Kalea",
-      "shop": "Galaxus",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 316 candidate(s)"
+      "note": "9 sitemap file(s) searched, 500 candidate(s)"
     },
     {
       "product": "Logitech MX Master 3S",
-      "shop": "Galaxus",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 316 candidate(s)"
-    },
-    {
-      "product": "Anker Solarbank 3 Pro",
-      "shop": "refurbed",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 33 candidate(s)"
-    },
-    {
-      "product": "Venjakob Kalea",
       "shop": "refurbed",
       "status": "not_found",
       "note": "20 sitemap file(s) searched, 33 candidate(s)"
@@ -1776,12 +1779,6 @@
     },
     {
       "product": "Logitech MX Master 4",
-      "shop": "Galaxus",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 316 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 3S",
       "shop": "refurbed",
       "status": "not_found",
       "note": "20 sitemap file(s) searched, 33 candidate(s)"
@@ -1820,31 +1817,25 @@
       "product": "Anker Solarbank 3 Pro",
       "shop": "Mindfactory",
       "status": "not_found",
-      "note": "9 sitemap file(s) searched, 499 candidate(s)"
+      "note": "9 sitemap file(s) searched, 500 candidate(s)"
     },
     {
       "product": "Venjakob Kalea",
       "shop": "Mindfactory",
       "status": "not_found",
-      "note": "9 sitemap file(s) searched, 499 candidate(s)"
-    },
-    {
-      "product": "Logitech MX Master 4",
-      "shop": "refurbed",
-      "status": "not_found",
-      "note": "20 sitemap file(s) searched, 33 candidate(s)"
+      "note": "9 sitemap file(s) searched, 500 candidate(s)"
     },
     {
       "product": "Logitech MX Master 3S",
       "shop": "Mindfactory",
       "status": "not_found",
-      "note": "9 sitemap file(s) searched, 499 candidate(s)"
+      "note": "9 sitemap file(s) searched, 500 candidate(s)"
     },
     {
       "product": "Logitech MX Master 4",
       "shop": "Mindfactory",
       "status": "not_found",
-      "note": "9 sitemap file(s) searched, 499 candidate(s)"
+      "note": "9 sitemap file(s) searched, 500 candidate(s)"
     }
   ]
 }

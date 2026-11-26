@@ -1,18 +1,12 @@
 # Black Week – Shop-Suche
 
-Stand: 25.11.2026 15:39 Uhr (Europe/Berlin)
-
-## Neu hinzugefügt
-
-- Apple Watch SE 3 bei Alternate: 341,00 € – [Link](https://www.alternate.de/Apple/Watch-SE-3-Smartwatch/html/product/100222171)
-- HomePod mini 2 bei Alternate: 169,00 € – [Link](https://www.alternate.de/Apple/HomePod-Mini-2-Lautsprecher/html/product/100227742)
-- Anker Solarbank 3 Pro bei Alternate: 797,00 € – [Link](https://www.alternate.de/Anker/SOLIX-Solarbank-3-E2700-Pro-0-MWST-Powerstation/html/product/100216949)
+Stand: 26.11.2026 15:02 Uhr (Europe/Berlin)
 
 ## Übersicht
 
 | Produkt | Shop | Ergebnis |
 |---|---|---|
-| Apple Watch SE 3 | Alternate | ➕ neu hinzugefügt |
+| Apple Watch SE 3 | Alternate | ✔ schon in targets.yaml |
 | Apple Watch SE 3 | asgoodasnew | – nicht gefunden |
 | Apple Watch SE 3 | Back Market | ✔ schon in targets.yaml |
 | Apple Watch SE 3 | BAUHAUS | – nicht gefunden |
@@ -76,11 +70,11 @@ Stand: 25.11.2026 15:39 Uhr (Europe/Berlin)
 | Eve Thermo 5. Gen. 3er | OTTO | – nicht gefunden |
 | Eve Thermo 5. Gen. 3er | rebuy | – nicht gefunden |
 | Eve Thermo 5. Gen. 3er | refurbed | – nicht gefunden |
-| Eve Thermo 5. Gen. 3er | Saturn | – nicht gefunden |
+| Eve Thermo 5. Gen. 3er | Saturn | ⛔ blockiert |
 | Eve Thermo 5. Gen. 3er | tink | ✔ schon in targets.yaml |
 | Eve Thermo 5. Gen. 3er | toom | – nicht gefunden |
 | Eve Thermo 5. Gen. 3er | XXXLutz | – nicht gefunden |
-| HomePod mini 2 | Alternate | ➕ neu hinzugefügt |
+| HomePod mini 2 | Alternate | ✔ schon in targets.yaml |
 | HomePod mini 2 | asgoodasnew | – nicht gefunden |
 | HomePod mini 2 | Back Market | ⛔ blockiert |
 | HomePod mini 2 | BAUHAUS | – nicht gefunden |
@@ -144,7 +138,7 @@ Stand: 25.11.2026 15:39 Uhr (Europe/Berlin)
 | HomePod 2. Gen. | OTTO | – nicht gefunden |
 | HomePod 2. Gen. | rebuy | – nicht gefunden |
 | HomePod 2. Gen. | refurbed | – nicht gefunden |
-| HomePod 2. Gen. | Saturn | – nicht gefunden |
+| HomePod 2. Gen. | Saturn | ⛔ blockiert |
 | HomePod 2. Gen. | tink | ✔ schon in targets.yaml |
 | HomePod 2. Gen. | toom | – nicht gefunden |
 | HomePod 2. Gen. | XXXLutz | – nicht gefunden |
@@ -178,11 +172,11 @@ Stand: 25.11.2026 15:39 Uhr (Europe/Berlin)
 | LG StanbyME 2 Max | OTTO | – nicht gefunden |
 | LG StanbyME 2 Max | rebuy | – nicht gefunden |
 | LG StanbyME 2 Max | refurbed | – nicht gefunden |
-| LG StanbyME 2 Max | Saturn | – nicht gefunden |
+| LG StanbyME 2 Max | Saturn | ⛔ blockiert |
 | LG StanbyME 2 Max | tink | – nicht gefunden |
 | LG StanbyME 2 Max | toom | – nicht gefunden |
 | LG StanbyME 2 Max | XXXLutz | – nicht gefunden |
-| Anker Solarbank 3 Pro | Alternate | ➕ neu hinzugefügt |
+| Anker Solarbank 3 Pro | Alternate | ✔ schon in targets.yaml |
 | Anker Solarbank 3 Pro | asgoodasnew | – nicht gefunden |
 | Anker Solarbank 3 Pro | Back Market | ⛔ blockiert |
 | Anker Solarbank 3 Pro | BAUHAUS | – nicht gefunden |
@@ -280,7 +274,7 @@ Stand: 25.11.2026 15:39 Uhr (Europe/Berlin)
 | Venjakob Kalea | OTTO | – nicht gefunden |
 | Venjakob Kalea | rebuy | – nicht gefunden |
 | Venjakob Kalea | refurbed | – nicht gefunden |
-| Venjakob Kalea | Saturn | – nicht gefunden |
+| Venjakob Kalea | Saturn | ⛔ blockiert |
 | Venjakob Kalea | tink | – nicht gefunden |
 | Venjakob Kalea | toom | – nicht gefunden |
 | Venjakob Kalea | XXXLutz | – nicht gefunden |
