@@ -1,6 +1,6 @@
 # Black Week – Shop-Suche
 
-Stand: 26.11.2026 15:02 Uhr (Europe/Berlin)
+Stand: 27.11.2026 15:00 Uhr (Europe/Berlin)
 
 ## Übersicht
 
