@@ -1,6 +1,6 @@
 # Black Week – Preise
 
-Stand: 26.11.2026 17:58 Uhr (Europe/Berlin) · ok: 21, no_price: 1, blocked: 7
+Stand: 27.11.2026 02:00 Uhr (Europe/Berlin) · ok: 22, no_price: 1, blocked: 6
 
 | Produkt | Shop | Status | Preis | Versand | Quelle | URL |
 |---|---|---|---|---|---|---|
@@ -8,7 +8,7 @@ Stand: 26.11.2026 17:58 Uhr (Europe/Berlin) · ok: 21, no_price: 1, blocked: 7
 | Apple Watch SE 3 40 mm Cellular | Back Market | blocked | – | – | – | [Link](https://www.backmarket.de/de-de/p/apple-watch-2025-gps-cellular-40-mm-aluminium-polarstern-sportarmband-wei/79f98011-e24f-49a7-b174-9128e5d2e8d7) |
 | Apple Watch SE 3 | Clevertronic | blocked | – | – | – | [Link](https://www.clevertronic.de/kaufen/smartwatch-kaufen/apple/se-3) |
 | Apple Watch SE 3 | rebuy | no_price | – | – | – | [Link](https://www.rebuy.de/kaufen/apple-apple-watch) |
-| Apple Watch SE 3 40 mm | refurbed | ok | 199,99 € | 0,00 € | jsonld | [Link](https://www.refurbed.de/p/apple-watch-se-3-40mm-2025/) |
+| Apple Watch SE 3 40 mm | refurbed | ok | 210,00 € | 0,00 € | jsonld | [Link](https://www.refurbed.de/p/apple-watch-se-3-40mm-2025/) |
 | Eve Thermo 5. Gen. 3er | tink | ok | 169,95 € | 0,00 € | jsonld | [Link](https://www.tink.de/p/eve-thermo-matter-5-gen-heizkoerperthermostat-3er-set-n) |
 | Eve Thermo 5. Gen. 3er | Geizhals | ok | 169,95 € | – | meta | [Link](https://geizhals.de/eve-thermo-2025-5-generation-matter-heizkoerperthermostat-10ecd1751-3x-a3722719.html) |
 | HomePod mini 2 | tink | ok | 168,95 € | 0,00 € | jsonld | [Link](https://www.tink.de/p/apple-homepod-mini-2-gen) |
@@ -28,7 +28,7 @@ Stand: 26.11.2026 17:58 Uhr (Europe/Berlin) · ok: 21, no_price: 1, blocked: 7
 | HomePod mini 2 | Saturn | ok | 169,00 € | 0,00 € | jsonld | [Link](https://www.saturn.de/de/product/_apple-mgkr4zda-homepod-mini-2-lautsprecher-pink-188598845.html) |
 | Anker Solarbank 3 Pro | Saturn | ok | 1.132,00 € | 0,00 € | jsonld | [Link](https://www.saturn.de/de/product/_anker-solix-solarbank-3-pro-mit-900w-pv-balkonkraftwerk-162854333.html) |
 | Logitech MX Master 4 | Alternate | ok | 108,90 € | 7,99 € | jsonld | [Link](https://www.alternate.de/Logitech/MX-Master-4-Maus/html/product/100162079) |
-| Logitech MX Master 4 | Saturn | blocked | – | – | – | [Link](https://www.saturn.de/de/product/_logitech-mx-master-4-fmac-space-black-maus-space-black-162759336.html) |
+| Logitech MX Master 4 | Saturn | ok | 94,00 € | 0,00 € | jsonld | [Link](https://www.saturn.de/de/product/_logitech-mx-master-4-fmac-space-black-maus-space-black-162759336.html) |
 | Logitech MX Master 3S | Alternate | ok | 192,90 € | 7,99 € | jsonld | [Link](https://www.alternate.de/Logitech/MX-Master-3S-Maus/html/product/1843035) |
 | Apple Watch SE 3 | Alternate | ok | 341,00 € | 7,99 € | jsonld | [Link](https://www.alternate.de/Apple/Watch-SE-3-Smartwatch/html/product/100222171) |
 | HomePod mini 2 | Alternate | ok | 169,00 € | 7,99 € | jsonld | [Link](https://www.alternate.de/Apple/HomePod-Mini-2-Lautsprecher/html/product/100227742) |
