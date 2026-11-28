@@ -1,6 +1,6 @@
 # Black Week – Shop-Suche
 
-Stand: 27.11.2026 15:00 Uhr (Europe/Berlin)
+Stand: 28.11.2026 14:16 Uhr (Europe/Berlin)
 
 ## Übersicht
 
@@ -70,7 +70,7 @@ Stand: 27.11.2026 15:00 Uhr (Europe/Berlin)
 | Eve Thermo 5. Gen. 3er | OTTO | – nicht gefunden |
 | Eve Thermo 5. Gen. 3er | rebuy | – nicht gefunden |
 | Eve Thermo 5. Gen. 3er | refurbed | – nicht gefunden |
-| Eve Thermo 5. Gen. 3er | Saturn | ⛔ blockiert |
+| Eve Thermo 5. Gen. 3er | Saturn | – nicht gefunden |
 | Eve Thermo 5. Gen. 3er | tink | ✔ schon in targets.yaml |
 | Eve Thermo 5. Gen. 3er | toom | – nicht gefunden |
 | Eve Thermo 5. Gen. 3er | XXXLutz | – nicht gefunden |
@@ -138,7 +138,7 @@ Stand: 27.11.2026 15:00 Uhr (Europe/Berlin)
 | HomePod 2. Gen. | OTTO | – nicht gefunden |
 | HomePod 2. Gen. | rebuy | – nicht gefunden |
 | HomePod 2. Gen. | refurbed | – nicht gefunden |
-| HomePod 2. Gen. | Saturn | ⛔ blockiert |
+| HomePod 2. Gen. | Saturn | – nicht gefunden |
 | HomePod 2. Gen. | tink | ✔ schon in targets.yaml |
 | HomePod 2. Gen. | toom | – nicht gefunden |
 | HomePod 2. Gen. | XXXLutz | – nicht gefunden |
